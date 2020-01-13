@@ -48,7 +48,7 @@ onboard==1.4.1
 padme==1.1.1
 pbr==5.4.4
 pexpect==4.2.1
-Pillow==5.1.0
+Pillow==6.2.0
 pip-tools==4.3.0
 pipdeptree==0.13.2
 pipenv==2018.11.26
