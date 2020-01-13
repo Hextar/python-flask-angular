@@ -1,0 +1,35 @@
+@import "src/theme/theme-variables.scss";
+@import "src/theme/theme-media.scss";
+@import "src/theme/theme-typography.scss";
+
+:host {
+  display: flex;
+  flex: 0;
+  flex-direction: column;
+  max-width: 100%;
+  width: 100%;
+  .breadcrumb {
+    margin: 0;
+    padding: 0;
+    li {
+      display: inline;
+      +li {
+        &::before {
+          content: " › ";
+          font-weight: 700;
+          color: mat-color($mat-grey, 700);
+        }
+      }
+      a {
+        color: mat-color($mat-grey, 700);
+        &:hover {
+          color: mat-color($primary, 500);
+          text-decoration: underline;
+        }
+      }
+      span {
+        font-weight: 700;
+      }
+    }
+  }
+}

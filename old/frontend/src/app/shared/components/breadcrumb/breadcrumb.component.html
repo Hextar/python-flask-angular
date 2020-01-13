@@ -1,0 +1,58 @@
+<ng-container *ngIf="!!breadcrumbs?.length; else breadcrumbGhostLoading">
+  <div
+    fxLayout="row"
+    fxFlex="0 0 48px"
+    fxLayoutAlign="start start"
+  >
+      <ul class="breadcrumb">
+        <li
+          *ngFor="let b of breadcrumbs; last as isLast;"
+          [ngClass]="{'active': isLast}"
+          aria-current="page"
+        >
+          <ng-container *ngIf="!isLast; else lastRoute">
+            <a
+              class="mat-body-strong"
+              [routerLink]="[b?.url]"
+              routerLinkActive="active"
+            >
+              {{ b?.label }}
+            </a>
+          </ng-container>
+          <ng-template #lastRoute>
+            <span
+              class="mat-h3"
+            >
+              {{ b?.label }}
+            </span>
+          </ng-template>
+        </li>
+      </ul>
+  </div>
+</ng-container>
+<ng-template #breadcrumbGhostLoading>
+  <div
+    fxLayout="column"
+    fxFill
+  >
+    <div
+      #svgWrapper
+      fxLayout="row"
+      fxFlex="0 0 48px"
+      fxLayoutAlign="start start"
+    >
+      <ng-container *ngIf="svgWrapper">
+        <content-loader
+          fxFlex="0 0 100"
+          [height]="48"
+          [width]="svgWrapper?.offsetWidth"
+          xmlns:svg="http://www.w3.org/2000/svg"
+        >
+          <svg:rect x="0" y="0" rx="8" ry="8" [attr.width]="svgWrapper?.offsetWidth * .2" height="16" />
+          <svg:rect [attr.x]="(svgWrapper?.offsetWidth * .2) + 16" y="0" rx="8" ry="8" [attr.width]="svgWrapper?.offsetWidth * .15" height="16" />
+          <svg:rect [attr.x]="(svgWrapper?.offsetWidth * .35) + 32" y="0" rx="8" ry="8" [attr.width]="svgWrapper?.offsetWidth *.1" height="16" />
+        </content-loader>
+      </ng-container>
+    </div>
+  </div>
+</ng-template>

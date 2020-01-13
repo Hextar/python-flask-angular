@@ -1,0 +1,20 @@
+@import "src/theme/theme-variables.scss";
+@import "src/theme/theme-media.scss";
+@import "src/theme/theme-typography.scss";
+
+:host {
+  display: flex;
+  flex: 1;
+  min-height: 100%;
+  width: 100%;
+
+  .mat-progress-spinner {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .message {
+    margin-left: 0.5em;
+  }
+
+}
