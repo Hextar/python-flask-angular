@@ -1,6 +1,6 @@
 # coding=utf-8
 
-# from flask_cors import CORS
+from flask_cors import CORS
 from flask import Flask, jsonify, request
 
 from .entities.entity import Session, engine, Base
@@ -8,7 +8,10 @@ from .entities.exam import Exam, ExamSchema
 
 # creating the Flask application
 app = Flask(__name__)
-# CORS(app)
+CORS(app)
+
+if __name__ == "__main__":
+    app.run(debug=True)
 
 # if needed, generate database schema
 Base.metadata.create_all(engine)
@@ -46,6 +49,6 @@ def add_exam():
     session.commit()
 
     # return created exam
-    new_exam = ExamSchema().dump(exam)
+    new_exam = ExamSchema().dump(exam).data
     session.close()
     return jsonify(new_exam), 201
