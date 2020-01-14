@@ -15,23 +15,30 @@ class FinancialService():
     	    "data": {}
     	}
 		try:
-			for idx, s in enumerate(stocks): 
-				stock_data = web.data.get_data_yahoo(s, start, end)
+			for idx, s in enumerate(stocks):
+				# prepare the response json
 				response_dict["result"] = "OK"
 
-				temp = json.loads(stock_data.to_json(orient="index"))
+				# get data from pandas_datareader 
+				stock_data = web.data.get_data_yahoo(s, start, end)
 
-				print(temp.keys())
+				# parse stocks as json
+				json_stock_data = json.loads(stock_data.to_json(orient="index"))
+
+				# pretty parse of timestamp, value
 				values = {}
-				for idy, ts in enumerate(temp.keys()):
+				average = 0
+				for idy, ts in enumerate(json_stock_data.keys()):
 					values[idy] = {
 						"timestamp": ts,
-						"value": temp[ts]['Close']
+						"value": json_stock_data[ts]['Close'],
 					}
-
-				response_dict["data"] [idx] = {
+					average += json_stock_data[ts]['Close']
+				print("<========", average)
+				response_dict["data"][idx] = {
 					"label": s,
-					"values": values
+					"values": values,
+					"forecasted_value": average / len(values)
 	        	}
 			return response_dict, 200
 		except:
