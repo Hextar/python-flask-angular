@@ -3,14 +3,9 @@
 from flask_cors import CORS
 from flask import Flask, jsonify, request, render_template, redirect, session
 
-import sys
+from datetime import datetime
 import matplotlib.pyplot as plt
 import numpy as np
-from datetime import datetime
-import pandas as pd 
-from sklearn.linear_model import LinearRegression
-import pandas_datareader as web
-pd.plotting.register_matplotlib_converters()
 
 from .services.financial_service import FinancialService
 
@@ -23,7 +18,22 @@ CORS(app)
 if __name__ == "__main__":
     app.run(debug=True)
 
+@app.route('/stocks', methods=("POST", "GET"))
+def get_financials():
+    try:
+        # Get Corn, Gasoline and Nasdaq stocks
+        stocks = ["CROP", "UGA", "NDAQ"]
+        
+        # Ask for 5 years of data
+        start = datetime(2020, 1, 1)
+        end = datetime(2020, 1, 3)
 
+        # Get data from the financial service
+        financial_service = FinancialService
+        return jsonify(financial_service.get_stocks(stocks = stocks, start = start, end = end)), 200
+    except:
+        return {"result": "KO"}, 500
+'''
 @app.route('/')
 def home():
     # get and process 5 years of data
@@ -75,27 +85,4 @@ def home():
         return render_template('./src/templates/plot.html', name = 'new_plot', url ='./src/static/images/new_plot.png')
     except:
         return 'template rendering failed'
-
-
-@app.route('/stocks', methods=("POST", "GET"))
-def get_financials():
-    try:
-        response_dict = {
-            "result": "OK",
-            "data": {}
-        }
-         # get and process 5 years of data
-        start = datetime(2020, 1, 1)
-        end = datetime(2020, 1, 3)
-        stocks = ["CROP", "UGA", "NDAQ"]
-        for idx, s in enumerate(stocks): 
-            data_SP = web.data.get_data_yahoo(s, start = start, end = end)
-            response_dict["result"] = 'OK'
-            response_dict["data"][idx] = {
-                "label": s,
-                "values": json.loads(data_SP.to_json(orient="split"))
-            }
-        return jsonify(response_dict), 200
-    except:
-        response_dict["result"] = 'KO'
-        return jsonify(response_dict), 500    
+'''

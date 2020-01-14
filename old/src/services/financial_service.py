@@ -1,26 +1,30 @@
-import datetime
-from pandas_datareader import data as pdr
+import json
+import pandas as pd 
+from datetime import datetime
+import pandas_datareader as web
+from sklearn.linear_model import LinearRegression
+from typing import List
 
-DATA_NOT_AVAILABLE = "stock data not available"	
+pd.plotting.register_matplotlib_converters()
 
 class FinancialService():
 
-	def get_stocks(stocks, start, end):
-		if stocks and start and end:
-			joined_stocks = ' '.join(str(e) for e in stocks)
-			data = pdr.get_data_yahoo(stocks, start = start, end = end)
-			try:
-				print(data)		
-				return data
-			except:
-				return DATA_NOT_AVAILABLE
-		elif stocks:
-			joined_stocks = ' '.join(str(e) for e in stocks)
-			data = pdr.get_data_yahoo(stocks)
-			try:
-				print(data)		
-				return data
-			except:
-				return DATA_NOT_AVAILABLE
-		else:
-			return "ERROR," + DATA_NOT_AVAILABLE
+	def get_stocks(stocks = List[str], start = datetime, end = datetime):
+		response_dict = {
+    	    "result": "OK",
+    	    "data": {}
+    	}
+		try:
+			for idx, s in enumerate(stocks): 
+				stock_data = web.data.get_data_yahoo(s, start, end)
+				response_dict["result"] = "OK"
+				response_dict["data"] = {
+					"label": s,
+					"values": json.loads(stock_data.to_json(orient="split"))
+	        	}
+			print("exited from for in cycle")
+			return response_dict, 200
+		except:
+			response_dict["result"] = 'KO'
+			response_dict["message"] = 'Could not find any stock'
+			return response_dict, 500    
