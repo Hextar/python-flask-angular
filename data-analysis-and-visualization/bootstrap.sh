@@ -6,12 +6,12 @@ export FLASK_APP=./backend/main.py
 source $(pipenv --venv)/bin/activate
 
 ## freeze and install requirements
-# echo "freeze and install the requirements"
-# { # try
-#	sudo bash scripts/install-requirements.sh
-# } || { #catch
-#	echo "install failed"
-# }
+ echo "freeze and install the requirements"
+ { # try
+	sudo bash scripts/install-requirements.sh
+ } || { #catch
+	echo "install failed"
+ }
 
 # run angular 
 # echo "frontend bootstrap [Angular 8]"
