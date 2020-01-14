@@ -12,9 +12,6 @@ app = Flask(__name__,
 # allowing cors for google-chrome
 CORS(app)
 
-if __name__ == "__main__":
-    app.run(debug=True)
-
 # expose a GET endpoint to be called from the front-end
 @app.route('/stocks', methods=("GET", "POST"))
 def get_financials():
@@ -27,8 +24,11 @@ def get_financials():
         end = datetime(2020, 1, 3)
 
         # Get data from the financial service and return it
-        financial_service = FinancialService
+        financial_service = FinancialService()
         return financial_service.get_stocks(stocks = stocks, start = start, end = end)
     except:
         # Return a 500 Internal Server Error
         return {"result": "KO"}, 500
+
+if __name__ == "__main__":
+    app.run(debug=True)

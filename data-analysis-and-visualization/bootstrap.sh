@@ -1,19 +1,19 @@
 #!/bin/bash
 
-## activate virutal env
+### activate virutal env
 echo "activate virtual env"
 export FLASK_APP=./backend/main.py
 source $(pipenv --venv)/bin/activate
 
-## freeze and install requirements
- echo "freeze and install the requirements"
- { # try
-	sudo bash scripts/install-requirements.sh
- } || { #catch
-	echo "install failed"
- }
+### freeze and install requirements
+# echo "freeze and install the requirements"
+# { # try
+#	sudo bash scripts/install-requirements.sh
+# } || { #catch
+#	echo "install failed"
+# }
 
-# run angular 
+### run angular 
 # echo "frontend bootstrap [Angular 8]"
 # { # try
 #	cd ./frontend
@@ -22,7 +22,7 @@ source $(pipenv --venv)/bin/activate
 # 	echo "frontend bootstrap failed"
 # }
 
-# run flask
+### run flask
 echo "backend bootstrap [Flask]"
 { # try
 	# cd ..

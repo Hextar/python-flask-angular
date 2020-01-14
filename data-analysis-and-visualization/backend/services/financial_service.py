@@ -4,22 +4,28 @@ from datetime import datetime
 import pandas_datareader as web
 from typing import List
 from sklearn.linear_model import LinearRegression
-
 pd.plotting.register_matplotlib_converters()
 
 LAST_N_DAYS = 3
 
-class FinancialService():
+class FinancialService:
 
+	def __init__(self):
+		pass
 
-	def get_stocks(stocks = List[str], start = datetime, end = datetime):
+	def get_average(self, sum = int, len = int):
+		try:
+			return sum / min(len, LAST_N_DAYS)
+		except:
+			return 0
+
+	def get_stocks(self, stocks = List[str], start = datetime, end = datetime):
 		# prepare the response json
 		response_dict = {
     	    "result": "OK",
     	    "data": {}
     	}
 		try:
-			print (LAST_N_DAYS)
 			# for each stock in the list
 			for idx, s in enumerate(stocks):
 				# get data from pandas_datareader 
@@ -30,7 +36,7 @@ class FinancialService():
 
 				# pretty parse of timestamp, value couples
 				values = {}
-				average = 0
+				average_sum = 0
 				for idy, ts in enumerate(json_stock_data.keys()):
 					values[idy] = {
 						"timestamp": ts,
@@ -38,13 +44,13 @@ class FinancialService():
 					}
 					# use the last 3 days to calculate the average
 					if idy >= len(values) - LAST_N_DAYS:
-						average += json_stock_data[ts]['Close']
+						average_sum += json_stock_data[ts]['Close']
 
 				# final stock parsing
 				response_dict["data"][idx] = {
 					"label": s,
 					"values": values,
-					"forecasted_value": average / LAST_N_DAYS
+					"forecasted_value": self.get_average(average_sum, len(json_stock_data))
 	        	}
 			return response_dict, 200
 		except:
