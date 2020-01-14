@@ -18,11 +18,21 @@ class FinancialService():
 			for idx, s in enumerate(stocks): 
 				stock_data = web.data.get_data_yahoo(s, start, end)
 				response_dict["result"] = "OK"
-				response_dict["data"] = {
+
+				temp = json.loads(stock_data.to_json(orient="index"))
+
+				print(temp.keys())
+				values = {}
+				for idy, ts in enumerate(temp.keys()):
+					values[idy] = {
+						"timestamp": ts,
+						"value": temp[ts]['Close']
+					}
+
+				response_dict["data"] [idx] = {
 					"label": s,
-					"values": json.loads(stock_data.to_json(orient="split"))
+					"values": values
 	        	}
-			print("exited from for in cycle")
 			return response_dict, 200
 		except:
 			response_dict["result"] = 'KO'

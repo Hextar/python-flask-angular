@@ -30,7 +30,7 @@ def get_financials():
 
         # Get data from the financial service
         financial_service = FinancialService
-        return jsonify(financial_service.get_stocks(stocks = stocks, start = start, end = end)), 200
+        return financial_service.get_stocks(stocks = stocks, start = start, end = end)
     except:
         return {"result": "KO"}, 500
 '''
