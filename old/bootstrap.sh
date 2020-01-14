@@ -6,27 +6,26 @@ export FLASK_APP=./src/main.py
 source $(pipenv --venv)/bin/activate
 
 ## freeze and install requirements
-echo "freeze and install the requirements"
-{ # try
-	sudo bash scripts/install-requirements.sh
-	sudo bash scripts/init-db.sh
-} || { #catch
-	echo "install failed"
-}
+# echo "freeze and install the requirements"
+# { # try
+#	sudo bash scripts/install-requirements.sh
+# } || { #catch
+#	echo "install failed"
+# }
 
 # run angular 
-echo "bootstrapping frontend (Angular 8)"
-{ # try
-	cd ./frontend
-	npm run build && npm run start
-} || { #catch
-	echo "frontend bootstrap failed"
-}
+# echo "frontend bootstrap [Angular 8]"
+# { # try
+#	cd ./frontend
+#	npm run build && npm run start
+# } || { #catch
+# 	echo "frontend bootstrap failed"
+# }
 
 # run flask
-echo "bootstrapping backend (Flask)"
+echo "backend bootstrap [Flask]"
 { # try
-	cd ..
+	# cd ..
 	flask run -h 0.0.0.0
 } || { #catch
 	echo "backend bootstrap failed"

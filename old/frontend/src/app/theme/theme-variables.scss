@@ -1,0 +1,109 @@
+/*
+ * Application global variables.
+ */
+
+// Angular Material custom theme
+// See https://material.angular.io/guide/theming for more details.
+//
+// You can also read https://medium.com/@tomastrajan/the-complete-guide-to-angular-material-themes-4d165a9d24d1
+// for more insight about Angular Material theming.
+
+@import "~@angular/material/theming";
+@import "./theme-palette";
+
+$radius-default: 4px;
+
+$magic-number: 16px; // 16
+$magic-number-1: $magic-number; // 16
+$magic-number-2: $magic-number * 2; // 32
+$magic-number-3: $magic-number * 3; // 48
+$magic-number-4: $magic-number * 4; // 64
+$magic-number-5: $magic-number * 5; // 80
+$magic-number-6: $magic-number * 6; // 96
+$magic-number-7: $magic-number * 7; // 112
+$magic-number-8: $magic-number * 8; // 128
+$magic-number-9: $magic-number * 9; // 144
+$magic-number-10: $magic-number * 10; // 160
+$magic-number-11: $magic-number * 11; // 176
+$magic-number-12: $magic-number * 12; // 192
+$magic-number-13: $magic-number * 13; // 208
+$magic-number-14: $magic-number * 14; // 224
+$magic-number-15: $magic-number * 15; // 240
+$magic-number--2: $magic-number / 2; // 8
+$magic-number--4: $magic-number / 4; // 4
+$magic-number--8: $magic-number / 8; // 2
+
+/* HEIGHT */
+$height-default: $magic-number-4; // 64
+$header-height: $magic-number * 6; // 96 exception
+$header-height-xs: $magic-number * 4; // 64 exception
+$warning-height: $magic-number * 3; // 64 exception
+$footer-height: $magic-number-3; // 48
+$sidenav-item-height: $magic-number-4; // 64
+$list-item-height: $height-default; // 64
+$list-item-height-xs: $magic-number-3; // 48
+$report-tab-min-height: $magic-number-7; //
+
+$sidenav-width-lg: 0;
+$sidenav-width: 0; //$magic-number-6
+$sidenav-width-xs: 0; //$magic-number-2
+
+
+/* WIDTH */
+$sidenav-width: 244px;
+$sidenav-width-2: 244px;
+
+/* PADDING */
+$padding-default: $magic-number;
+$padding-default1: $magic-number;
+$padding-default1half: $magic-number * 1.5;
+$padding-default-2: $magic-number-2;
+$padding-default-3: $magic-number-3;
+$padding-default-4: $magic-number-4;
+$padding-default-5: $magic-number-5;
+$padding-default-6: $magic-number-6;
+$padding-default-7: $magic-number-7;
+$padding-default-8: $magic-number-8;
+$padding-default-9: $magic-number-9;
+$padding-default--2: $magic-number / 2;
+$padding-default--4: $magic-number / 4;
+$padding-default--8: $magic-number / 8;
+
+$header-padding: $magic-number-2;
+$header-padding-md: $magic-number-2;
+$header-padding-xs: $magic-number;
+
+$sidenav-padding-right: $magic-number-2;
+$sidenav-padding-left: $magic-number * 1.5;
+$sidenav-padding-right-xs: $magic-number;
+$sidenav-padding-left-xs: 20px;
+
+$padding-mat-content: $magic-number-3;
+$padding-mat-content-xs: $magic-number;
+$padding-mat-content-sm: $magic-number-2;
+$padding-mat-content-md: $magic-number-2;
+$padding-mat-content-lg: $magic-number-2;
+
+$footer-padding: $header-padding;
+$footer-padding-md: $header-padding-md;
+$footer-padding-xs: $header-padding-xs;
+
+/* MARGIN */
+$margin-default: $magic-number;
+$margin-default-1: $magic-number;
+$margin-default-2: $magic-number-2;
+$margin-default-3: $magic-number-3;
+$margin-default-4: $magic-number-4;
+$margin-default-5: $magic-number-5;
+$margin-default-6: $magic-number-6;
+$margin-default-7: $magic-number-7;
+$margin-default-8: $magic-number-8;
+$margin-default-9: $magic-number-9;
+$margin-default--2: $magic-number / 2;
+$margin-default--4: $magic-number / 4;
+$margin-default--8: $magic-number / 8;
+
+/* ELEVATION */
+.istella-elevation {
+  @include mat-elevation(9, #333333, 0.55);
+}

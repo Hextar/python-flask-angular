@@ -1,0 +1,43 @@
+@import "~@angular/material/theming";
+
+// $display-4     .mat-display-4
+// $display-3     .mat-display-3
+// $display-2     .mat-display-2
+// $display-1     .mat-display-1
+// $headline      .mat-h1, .mat-headline
+// $title         .mat-h2, .mat-title
+// $subheading-2  .mat-h3, .mat-subheading-2
+// $subheading-1  .mat-h4, .mat-subheading-1
+// $body-2        .mat-body-strong, .mat-body-2
+// $body-1        .mat-body, .mat-body-1
+// $caption       .mat-small, .mat-caption
+// $button        none, used only in report
+// $input         none, used only in report
+
+$istella-typography: mat-typography-config(
+  $font-family: "'Open Sans', Sans-serif",
+  $display-4: mat-typography-level(112px, 112px, 300),
+  $display-3: mat-typography-level(56px, 56px, 400),
+  $display-2: mat-typography-level(45px, 48px, 400),
+  $display-1: mat-typography-level(34px, 40px, 400),
+  $headline: mat-typography-level(24px, 32px, 400),
+  $title: mat-typography-level(18px, 32px, 600),
+  $subheading-2: mat-typography-level(16px, 28px, 400),
+  $subheading-1: mat-typography-level(15px, 24px, 400),
+  $body-2: mat-typography-level(14px, 24px, 500),
+  $body-1: mat-typography-level(14px, 20px, 400),
+  $caption: mat-typography-level(12px, 20px, 400),
+  $button: mat-typography-level(14px, 14px, 500),
+  $input: mat-typography-level(16px, 1.125, 400)
+);
+
+@include mat-base-typography($istella-typography);
+@include angular-material-typography($istella-typography);
+@include mat-core($istella-typography);
+
+.mat-h1,
+.mat-h2,
+.mat-h3,
+.mat-h4 {
+  margin: 0 !important;
+}

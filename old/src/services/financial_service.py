@@ -1,7 +1,5 @@
 import datetime
-import yfinance as fyf
 from pandas_datareader import data as pdr
-fyf.pdr_override() # <-- Fix for panda reader
 
 DATA_NOT_AVAILABLE = "stock data not available"	
 

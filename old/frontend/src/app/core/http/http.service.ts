@@ -1,12 +1,10 @@
 import {Inject, Injectable, InjectionToken, Injector, Optional, Type} from '@angular/core';
 import {HttpClient, HttpEvent, HttpInterceptor, HttpHandler, HttpRequest} from '@angular/common/http';
 import {Observable} from 'rxjs';
-
 import {ErrorHandlerInterceptor} from '../interceptors/error-handler.interceptor';
 import {CacheInterceptor} from '../interceptors/cache.interceptor';
 import {ApiPrefixInterceptor} from '../interceptors/api-prefix.interceptor';
 import {HeadersInterceptor} from '../interceptors/headers-interceptor.service';
-import {MockInterceptor} from '../interceptors/mock.interceptor';
 import {environment} from '@env/environment';
 
 // HttpClient is declared in a re-exported module, so we have to extend the original module to make it work properly
@@ -82,11 +80,8 @@ export class HttpService extends HttpClient {
         this.injector.get(ApiPrefixInterceptor),
         this.injector.get(HeadersInterceptor),
       ];
-      if (environment && (environment.local || environment.dev) && false) {
+      if (environment && environment.dev) {
         this.interceptors.push(this.injector.get(ErrorHandlerInterceptor));
-      }
-      if (environment && environment.mock) {
-        this.interceptors.push(this.injector.get(MockInterceptor));
       }
     }
   }

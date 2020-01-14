@@ -10,7 +10,7 @@ import {mergeMap, finalize} from 'rxjs/operators';
 import {HttpCacheService} from '@app/core/http/http-cache.service';
 import {environment} from '@env/environment';
 import {Logger} from '@app/core/services/logger.service';
-import {USER_ID_REPLACE, MONITORING_ID_REPLACE, SENTIMENT_PAGE_REPLACE} from '@app/core/http/api.constants';
+import {STOCK_REPLACE, USER_ID_REPLACE} from '@app/core/http/api.constants';
 import {StorageCredentials} from '@app/core/services/storage.constants';
 
 const log = new Logger('ApiService');
@@ -146,13 +146,12 @@ export class ApiService {
    * @method setApiCommonObject()
    * @desc method to set api common request object.
    */
-  setApiCommonObject(company_id: boolean = false, user_id: boolean = false, username: boolean = false): any {
+  setApiCommonObject(): any {
     const commonObject = {} as any;
     const credentials: StorageCredentials = this.storageService.credentials;
     if (credentials) {
-      company_id ? commonObject.company_id = credentials.company_id : noop();
-      user_id ? commonObject.user_id = credentials.user_id : noop();
-      username ? commonObject.username = credentials.username : noop();
+      commonObject.user_id = credentials.user_id;
+      commonObject.username = credentials.username;
     }
     return commonObject;
   }
@@ -188,16 +187,8 @@ export class ApiService {
     );
   }
 
-  getMonitoringPath(url: string, id: string): string {
-    return url.replace(MONITORING_ID_REPLACE, id);
-  }
-
-  getSentimentPath(url: string, id: string, page: number): string {
-    return url.replace(MONITORING_ID_REPLACE, id).replace(SENTIMENT_PAGE_REPLACE, page + '');
-  }
-
-  getSentimentStatsPath(url: string, id: string): string {
-    return url.replace(MONITORING_ID_REPLACE, id);
+  getStockPath(url: string, stock: string): string {
+    return url.replace(STOCK_REPLACE, stock);
   }
 
   clearApiFromCache(url: string) {

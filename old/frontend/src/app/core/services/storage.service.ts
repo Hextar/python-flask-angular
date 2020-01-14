@@ -7,7 +7,7 @@ import {SocialCredentials, StorageCredentials} from '@app/core/services/storage.
 
 @Injectable()
 export class StorageService {
-  private KEY_PREPEND = 'istella-';
+  private KEY_PREPEND = 'hextar-';
   private CREDENTIALS_KEY = this.KEY_PREPEND + 'credentials-session-29FJWZ';
   private SOCIAL_KEY = this.KEY_PREPEND + 'social-session-1AFR6OO';
   private USER_KEY = this.KEY_PREPEND + 'user-session-L2VH9K';
@@ -132,9 +132,7 @@ export class StorageService {
         access_token: this._get(this._storage_credentials.access_token, this.ENCRYPT_CREDENTIALS),
         refresh_token: this._get(this._storage_credentials.refresh_token, this.ENCRYPT_CREDENTIALS),
         user_id: this._get(this._storage_credentials.user_id, this.ENCRYPT_CREDENTIALS),
-        company_id: this._get(this._storage_credentials.company_id, this.ENCRYPT_CREDENTIALS),
         username: this._get(this._storage_credentials.username, this.ENCRYPT_CREDENTIALS),
-        login_type: this._get(this._storage_credentials.login_type, this.ENCRYPT_CREDENTIALS),
         status: this._get(this._storage_credentials.status, this.ENCRYPT_CREDENTIALS),
       };
     }

@@ -1,17 +1,19 @@
-import { Injectable, OnDestroy } from '@angular/core';
-import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
-import { includes } from 'lodash';
-import { registerLocaleData } from '@angular/common';
+import {Injectable, OnDestroy} from '@angular/core';
+import {TranslateService, LangChangeEvent} from '@ngx-translate/core';
+import {includes} from 'lodash';
+import {registerLocaleData} from '@angular/common';
 import localeIt from '@angular/common/locales/it';
 import * as moment from 'moment';
 import 'moment/locale/it';
 import 'moment/locale/en-gb';
 
+// @ts-ignore
 import itIT from '@i18n/it-IT.json';
+// @ts-ignore
 import enUS from '@i18n/en-US.json';
 
-import { Observable } from 'rxjs';
-import { MatPaginatorIntl } from '@angular/material';
+import {Observable} from 'rxjs';
+import {MatPaginatorIntl} from '@angular/material';
 
 const languageKey = 'istella-language';
 
@@ -108,7 +110,8 @@ export class PaginatorI18n {
 
   constructor(
     private translate: TranslateService
-  ) {}
+  ) {
+  }
 
   getPaginatorIntl(): MatPaginatorIntl {
     const paginatorIntl = new MatPaginatorIntl();
@@ -123,12 +126,12 @@ export class PaginatorI18n {
 
   private getRangeLabel(page: number, pageSize: number, length: number): string {
     if (length === 0 || pageSize === 0) {
-      return this.translate.instant('paginator.RANGE_PAGE_LABEL_1', { length });
+      return this.translate.instant('paginator.RANGE_PAGE_LABEL_1', {length});
     }
     length = Math.max(length, 0);
     const startIndex = page * pageSize;
     // If the start index exceeds the list length, do not try and fix the end index to the end.
     const endIndex = startIndex < length ? Math.min(startIndex + pageSize, length) : startIndex + pageSize;
-    return this.translate.instant('paginator.RANGE_PAGE_LABEL_2', { startIndex: startIndex + 1, endIndex, length });
+    return this.translate.instant('paginator.RANGE_PAGE_LABEL_2', {startIndex: startIndex + 1, endIndex, length});
   }
 }

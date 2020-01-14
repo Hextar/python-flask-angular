@@ -1,9 +1,9 @@
-import { Injectable, OnDestroy } from '@angular/core';
-import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpResponse } from '@angular/common/http';
-import { Observable, Subscriber } from 'rxjs';
+import {Injectable, OnDestroy} from '@angular/core';
+import {HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpResponse} from '@angular/common/http';
+import {Observable, Subscriber} from 'rxjs';
 
-import { HttpCacheService } from '../http/http-cache.service';
-import { componentDestroyed } from '@w11k/ngx-componentdestroyed';
+import {HttpCacheService} from '../http/http-cache.service';
+import {componentDestroyed} from '@w11k/ngx-componentdestroyed';
 
 /**
  * Caches HTTP requests.
@@ -15,7 +15,8 @@ export class CacheInterceptor implements HttpInterceptor, OnDestroy {
 
   constructor(
     private httpCacheService: HttpCacheService
-  ) {}
+  ) {
+  }
 
   ngOnDestroy() {
     // Empty because '.takeUntil(componentDestroyed(this))' is used
@@ -50,14 +51,13 @@ export class CacheInterceptor implements HttpInterceptor, OnDestroy {
       } else {
         if (next.handle(request)) {
           next.handle(request)
-            .takeUntil(componentDestroyed(this))
             .subscribe(event => {
-              if (event) {
-                if (event instanceof HttpResponse) {
-                  this.httpCacheService.setCacheData(request.urlWithParams, event);
+                if (event) {
+                  if (event instanceof HttpResponse) {
+                    this.httpCacheService.setCacheData(request.urlWithParams, event);
+                  }
+                  subscriber.next(event);
                 }
-                subscriber.next(event);
-              }
               },
               error => subscriber.error(error),
               () => subscriber.complete()

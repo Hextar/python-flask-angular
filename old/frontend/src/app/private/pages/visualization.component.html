@@ -1,0 +1,26 @@
+<div style="text-align:center">
+  <h1>Financial</h1>
+</div>
+<h2>Stocks: [CROP, UGA, NDAQ] </h2>
+
+<ng-container *ngIf="!!isLoading; else loaded">
+  <mat-progress-spinner
+    mode="indeterminate"
+    [strokeWidth]="4"
+    [diameter]="32"
+  ></mat-progress-spinner>
+</ng-container>
+<ng-template #loaded>
+  <ng-container *ngIf="(financial$ | async) as financial; else noData">
+    JSON: {{ financial | json }}
+
+    <!-- Stock chart -->
+    <app-chart></app-chart>
+
+    <!-- Table w/ stock's next day prediction -->
+    <app-custom-table></app-custom-table>
+  </ng-container>
+  <ng-template #noData>
+    No data loaded
+  </ng-template>
+</ng-template>

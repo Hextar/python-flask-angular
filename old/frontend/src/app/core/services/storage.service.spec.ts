@@ -3,7 +3,7 @@ import { StorageService } from './storage.service';
 
 describe('StorageService', () => {
   let service: StorageService;
-  const KEY_PREPEND = 'istella-';
+  const KEY_PREPEND = 'hextar-';
   const USER_INFO_KEY = KEY_PREPEND + 'user-info-session-L2VH9K';
   beforeEach(() =>
     TestBed.configureTestingModule({

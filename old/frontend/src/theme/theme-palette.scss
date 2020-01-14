@@ -1,0 +1,205 @@
+@import "~@angular/material/theming";
+@include mat-core();
+
+$mat-istellaprimary: (
+  10: #e9ecf4,
+  50: #bdc6df,
+  100: #3a569f,
+  400: #3a569f,
+  500: #0f318a,
+  700: #0b2465,
+  contrast: (
+    50: #e1e1e1,
+    100: #fff,
+    400: #fff,
+    500: #0f318a,
+    700: #000
+  )
+);
+
+$mat-istellaaccent: (
+  10: #eaf8f6,
+  50: #c0ece4,
+  100: #62efcd,
+  400: #62efcd,
+  500: #1abc9c,
+  700: #138972,
+  contrast: (
+    50: #e1e1e1,
+    100: #fff,
+    400: #fff,
+    500: #1abc9c,
+    700: #000
+  )
+);
+
+$mat-lightwarn: (
+  50: #ffecb9,
+  100: #ffc62e,
+  400: #ffc62e,
+  500: #ffba00,
+  700: #ffab00,
+  contrast: (
+    50: #e1e1e1,
+    100: #fff,
+    400: #fff,
+    500: #ffba00,
+    700: #000
+  )
+);
+
+$mat-istellawarn: (
+  10: #FDF0EE,
+  50: #FBD4CD,
+  100: #F26248,
+  400: #F26248,
+  500: #F44336,
+  700: #B14835,
+  contrast: (
+    50: #e1e1e1,
+    100: #fff,
+    400: #fff,
+    500: #F44336,
+    700: #000
+  )
+);
+
+$mat-twitter: (
+  10: #eaf6fd,
+  50: #c1e5fb,
+  100: #73C4F4,
+  400: #1da1f2,
+  500: #1da1f2,
+  700: #1676b1,
+  contrast: (
+    100: #f5f8fa,
+    500: #f5f8fa
+  )
+);
+
+$mat-facebook: (
+  10: #dfe3ee,
+  50: #869ECC,
+  100: #869ECC,
+  400: #3b5998,
+  500: #3b5998,
+  700: #224389,
+  contrast: (
+    100: #f7f7f7,
+    500: #f7f7f7
+  )
+);
+
+
+$mat-negative: (
+  10: #FDF0EE,
+  50: #FBD4CD,
+  100: #F26248,
+  400: #F26248,
+  500: #F44336,
+  700: #B14835,
+  contrast: (
+    100: #f5f8fa,
+    500: #f5f8fa
+  )
+);
+
+$mat-positive: (
+  10: #EEFDF3,
+  50: #CDFBDD,
+  100: #69F0AE,
+  400: #69F0AE,
+  500: #48F284,
+  700: #35B161,
+  contrast: (
+    100: #f5f8fa,
+    500: #f5f8fa
+  )
+);
+
+$istella-background: (
+  status-bar: mat-color($mat-istellaprimary, 500),
+  app-bar: mat-color($mat-istellaprimary, 500),
+  background: mat-color($mat-grey, 100),
+  hover: map_get($mat-grey, 100),
+  card: white,
+  dialog: white,
+  disabled-button: mat-color($mat-istellaprimary, 50),
+  raised-button: map-get($mat-grey, 800),
+  focused-button: $white-6-opacity,
+  selected-button: map_get($mat-grey, 900),
+  selected-disabled-button: map_get($mat-grey, 800),
+  disabled-button-toggle: black,
+  unselected-chip: map_get($mat-grey, 700),
+  disabled-list-option: black
+);
+
+$istella-foreground: (
+  base: mat-color($mat-istellaprimary, 100),
+  divider: map_get($mat-grey, 700),
+  dividers: map_get($mat-grey, 700),
+  disabled: map_get($mat-grey, 200),
+  disabled-button: mat-contrast($mat-istellaprimary, 50),
+  disabled-text: mat-contrast($mat-istellaprimary, 50),
+  hint-text: map_get($mat-grey, 200),
+  secondary-text: map_get($mat-grey, 500),
+  icon: mat-color($mat-istellaprimary, 500),
+  icons: mat-color($mat-istellaprimary, 500),
+  text: $dark-primary-text,
+  slider-min: map_get($mat-grey, 200),
+  slider-off: map_get($mat-grey, 200),
+  slider-off-active: map_get($mat-grey, 200),
+);
+@function create-istella-theme($primary, $accent, $warn) {
+  @return (
+    primary: $primary,
+    accent: $accent,
+    warn: $warn,
+    is-dark: false,
+    foreground: $istella-foreground,
+    background: $istella-background
+  );
+}
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a setDefault, lighter, and darker
+// hue.
+$istella-primary: mat-palette($mat-istellaprimary, 500, 100, 700);
+$istella-accent: mat-palette($mat-istellaaccent, 500, 100, 700);
+$istella-warn: mat-palette($mat-istellawarn, 500, 100, 700);
+// Create the theme object (a Sass map containing all of the palettes).
+$istella-theme: create-istella-theme($istella-primary, $istella-accent, $istella-warn);
+@include angular-material-theme($istella-theme);
+
+$primary: map-get($istella-theme, primary);
+$accent: map-get($istella-theme, accent);
+$warn: map-get($istella-theme, warn);
+$background: map-get($istella-theme, background);
+$foreground: map-get($istella-theme, foreground);
+$dark-primary-text: $dark-primary-text;
+$light-primary-text: $light-primary-text;
+
+/********* SVG COLOR CONTROL **********/
+.white-fill g {
+  fill: #fff;
+}
+.black-fill g {
+  fill: #000;
+}
+.primary-fill g {
+  fill: mat-color($primary, 500);
+}
+.white-stroke g {
+  stroke: #fff;
+}
+.black-stroke g {
+  stroke: #000;
+}
+.primary-stroke g {
+  stroke: mat-color($primary, 500);
+}
+
+@mixin mat-ripple-theme($theme) {
+  .mat-ripple-element {
+    background-color: rgba(255, 255, 255, .4);
+  }
+}

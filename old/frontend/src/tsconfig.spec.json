@@ -4,10 +4,23 @@
     "outDir": "../out-tsc/spec",
     "baseUrl": "./",
     "module": "commonjs",
-    "types": [
-      "jasmine",
-      "node"
-    ]
+    "target": "es5",
+    "types": ["node", "jasmine"],
+    "lib": ["es2017", "dom", "es6"],
+    "paths": {
+      "@app/*": ["app/*"],
+      "@models/*": ["app/core/entities/*"],
+      "@shared/*": ["app/shared/*"],
+      "@shell/*": ["app/shell/*"],
+      "@public/*": ["app/public/*"],
+      "@private/*": ["app/private/*"],
+      "@assets/*": ["assets/*"],
+      "@theme/*": ["theme/*"],
+      "@env/*": ["environments/*"],
+      "@i18n/*": ["translations/*"],
+      "core-js/es7/reflect": ["../node_modules/@angular-devkit/build-angular/node_modules/core-js/proposals/reflect-metadata"],
+      "core-js/es6/*": ["../node_modules/@angular-devkit/build-angular/node_modules/core-js/es"]
+    }
   },
   "files": [
     "test.ts",
@@ -15,6 +28,8 @@
   ],
   "include": [
     "**/*.spec.ts",
-    "**/*.d.ts"
+    "**/*.mock.ts",
+    "**/*.d.ts",
+    "node_modules"
   ]
 }

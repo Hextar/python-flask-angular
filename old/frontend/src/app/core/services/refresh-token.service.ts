@@ -1,6 +1,6 @@
 import {Injectable, Injector, OnDestroy} from '@angular/core';
 import {ApiService} from '@app/core/http/api.service';
-import {EP_PATHS} from '@app/core/http/api.constants';
+import {API_PATHS} from '@app/core/http/api.constants';
 import {StorageService} from '@app/core/services/storage.service';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
@@ -27,7 +27,7 @@ export class RefreshTokenService implements OnDestroy {
   }
 
   refreshToken(): Observable<boolean> {
-    this.apiObject = this._apiService.setApiCallObject(EP_PATHS.TOKEN_REFRESH_POST, {});
+    this.apiObject = this._apiService.setApiCallObject(API_PATHS.TOKEN_REFRESH_POST, {});
     return this._apiService.postApi(this.apiObject).pipe(
       map((response: any) => {
         if (!response.access_token || !response.refresh_token) {
