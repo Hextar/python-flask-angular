@@ -21,7 +21,7 @@ def get_financials():
         
         # Ask for 5 years of data
         start = datetime(2020, 1, 1)
-        end = datetime(2020, 1, 3)
+        end = datetime(2020, 1, 10)
 
         # Get data from the financial service and return it
         financial_service = FinancialService()

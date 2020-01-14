@@ -6,16 +6,14 @@ from typing import List
 from sklearn.linear_model import LinearRegression
 pd.plotting.register_matplotlib_converters()
 
-LAST_N_DAYS = 3
-
 class FinancialService:
 
-	def __init__(self):
-		pass
+	def __init__(self, last_n_days = 3):
+		self.last_n_days = last_n_days
 
 	def get_average(self, sum = int, len = int):
 		try:
-			return sum / min(len, LAST_N_DAYS)
+			return sum / min(len, self.last_n_days)
 		except:
 			return 0
 
@@ -33,6 +31,7 @@ class FinancialService:
 
 				# parse stocks as json
 				json_stock_data = json.loads(stock_data.to_json(orient="index"))
+				json_length = len(json_stock_data)
 
 				# pretty parse of timestamp, value couples
 				values = {}
@@ -43,14 +42,14 @@ class FinancialService:
 						"value": json_stock_data[ts]['Close'],
 					}
 					# use the last 3 days to calculate the average
-					if idy >= len(values) - LAST_N_DAYS:
+					if (idy >= (json_length - self.last_n_days)):
 						average_sum += json_stock_data[ts]['Close']
 
 				# final stock parsing
 				response_dict["data"][idx] = {
 					"label": s,
 					"values": values,
-					"forecasted_value": self.get_average(average_sum, len(json_stock_data))
+					"forecasted_value": self.get_average(average_sum, json_length)
 	        	}
 			return response_dict, 200
 		except:
