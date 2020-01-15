@@ -1,0 +1,14 @@
+version: '3'
+services:
+
+  daav-fe-angular:
+    build: ./frontend-daav
+    container_name: daav-fe
+    ports:
+      - 80:80   
+       
+  daav-be-flask:
+    build: ./backend-daav
+    container_name: daav-be
+    ports:
+      - 5000:5000

@@ -11,6 +11,4 @@ RUN npm install && \
 
 FROM nginx:alpine
 
-EXPOSE 4200
-
 COPY --from=builder /src/app/dist/ /usr/share/nginx/html/

@@ -24,7 +24,7 @@ export class VisualizationComponent implements OnInit, OnDestroy {
     const start = '2020-1-1';
     const end = '2020-1-5';
     this.subscription = this.financialService.getStocks(stocksToAnalyse, start, end)
-      .subscribe((response: Stock[]) => {
+      .subscribe((response: any) => {
         console.log(response);
         this.isLoading = false;
         this.financial$.next(response);

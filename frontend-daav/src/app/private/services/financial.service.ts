@@ -29,13 +29,17 @@ export class FinancialService {
     this._apiObject = this.apiService.setApiCallObject(path, request);
     return this.apiService.postApi(this._apiObject).pipe(
       map((response: ApiBaseResponse) => {
-        if (response && response.result === 'OK') {
-          return response.data;
+        if (response && !!response[0] && response[0].result === 'OK' && !!response[0].data) {
+          const stocksData: Stock[] = response[0].data;
+          console.log(stocksData);
+          return stocksData;
         } else {
+          console.error(NO_STOCK_DATA);
           return throwError(NO_STOCK_DATA);
         }
       }),
       catchError(err => {
+        console.error(NO_STOCK_DATA);
         return throwError(NO_STOCK_DATA);
       })
     );
