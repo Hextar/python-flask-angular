@@ -20,7 +20,10 @@ export class VisualizationComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // this.isLoading = true;
-    this.subscription = this.financialService.getStocks()
+    const stocksToAnalyse = ['CROP', 'UGA', 'NDAQ'];
+    const start = '2020-1-1';
+    const end = '2020-1-5';
+    this.subscription = this.financialService.getStocks(stocksToAnalyse, start, end)
       .subscribe((response: Stock[]) => {
         console.log(response);
         this.isLoading = false;

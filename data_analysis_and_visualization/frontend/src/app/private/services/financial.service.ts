@@ -20,15 +20,17 @@ export class FinancialService {
   }
 
   // GET list of public, future events
-  getStocks(): Observable<Stock[]> {
+  getStocks(stocks: string[], start: string, end: string): Observable<Stock[]> {
     const request = this.apiService.setApiCommonObject();
+    request.stocks = stocks;
+    request.start = start;
+    request.end = end;
     const path = API_PATHS.STOCKS_GET;
     this._apiObject = this.apiService.setApiCallObject(path, request);
-    return this.apiService.getApi(this._apiObject).pipe(
+    return this.apiService.postApi(this._apiObject).pipe(
       map((response: ApiBaseResponse) => {
         if (response && response.result === 'OK') {
-          const stocks = response.data;
-          return stocks;
+          return response.data;
         } else {
           return throwError(NO_STOCK_DATA);
         }
