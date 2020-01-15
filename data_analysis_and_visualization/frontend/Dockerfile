@@ -1,5 +1,7 @@
 FROM node:alpine AS builder
 
+MAINTAINER Stefano st.salidu@gmail.com
+
 WORKDIR /src/app
 
 COPY . .
@@ -9,4 +11,4 @@ RUN npm install && \
 
 FROM nginx:alpine
 
-COPY --from=builder /src/app/dist/* /usr/share/nginx/html/
+COPY --from=builder /src/app/dist/ /usr/share/nginx/html/
