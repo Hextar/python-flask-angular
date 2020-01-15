@@ -13,11 +13,6 @@ CORS(app)
 
 from src import routes
 
-def create_app():
-    """Return the Flask application.
-    """
-    return app
-
 # run app
 if __name__ == "__main__":
 	app.run(debug=True)

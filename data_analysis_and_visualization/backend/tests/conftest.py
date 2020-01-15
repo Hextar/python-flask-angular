@@ -11,7 +11,6 @@ import pytest
 @pytest.fixture
 def app():
     """Create and configure a new app instance for each test."""
-    # app = testApp.create_app()
     yield app
 
 
