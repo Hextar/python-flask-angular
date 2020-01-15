@@ -31,7 +31,7 @@ const routes: Routes = ShellService.childRoutes([
     },
   },
   {
-    path: 'private',
+    path: 'dashboard',
     loadChildren: () => import('@private/private.module').then(m => m.PrivateModule),
     data: {
       isClickable: false,
@@ -42,10 +42,10 @@ const routes: Routes = ShellService.childRoutes([
     },
   },
   {
-    path: '', redirectTo: 'private', pathMatch: 'full'
+    path: '', redirectTo: 'dashboard', pathMatch: 'full'
   },
   {
-    path: '**', redirectTo: 'private', pathMatch: 'full'
+    path: '**', redirectTo: 'dashboard', pathMatch: 'full'
   }
 ]);
 

@@ -1,13 +1,13 @@
-import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import 'rxjs/add/operator/catch';
-import {HttpErrorResponse} from '@angular/common/http';
-import {ApiService} from '@app/core';
-import {API_PATHS} from '@app/core/http/api.constants';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ApiService } from '@app/core';
+import { API_PATHS } from '@app/core/http/api.constants';
 import { ApiBaseObject, ApiBaseResponse } from '@app/core/models/api-base.model';
-import {catchError, map} from 'rxjs/operators';
-import {Stock} from '@app/private/models/stock.model';
-import {throwError} from 'rxjs/internal/observable/throwError';
+import { catchError, map } from 'rxjs/operators';
+import { Stock } from '@app/private/models/stock.model';
+import { throwError } from 'rxjs/internal/observable/throwError';
 import { NO_STOCK_DATA } from '@private/services/financial.constants';
 
 @Injectable()
@@ -17,10 +17,6 @@ export class FinancialService {
   constructor(
     private apiService: ApiService
   ) {
-  }
-
-  private static _handleError(err: HttpErrorResponse | any) {
-    return Observable.throw(err.message || 'Error: Unable to complete request.');
   }
 
   // GET list of public, future events

@@ -4,7 +4,6 @@ import {Observable} from 'rxjs';
 import {ErrorHandlerInterceptor} from '../interceptors/error-handler.interceptor';
 import {CacheInterceptor} from '../interceptors/cache.interceptor';
 import {ApiPrefixInterceptor} from '../interceptors/api-prefix.interceptor';
-import {HeadersInterceptor} from '../interceptors/headers-interceptor.service';
 import {environment} from '@env/environment';
 
 // HttpClient is declared in a re-exported module, so we have to extend the original module to make it work properly
@@ -78,7 +77,6 @@ export class HttpService extends HttpClient {
       // Configure default interceptors that can be disabled here
       this.interceptors = [
         this.injector.get(ApiPrefixInterceptor),
-        this.injector.get(HeadersInterceptor),
       ];
       if (environment && environment.dev) {
         this.interceptors.push(this.injector.get(ErrorHandlerInterceptor));

@@ -1,23 +1,22 @@
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { RouterTestingModule } from '@angular/router/testing';
-import { I18nService } from '@app/core';
-import { TranslateService } from '@ngx-translate/core';
 import { Title } from '@angular/platform-browser';
+import { PrivateModule } from '@private/private.module';
+import { PublicModule } from '@public/public.module';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
-
+        PublicModule,
+        PrivateModule
       ],
       declarations: [
         AppComponent
       ],
       providers: [
-        I18nService,
-        TranslateService,
         Title
       ]
     }).compileComponents();
@@ -29,16 +28,9 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   }));
 
-  it(`should have as title 'app'`, async(() => {
+  it(`should have as title 'data-analysis-and-visualization'`, async(() => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('app');
-  }));
-
-  it('should render title in a h1 tag', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to app!');
+    expect(app.title).toEqual('data-analysis-and-visualization');
   }));
 });

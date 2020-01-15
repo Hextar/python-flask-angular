@@ -5,7 +5,6 @@ export * from './http/http-cache.service';
 export * from './interceptors/api-prefix.interceptor';
 export * from './interceptors/cache.interceptor';
 export * from './interceptors/error-handler.interceptor';
-export * from './route-reusable-strategy';
 export * from './services/i18n.service';
 export * from './services/logger.service';
 export * from './services/storage.service';

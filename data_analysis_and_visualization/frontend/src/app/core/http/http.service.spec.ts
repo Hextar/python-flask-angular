@@ -7,7 +7,6 @@ import { HttpCacheService } from './http-cache.service';
 import { ErrorHandlerInterceptor } from '../interceptors/error-handler.interceptor';
 import { CacheInterceptor } from '../interceptors/cache.interceptor';
 import { ApiPrefixInterceptor } from '../interceptors/api-prefix.interceptor';
-import { HeadersInterceptor } from '@app/core/interceptors/headers-interceptor.service';
 import { ApiService, StorageService } from '@app/core';
 import { RouterTestingModule } from '@angular/router/testing';
 
@@ -27,7 +26,6 @@ describe('HttpService', () => {
         CacheInterceptor,
         ApiPrefixInterceptor,
         HttpCacheService,
-        HeadersInterceptor,
         ApiService,
         StorageService,
         {

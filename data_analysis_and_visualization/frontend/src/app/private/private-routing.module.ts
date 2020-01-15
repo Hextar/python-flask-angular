@@ -17,8 +17,6 @@ const routes: Routes = [
         path: 'visualization',
         component: VisualizationComponent,
         data: {
-          isClickable: true,
-          breadcrumb: 'Crea Monitoring',
           data: {
             title: 'Visualization'
           }
@@ -26,6 +24,9 @@ const routes: Routes = [
       },
       {
         path: '', redirectTo: 'visualization', pathMatch: 'full'
+      },
+      {
+        path: '**', redirectTo: 'visualization', pathMatch: 'full'
       }
     ]
   }

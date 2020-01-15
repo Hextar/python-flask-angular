@@ -179,25 +179,4 @@ export class ApiService {
       alertHide: alertHide
     };
   }
-
-  getUserPath(url: string, user_id?: string): string {
-    return url.replace(
-      USER_ID_REPLACE,
-      user_id ? user_id : this.storageService.credentials ? this.storageService.credentials.user_id : null
-    );
-  }
-
-  getStockPath(url: string, stock: string): string {
-    return url.replace(STOCK_REPLACE, stock);
-  }
-
-  clearApiFromCache(url: string) {
-    const request = this.setApiCommonObject();
-    let params = '?';
-    if (request) {
-      Object.keys(request).forEach((item: any) => params = params + item + '=' + request[item] + '&');
-      params = params.slice(0, -1);
-    }
-    this.cache.clearCache(environment.backendUrl + '/' + url + params);
-  }
 }

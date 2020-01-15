@@ -5,8 +5,7 @@ import { HttpService } from '../http/http.service';
 import { environment } from '@env/environment';
 import { ApiPrefixInterceptor } from './api-prefix.interceptor';
 import { ErrorHandlerInterceptor } from './error-handler.interceptor';
-import { HeadersInterceptor } from '@app/core/interceptors/headers-interceptor.service';
-import { ApiService } from '@app/core';
+import { ApiService, StorageService } from '@app/core';
 import { RouterTestingModule } from '@angular/router/testing';
 
 describe('ApiPrefixInterceptor', () => {
@@ -22,8 +21,8 @@ describe('ApiPrefixInterceptor', () => {
       providers: [
         ApiPrefixInterceptor,
         ErrorHandlerInterceptor,
-        HeadersInterceptor,
         ApiService,
+        StorageService,
         {
           provide: HttpClient,
           useClass: HttpService

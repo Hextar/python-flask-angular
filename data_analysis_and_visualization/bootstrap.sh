@@ -1,9 +1,7 @@
 #!/bin/bash
 
 ### activate virutal env
-echo "activate virtual env"
-export FLASK_APP=./backend/run.py
-source $(pipenv --venv)/bin/activate
+sudo bash scripts/init_venv.sh
 
 ### freeze and install requirements
 # echo "freeze and install the requirements"
@@ -24,9 +22,4 @@ source $(pipenv --venv)/bin/activate
 
 ### run flask
 echo "backend bootstrap [Flask]"
-{ # try
-	# cd ..
-	flask run -h 0.0.0.0
-} || { #catch
-	echo "backend bootstrap failed"
-}
+sudo bash ./scripts/init_flask.sh

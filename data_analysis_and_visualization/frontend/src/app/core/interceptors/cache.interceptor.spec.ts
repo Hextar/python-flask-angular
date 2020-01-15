@@ -52,36 +52,36 @@ describe('CacheInterceptor', () => {
 
     it('should cache the request', () => {
       // Act
-      http.get('/toto').subscribe(() => {
+      http.get('/test').subscribe(() => {
         // Assert
-        const cachedData = httpCacheService.getCacheData('/toto');
+        const cachedData = httpCacheService.getCacheData('/test');
         expect(cachedData).toBeDefined();
         expect(cachedData ? cachedData.body : null).toEqual('someData');
       });
 
-      httpMock.expectOne({ url: '/toto' }).flush('someData');
+      httpMock.expectOne({ url: '/test' }).flush('someData');
     });
 
     it('should respond from the cache', () => {
       // Arrange
-      httpCacheService.setCacheData('/toto', new HttpResponse({ body: 'cachedData' }));
+      httpCacheService.setCacheData('/test', new HttpResponse({ body: 'cachedData' }));
 
       // Act
-      http.get('/toto').subscribe(response => {
+      http.get('/test').subscribe(response => {
         // Assert
         expect(response).toEqual('cachedData');
       });
 
-      httpMock.expectNone({ url: '/toto' });
+      httpMock.expectNone({ url: '/test' });
     });
 
     it('should not cache the request in case of error', () => {
       // Act
-      http.get('/toto').subscribe(
+      http.get('/test').subscribe(
         () => {},
         () => {
           // Assert
-          expect(httpCacheService.getCacheData('/toto')).toBeNull();
+          expect(httpCacheService.getCacheData('/test')).toBeNull();
         }
       );
 
@@ -113,16 +113,21 @@ describe('CacheInterceptor', () => {
 
     it('should force cache update', () => {
       // Arrange
-      httpCacheService.setCacheData('/toto', new HttpResponse({ body: 'oldCachedData' }));
-      cacheInterceptor.configure({ update: true });
+      httpCacheService.setCacheData('/test', new HttpResponse({ body: 'oldCachedData' }));
+      if (cacheInterceptor) {
+        cacheInterceptor.configure({ update: true });
+      } else {
+        cacheInterceptor = createInterceptor(new HttpCacheService);
+        cacheInterceptor.configure({ update: true });
+      }
 
       // Act
-      http.get('/toto').subscribe(response => {
+      http.get('/test').subscribe(response => {
         // Assert
         expect(response).toEqual('newData');
       });
 
-      httpMock.expectOne({ url: '/toto' }).flush('newData');
+      httpMock.expectOne({ url: '/test' }).flush('newData');
     });
   });
 });

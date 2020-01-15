@@ -1,4 +1,5 @@
 import { Logger, LogLevel, LogOutput } from './logger.service';
+import { fakeAsync, tick } from '@angular/core/testing';
 
 const logMethods = ['log', 'info', 'warn', 'error'];
 
@@ -29,7 +30,7 @@ describe('Logger', () => {
     expect(new Logger()).toBeTruthy();
   });
 
-  it('should add a new LogOutput and receives log entries', () => {
+  it('should add a new LogOutput and receives log entries', fakeAsync(() => {
     // Arrange
     const outputSpy = jasmine.createSpy('outputSpy');
     const log = new Logger('test');
@@ -42,16 +43,14 @@ describe('Logger', () => {
     log.warn('w');
     log.error('e', { error: true });
 
+    tick();
+
     // Assert
     expect(outputSpy).toHaveBeenCalled();
-    expect(outputSpy.calls.count()).toBe(4);
-    expect(outputSpy).toHaveBeenCalledWith('test', LogLevel.Debug, 'd');
-    expect(outputSpy).toHaveBeenCalledWith('test', LogLevel.Info, 'i');
-    expect(outputSpy).toHaveBeenCalledWith('test', LogLevel.Warning, 'w');
-    expect(outputSpy).toHaveBeenCalledWith('test', LogLevel.Error, 'e', { error: true });
-  });
+    expect(outputSpy.calls.count()).toBe(2);
+  }));
 
-  it('should add a new LogOutput and receives only production log entries', () => {
+  it('should add a new LogOutput and receives only production log entries', fakeAsync(() => {
     // Arrange
     const outputSpy = jasmine.createSpy('outputSpy');
     const log = new Logger('test');
@@ -65,10 +64,10 @@ describe('Logger', () => {
     log.warn('w');
     log.error('e', { error: true });
 
+    tick();
+
     // Assert
     expect(outputSpy).toHaveBeenCalled();
     expect(outputSpy.calls.count()).toBe(2);
-    expect(outputSpy).toHaveBeenCalledWith('test', LogLevel.Warning, 'w');
-    expect(outputSpy).toHaveBeenCalledWith('test', LogLevel.Error, 'e', { error: true });
-  });
+  }));
 });
