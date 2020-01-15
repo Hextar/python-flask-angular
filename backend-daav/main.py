@@ -1,13 +1,24 @@
-from src import app
+# coding=utf-8
+from flask import Flask
+from flask_cors import CORS
+from flask import request
+from flask import jsonify
+
 from datetime import datetime
 from src.services.financial_service import FinancialService
-from flask import request
 
+# creating the Flask application
+app = Flask(__name__,
+    static_folder='./backend-daav/src/static',
+    template_folder='./backend-daav/src/templates')
+
+# allowing cors for google-chrome
+CORS(app)
 
 # expose a blank page with the label 'OK'
 @app.route('/')
 def het_home():
-    return 'OK'
+    return jsonify('OK')
 
 # expose a GET endpoint to be called from the front-end
 @app.route('/stocks', methods=("GET", "POST"))
@@ -28,10 +39,14 @@ def get_financials():
 
             # Get data from the financial service and return it
             financial_service = FinancialService()
-            return financial_service.get_stocks(stocks = stocks, start = start, end = end)
+            return jsonify(financial_service.get_stocks(stocks = stocks, start = start, end = end))
         except:
             # Return a 500 Internal Server Error
-            return {"result": "KO"}, 400
+            return jsonify({"result": "KO"}), 400
     else:
         # Return a 405 Internal Server Error
-        return {"result": "KO"}, 405
+        return jsonify({"result": "KO"}), 405
+
+# run app
+if __name__ == "__main__":
+	app.run(debug=True, host='0.0.0.0', port=5000)

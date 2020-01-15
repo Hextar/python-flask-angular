@@ -1,10 +1,10 @@
 import sys
 import os
 
-folder = os.path.join(os.path.dirname(__file__), "../src/")
+folder = os.path.join(os.path.dirname(__file__), "../")
 sys.path.append(folder)
 
-from src import app as testApp
+from main import app as testApp
 import pytest
 
 
@@ -16,5 +16,5 @@ def app():
 
 @pytest.fixture
 def client(app):
-    """A test client for the app."""
+    """A test client forl the app."""
     return testApp.test_client()

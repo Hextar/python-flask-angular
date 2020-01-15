@@ -18,11 +18,11 @@ def test_financial_path(client):
 	}
 	r = client.post('/stocks', data=json.dumps(data), content_type='application/json')
 	assert r.status_code == 200
-	assert "result" in r.json
-	assert "data" in r.json
-	result = r.json["result"]
+	assert "result" in r.json[0]
+	assert "data" in r.json[0]
+	result = r.json[0]["result"]
 	assert result == "OK"
-	data = r.json["data"]
+	data = r.json[0]["data"]
 	assert len(data) >= 1
 
 def test_financial_path_no_data(client):
@@ -34,11 +34,11 @@ def test_financial_path_no_data(client):
 	}
 	r = client.post('/stocks', data=json.dumps(data), content_type='application/json')
 	assert r.status_code == 200
-	assert "result" in r.json
-	assert "data" in r.json
-	result = r.json["result"]
+	assert "result" in r.json[0]
+	assert "data" in r.json[0]
+	result = r.json[0]["result"]
 	assert result == "OK"
-	data = r.json["data"]
+	data = r.json[0]["data"]
 	assert len(data) == 0
 
 def test_raises_wrong_method(client):

@@ -1,6 +1,6 @@
 -i https://pypi.org/simple
 pkgconfig==1.5.1
-Flask==0.10.1
+Flask==1.0
 Flask-Cors==3.0.8
 certifi==2019.11.28
 chardet==3.0.4
@@ -22,7 +22,6 @@ pytz==2019.3
 requests==2.22.0
 scikit-learn==0.22.1
 scipy==1.4.1
-simplejson==3.17.0
 six==1.13.0
 urllib3==1.25.7
 zope.interface==4.7.1
