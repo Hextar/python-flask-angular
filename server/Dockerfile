@@ -13,6 +13,6 @@ RUN pip install -r requirements.txt
 
 COPY . /src
 
-ENTRYPOINT [ "python" ]
+EXPOSE 5000
 
-CMD [ "main.py" ]
+CMD gunicorn --bind 0.0.0.0:5000 wsgi:app --max-requests 10000 --timeout 5 --keep-alive 5 --log-level info
