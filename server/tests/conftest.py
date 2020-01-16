@@ -1,18 +1,18 @@
-import sys
+import pytest
 import os
-
+import sys
 folder = os.path.join(os.path.dirname(__file__), "../")
 sys.path.append(folder)
 
-from main import app as testApp
+import app as saApp
 import pytest
 
 
 @pytest.fixture
 def app():
     """Create and configure a new app instance for each test."""
+    app = saApp.create_app()
     yield app
-
 
 @pytest.fixture
 def client(app):
