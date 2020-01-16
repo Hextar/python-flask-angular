@@ -1,12 +1,12 @@
+from flask import request, jsonify
+from datetime import datetime
+from typing import List
 import json
 import pandas as pd 
-from datetime import datetime
 import pandas_datareader as web
-from typing import List
-from sklearn.linear_model import LinearRegression
 pd.plotting.register_matplotlib_converters()
 
-class FinancialService:
+class StockService:
 
 	def __init__(self, last_n_days = 3):
 		self.last_n_days = last_n_days
@@ -19,7 +19,7 @@ class FinancialService:
 
 	def get_stocks(self, stocks = List[str], start = datetime, end = datetime):
 		# prepare the response json
-		response_dict = {
+		response = {
     	    "result": "OK",
     	    "data": {}
     	}
@@ -46,11 +46,13 @@ class FinancialService:
 						average_sum += json_stock_data[ts]['Close']
 
 				# final stock parsing
-				response_dict["data"][idx] = {
+				response["data"][idx] = {
 					"label": s,
 					"values": values,
 					"forecasted_value": self.get_average(average_sum, json_length)
 	        	}
-			return response_dict, 200
+			return response, 200
 		except:
-			return jsonify(result="KO", message="Could not find any stock"), 500
+			response["result"] = "KO"
+			response["message"] = "Could not find any stock"
+			return response, 500
