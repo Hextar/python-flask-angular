@@ -5,7 +5,7 @@ from flask import request
 from flask import jsonify
 
 from datetime import datetime
-from src.services.financial_service import FinancialService
+from services.financial_service import FinancialService
 
 # creating the Flask application
 app = Flask(__name__,

@@ -10,19 +10,13 @@ export class PrivateInitComponent {}
 
 const routes: Routes = [
   {
-    path: 'visualization',
-    component: VisualizationComponent
-  },
-  {
     path: '',
-    redirectTo: 'visualization',
-    pathMatch: 'full'
+    component: VisualizationComponent,
+    data: {
+      title: 'Private area'
+    }
   },
-  {
-    path: '**',
-    redirectTo: 'visualization',
-    pathMatch: 'full'
-  }
+
 ];
 
 @NgModule({

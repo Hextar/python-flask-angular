@@ -12,10 +12,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { AppHammerConfig } from '../hammer.config';
 import { SharedModule } from '@shared/shared.module';
 import { CoreModule } from '@app/core';
-import { PrivateModule } from '@private/private.module';
 import { AppRoutingModule } from '@app/app-routing.module';
 import { ShellModule } from '@app/shell/shell.module';
-import { PublicModule } from './public/public.module';
 
 @NgModule({
   imports: [
@@ -32,8 +30,6 @@ import { PublicModule } from './public/public.module';
     CoreModule,
     SharedModule,
     ShellModule,
-    PublicModule,
-    PrivateModule,
     AppRoutingModule
   ],
   declarations: [

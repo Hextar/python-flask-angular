@@ -5,12 +5,12 @@
 
 import {env} from '@env/.env';
 
-const LABEL = '-local';
-export const FRONTEND_URL = 'http://localhost:4200';
+const LABEL = '-dev';
+export const FRONTEND_URL = 'http://localhost:4300';
 export const BACKEND_URL = 'http://localhost:5000';
 
 export const environment = {
-  label: 'production',
+  label: 'dev',
   dev: true,
   production: false,
   hmr: true,

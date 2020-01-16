@@ -83,12 +83,8 @@
               "browserTarget": "frontend:build:production"
             },
             "dev": {
-              "port": 4300,
-              "hmr": true,
-              "browserTarget": "istella-social-analytics:build:dev"
-            },
-            "local": {
               "browserTarget": "istella-social-analytics:build",
+              "port": 4300,
               "hmr": true,
               "hmrWarning": false,
               "disableHostCheck": true

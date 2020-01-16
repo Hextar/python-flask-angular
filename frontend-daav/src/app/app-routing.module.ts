@@ -20,30 +20,20 @@ export class AuthPreloadingStrategy implements PreloadingStrategy {
 
 const routes: Routes = ShellService.childRoutes([
   {
-    path: '',
+    path: 'dashboard',
     loadChildren: () => import('@private/private.module').then(m => m.PrivateModule),
     data: {
-      isClickable: false,
-      breadcrumb: 'Private',
-      data: {
-        data: {title: 'Private area'}
-      }
-    },
+      title: 'Dashboard'
+    }
   },
   {
-    path: 'public',
-    loadChildren: () => import('@public/public.module').then(m => m.PublicModule),
-    data: {
-      isClickable: false,
-      breadcrumb: 'Public',
-      data: {
-        data: {title: 'Public area'}
-      }
-    },
+    path: '',
+    redirectTo: 'dashboard',
+    pathMatch: 'full'
   },
   {
     path: '**',
-    redirectTo: 'visualization',
+    redirectTo: 'dashboard',
     pathMatch: 'full'
   }
 ]);
@@ -51,7 +41,7 @@ const routes: Routes = ShellService.childRoutes([
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, {
-      enableTracing: true,
+      enableTracing: false,
       preloadingStrategy: AuthPreloadingStrategy,
       useHash: environment.useHash,
       scrollPositionRestoration: 'disabled'
