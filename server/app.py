@@ -17,16 +17,10 @@ logger = logging.getLogger()
 
 # Creating the Flask application
 def create_app():
-    logger.info(f'Starting app in {config.APP_ENV} environment')
+    logger.info(f'Starting app in {config.APP_ENV.upper()} environment')
     app = Flask(__name__)
     app.config.from_object('config')
     api.init_app(app)
-
-    # Define the home page
-    @app.route("/")
-    def hello_world():
-        return "Running " + config.APP_ENV.lower() + " environment"
-
     return app
 
 # run app

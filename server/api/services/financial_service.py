@@ -53,6 +53,4 @@ class FinancialService:
 	        	}
 			return response_dict, 200
 		except:
-			response_dict["result"] = 'KO'
-			response_dict["message"] = 'Could not find any stock'
-			return response_dict, 500
+			return jsonify(result="KO", message="Could not find any stock"), 500
