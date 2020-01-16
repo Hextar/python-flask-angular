@@ -31,7 +31,6 @@ export class FinancialService {
       map((response: ApiBaseResponse) => {
         if (response && !!response[0] && response[0].result === 'OK' && !!response[0].data) {
           const stocksData: Stock[] = response[0].data;
-          console.log(stocksData);
           return stocksData;
         } else {
           console.error(NO_STOCK_DATA);

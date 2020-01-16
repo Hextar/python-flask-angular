@@ -10,25 +10,18 @@ export class PrivateInitComponent {}
 
 const routes: Routes = [
   {
+    path: 'visualization',
+    component: VisualizationComponent
+  },
+  {
     path: '',
-    component: PrivateInitComponent,
-    children: [
-      {
-        path: 'visualization',
-        component: VisualizationComponent,
-        data: {
-          data: {
-            title: 'Visualization'
-          }
-        }
-      },
-      {
-        path: '', redirectTo: 'visualization', pathMatch: 'full'
-      },
-      {
-        path: '**', redirectTo: 'visualization', pathMatch: 'full'
-      }
-    ]
+    redirectTo: 'visualization',
+    pathMatch: 'full'
+  },
+  {
+    path: '**',
+    redirectTo: 'visualization',
+    pathMatch: 'full'
   }
 ];
 

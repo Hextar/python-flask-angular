@@ -14,6 +14,7 @@ export const environment = {
   dev: true,
   production: false,
   hmr: true,
+  useHash: false,
   version: env.npm_package_version + LABEL,
   frontendUrl: FRONTEND_URL,
   backendUrl: BACKEND_URL,
