@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 
-import { Logger } from '../services/logger.service';
-
-const log = new Logger('HttpCacheService');
 const cachePersistenceKey = 'httpCache';
 
 export interface HttpCacheEntry {
@@ -37,7 +34,6 @@ export class HttpCacheService {
       lastUpdated: lastUpdated || new Date(),
       data
     };
-    log.debug(`Cache set for key: "${url}"`);
     this.saveCacheData();
   }
 
@@ -50,7 +46,6 @@ export class HttpCacheService {
     const cacheEntry = this.cachedData[url];
 
     if (cacheEntry) {
-      log.info(`Cache hit for key: "${url}"`);
       return cacheEntry.data;
     }
 
@@ -72,7 +67,6 @@ export class HttpCacheService {
    */
   clearCache(url: string): void {
     delete this.cachedData[url];
-    log.info(`Cache cleared for key: "${url}"`);
     this.saveCacheData();
   }
 

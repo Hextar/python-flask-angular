@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { PrivateInitComponent, PrivateRoutingModule } from './private-routing.module';
 import { VisualizationComponent } from '@private/pages/visualization.component';
 import { ChartComponent } from './components/chart/chart.component';

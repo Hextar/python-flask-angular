@@ -6,6 +6,7 @@ import { FooterComponent } from '@shell/components/footer/footer.component';
 import { ShellService } from '@shell/service/shell.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { BrowserModule } from '@angular/platform-browser';
+import { SharedModule } from '@app/shared';
 
 describe('ShellComponent', () => {
   let component: ShellComponent;
@@ -15,6 +16,7 @@ describe('ShellComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         BrowserModule,
+        SharedModule,
         RouterTestingModule
       ],
       declarations: [

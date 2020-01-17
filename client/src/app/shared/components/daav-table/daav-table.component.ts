@@ -13,6 +13,7 @@ import {
 } from '@angular/core';
 import {MatPaginator, MatTableDataSource, PageEvent, MatSort, Sort} from '@angular/material';
 import { environment } from '@env/environment';
+import { noop } from 'rxjs';
 
 export enum DaavTableType {
   LABEL = 'value'
@@ -95,7 +96,7 @@ export class DaavTableComponent implements OnChanges, AfterViewInit {
   @ViewChild(MatSort, {static: false}) set content(sort: MatSort) {
     if (this.dataSource) {
       this.dataSource.sort = sort;
-      this.dataSource.sort.disableClear = true;
+      this.dataSource.sort ? this.dataSource.sort.disableClear = true : noop();
     }
   }
 

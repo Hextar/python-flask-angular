@@ -10,7 +10,8 @@
         fxLayout="column"
         fxLayoutAlign="stretch stretch"
         fxFlex="0 0 100%"
-        fxLayoutGap="32px"
+        fxLayoutGap="64px"
+        [ngStyle]="{'padding-bottom.px': 64}"
       >
         <ng-container *ngIf="!isLoading; else loading">
           <!-- Stock chart -->
@@ -30,7 +31,7 @@
             <!-- Forecasting table-->
             <app-table
               [headingTitle]="'Closing Price Forecast'"
-              [bottomDescription]="'Calculated using the average of the last 3 days'"
+              [bottomDescription]="'*Calculated using the average closig price of the last 3 days.'"
               [stocks]="stock"
               [mobile]="mobile"
             >
@@ -65,6 +66,7 @@
           No data loaded
         </ng-template>
       </div>
+
     </div>
   </ng-container>
 </app-daav-container>

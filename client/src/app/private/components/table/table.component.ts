@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, Input } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, Input, OnChanges, SimpleChange, SimpleChanges } from '@angular/core';
 import { Stock } from '@private/models/stock.model';
 import { DaavTableColumn, DaavTableComponent, DaavTableType, SortedTableData } from '@shared/components/daav-table/daav-table.component';
 import { Sort } from '@angular/material';
@@ -8,7 +8,7 @@ import { Sort } from '@angular/material';
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss']
 })
-export class TableComponent implements AfterViewInit {
+export class TableComponent implements OnChanges {
   @Input() headingTitle: string;
   @Input() bottomDescription: string;
   @Input() stocks: Stock[] = [];
@@ -27,18 +27,17 @@ export class TableComponent implements AfterViewInit {
     private cd: ChangeDetectorRef
   ) {}
 
-  ngAfterViewInit() {
-    if (this.stocks) {
-      this._getDataSource();
-      // this.dataSource = this.stocks.map((s: Stock) => {
-      //   if (s) {
-      //     return {
-      //       'stock': s.label,
-      //       'cpf': s.closing_price_forecast
-      //     };
-      //   }
-      // });
-      // console.log(this.dataSource);
+  ngOnChanges(changes: SimpleChanges) {
+    const stocks: SimpleChange = changes.stocks;
+    if (stocks) {
+      const dpv = stocks.previousValue;
+      const dcv = stocks.currentValue;
+      if (dcv && dpv !== dcv) {
+        this.stockWithId = dcv.map((x: any, index: number) => {
+          return {uid: 'UID-' + index, value: x};
+        });
+        this._getDataSource();
+      }
     }
   }
 
@@ -53,11 +52,11 @@ export class TableComponent implements AfterViewInit {
   //// ISTELLA TABLE INIT
   private _getDisplayColmuns(): DaavTableColumn[] {
     let displayColumns: DaavTableColumn[];
-    const stock = DaavTableComponent.getSize(50);
-    const cpf = DaavTableComponent.getSize(50);
+    const stockSize = DaavTableComponent.getSize(50, 16);
+    const cpfSize = DaavTableComponent.getSize(50, 16);
     displayColumns = <DaavTableColumn[]>[
-      {id: 'stock', label: 'Stock', align: 'left', size: stock, sort: true, type: DaavTableType.LABEL},
-      {id: 'cpf', label: 'Close price forecast', size: cpf, sort: true, type: DaavTableType.LABEL},
+      {id: 'stock', label: 'Stock', align: 'left', size: stockSize, sort: true, type: DaavTableType.LABEL},
+      {id: 'cpf', label: 'Close price forecast', align: 'left', size: cpfSize, sort: true, type: DaavTableType.LABEL},
     ];
     return displayColumns;
   }
@@ -81,7 +80,7 @@ export class TableComponent implements AfterViewInit {
                 sort: x.closing_price_forecast,
                 align: 'left'
               }
-            },
+            }
           ]
         };
       });

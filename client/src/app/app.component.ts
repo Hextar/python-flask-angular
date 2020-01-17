@@ -1,6 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { environment } from '@env/environment';
-import { Logger } from '@app/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { filter, map } from 'rxjs/operators';
@@ -10,7 +8,7 @@ import { filter, map } from 'rxjs/operators';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent {
   title = 'data-analysis-and-visualization';
 
   constructor(
@@ -38,16 +36,5 @@ export class AppComponent implements OnInit, OnDestroy {
         this.titleService.setTitle(data + ' - Data Analysis and Visualization');
       }
     });
-  }
-
-  ngOnInit() {
-    // Setup logger
-    if (environment.production) {
-      Logger.enableProductionMode();
-    }
-  }
-
-  ngOnDestroy() {
-    //
   }
 }

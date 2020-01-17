@@ -1,13 +1,14 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { VisualizationComponent } from './visualization.component';
 import { SharedModule } from '@shared/shared.module';
 import { MaterialModule } from '@app/material.module';
 import { ChartComponent } from '@private/components/chart/chart.component';
 import { TableComponent } from '@private/components/table/table.component';
 import { StockService } from '@private/services/stock.service';
-import { ApiService, HttpService, StorageService } from '@app/core';
+import { ApiService, StorageService } from '@app/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { ChartModule, HIGHCHARTS_MODULES } from 'angular-highcharts';
+import { HAMMER_GESTURE_CONFIG, HammerGestureConfig } from '@angular/platform-browser';
 
 describe('VisualizationComponent', () => {
   let component: VisualizationComponent;
@@ -17,8 +18,8 @@ describe('VisualizationComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         SharedModule,
-        MaterialModule,
-        HttpClientModule
+        HttpClientModule,
+        ChartModule
       ],
       declarations: [
         VisualizationComponent,
@@ -29,7 +30,9 @@ describe('VisualizationComponent', () => {
         ApiService,
         HttpClient,
         StorageService,
-        StockService
+        StockService,
+        {provide: HIGHCHARTS_MODULES, useFactory: (): any => []},
+        {provide: HAMMER_GESTURE_CONFIG, useClass: HammerGestureConfig},
       ]
     })
     .compileComponents();

@@ -142,7 +142,6 @@ export class ChartComponent implements OnChanges, OnDestroy {
         };
       });
     }
-    console.log(this.series);
     return this.series;
   }
 

@@ -4,7 +4,6 @@ import { TranslateModule } from '@ngx-translate/core';
 import { DaavTableComponent } from './daav-table.component';
 import { SharedModule } from '@app/shared';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ToastrModule } from 'ngx-toastr';
 import { ChartModule } from 'angular-highcharts';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
@@ -22,7 +21,6 @@ describe('IstellaTableComponent', () => {
         SharedModule,
         TranslateModule.forRoot(),
         HttpClientTestingModule,
-        ToastrModule.forRoot(),
         ChartModule
       ],
       declarations: [],

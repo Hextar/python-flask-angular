@@ -8,10 +8,8 @@ import {_throw} from 'rxjs/observable/throw';
 import {timer} from 'rxjs/observable/timer';
 import {mergeMap, finalize} from 'rxjs/operators';
 import {HttpCacheService} from '@app/core/http/http-cache.service';
-import {Logger} from '@app/core/services/logger.service';
 import {StorageCredentials} from '@app/core/services/storage.constants';
 
-const log = new Logger('ApiService');
 
 const genericRetryStrategy = (
   {
@@ -31,11 +29,11 @@ const genericRetryStrategy = (
       if (retryAttempt > maxRetryAttempts || excludedStatusCodes.find(e => e === error.status)) {
         return _throw(error);
       }
-      log.warn(`Attempt ${retryAttempt}: retrying in ${retryAttempt * scalingDuration}ms`);
+      console.warn(`Attempt ${retryAttempt}: retrying in ${retryAttempt * scalingDuration}ms`);
       // retry after 1s, 2s, etc...
       return timer(retryAttempt * scalingDuration);
     }),
-    finalize(() => log.warn('Stop retrying!'))
+    finalize(() => console.warn('Stop retrying!'))
   );
 };
 

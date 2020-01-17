@@ -3,7 +3,6 @@ import {HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpResponse} from
 import {Observable, Subscriber} from 'rxjs';
 
 import {HttpCacheService} from '../http/http-cache.service';
-import {componentDestroyed} from '@w11k/ngx-componentdestroyed';
 
 /**
  * Caches HTTP requests.

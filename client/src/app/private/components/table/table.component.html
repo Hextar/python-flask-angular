@@ -9,7 +9,8 @@
     [ngStyle.gt-md]="{'width' : '100%'}"
     [ngStyle.md]="{'width' : '100%'}"
     [ngStyle.lt-md]="{'width' : '100%'}"
-    fxLayoutAlign="space-between center"
+    fxLayoutAlign.gt-sm="space-between start"
+    fxLayoutAlign.lt-md="space-between center"
     *ngIf="headingTitle"
   >
     <span
@@ -44,7 +45,8 @@
     [ngStyle.gt-md]="{'width' : '100%'}"
     [ngStyle.md]="{'width' : '100%'}"
     [ngStyle.lt-md]="{'width' : '100%'}"
-    fxLayoutAlign="space-between center"
+    fxLayoutAlign.gt-sm="space-between end"
+    fxLayoutAlign.lt-md="space-between center"
     *ngIf="bottomDescription"
   >
     <span

@@ -56,7 +56,8 @@
 <!-- ----------------------------------------------------------------- -->
 <!-- MAT TABLE  ----------------------------------------------------- -->
 <!-- ----------------------------------------------------------------- -->
-<ng-template #matTable>
+
+<ng-container #matTable>
   <mat-table
     [class.disabled]="disabled"
     [class.isMobile]="true"
@@ -158,4 +159,4 @@
     >
     </mat-paginator>
   </ng-container>
-</ng-template>
+</ng-container>

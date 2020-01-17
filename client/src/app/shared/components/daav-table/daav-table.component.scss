@@ -245,6 +245,9 @@
   }
 
   @include media(">xs", "<=sm") {
+    .mat-row {
+      padding: $padding-default--2 0 $padding-default 0 !important;
+    }
     .mat-cell {
       width: 100%;
       height: $list-item-height-xs;
@@ -274,7 +277,7 @@
 
     .mat-row {
       flex-wrap: wrap;
-      padding: 0;
+      padding: $padding-default--2 0 $padding-default 0 !important;
       align-items: start;
     }
 
