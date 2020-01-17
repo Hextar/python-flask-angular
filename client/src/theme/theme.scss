@@ -29,7 +29,7 @@ a {
 }
 
 a:visited {
-  color: mat-color($istella-primary);
+  color: mat-color($daav-primary);
 }
 
 p {
@@ -153,7 +153,7 @@ p {
 }
 
 .mat-title {
-  height: mat-font-size($istella-typography, title);
+  height: mat-font-size($daav-typography, title);
   margin-bottom: $margin-default 0 !important;
 }
 
@@ -694,7 +694,7 @@ button[disabled],
       min-height: 20.5px !important;
       line-height: 20.5px !important;
       vertical-align: top !important;
-      font-size: mat-font-size($istella-typography, subheading-2) !important;
+      font-size: mat-font-size($daav-typography, subheading-2) !important;
       font-weight: 700 !important;
     }
     .mat-form-field-label,
@@ -795,9 +795,9 @@ button[disabled],
 .mat-tab-group {
   .mat-ink-bar {
     height: $magic-number-3;
-    background-color: mat-color($istella-primary, 10) !important;
+    background-color: mat-color($daav-primary, 10) !important;
     border-radius: $magic-number $magic-number 0 0 !important;
-    border-bottom: 2px solid mat-color($istella-primary, 500);
+    border-bottom: 2px solid mat-color($daav-primary, 500);
     overflow: visible;
     z-index: -1;
   }

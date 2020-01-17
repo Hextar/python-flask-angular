@@ -4,17 +4,24 @@ import { PrivateInitComponent, PrivateRoutingModule } from './private-routing.mo
 import { VisualizationComponent } from '@private/pages/visualization.component';
 import { ChartComponent } from './components/chart/chart.component';
 import { TableComponent } from './components/table/table.component';
-import { FinancialService } from '@private/services/financial.service';
+import { StockService } from '@private/services/stock.service';
 import { SharedModule } from '@shared/shared.module';
-import { MaterialModule } from '@app/material.module';
+import { ChartModule, HIGHCHARTS_MODULES } from 'angular-highcharts';
+import { HAMMER_GESTURE_CONFIG, HammerGestureConfig } from '@angular/platform-browser';
 
+import * as Highcharts from 'highcharts';
+declare var require: any;
+require('highcharts/highcharts-more')(Highcharts);
+require('highcharts/modules/exporting')(Highcharts);
+require('highcharts/modules/stock')(Highcharts);
+const Boost = require('highcharts/modules/boost');
 
+Boost(Highcharts);
 @NgModule({
   imports: [
-    CommonModule,
-    PrivateRoutingModule,
     SharedModule,
-    MaterialModule
+    ChartModule,
+    PrivateRoutingModule
   ],
   declarations: [
     PrivateInitComponent,
@@ -23,7 +30,9 @@ import { MaterialModule } from '@app/material.module';
     TableComponent
   ],
   providers: [
-    FinancialService
+    StockService,
+    {provide: HIGHCHARTS_MODULES, useFactory: (): any => []},
+    {provide: HAMMER_GESTURE_CONFIG, useClass: HammerGestureConfig},
   ]
 })
 export class PrivateModule {

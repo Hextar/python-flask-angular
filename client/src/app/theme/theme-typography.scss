@@ -14,7 +14,7 @@
 // $button        none, used only in report
 // $input         none, used only in report
 
-$istella-typography: mat-typography-config(
+$daav-typography: mat-typography-config(
   $font-family: "'Open Sans', Sans-serif",
   $display-4: mat-typography-level(112px, 112px, 300),
   $display-3: mat-typography-level(56px, 56px, 400),
@@ -31,9 +31,9 @@ $istella-typography: mat-typography-config(
   $input: mat-typography-level(16px, 1.125, 400)
 );
 
-@include mat-base-typography($istella-typography);
-@include angular-material-typography($istella-typography);
-@include mat-core($istella-typography);
+@include mat-base-typography($daav-typography);
+@include angular-material-typography($daav-typography);
+@include mat-core($daav-typography);
 
 .mat-h1,
 .mat-h2,

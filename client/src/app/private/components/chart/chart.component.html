@@ -1,1 +1,33 @@
-<p>chart works!</p>
+<div
+  #highchartsContainer
+  fxFlex="0 0 100%"
+  fxLayout="column"
+  fxLayoutGap="16px"
+>
+  <div
+    fxLayout="column"
+    fxFlex="0 0 auto"
+    [ngStyle.gt-md]="{'width' : '100%'}"
+    [ngStyle.md]="{'width' : '100%'}"
+    [ngStyle.lt-md]="{'width' : '100%'}"
+    fxLayoutAlign="space-between start"
+    style="border: 2px solid red"
+  >
+    <span
+      class="align-center mat-h2">
+      {{headingTitle}}
+    </span>
+    <span
+      class="align-left
+       mat-caption"
+      [innerHTML]="headingDescription"
+    >
+    </span>
+  </div>
+  <div
+    [chart]="stockChart"
+    class="chart"
+    fxFlex="100"
+  >
+  </div>
+</div>

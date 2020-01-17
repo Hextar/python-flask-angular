@@ -6,6 +6,8 @@ import { MatTabsModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 import { MaterialModule } from '@app/material.module';
+import { DateHelperService } from '@shared/services/data-helper.service';
+import { DaavContainerComponent } from '@shared/components/daav-container/daav-container.component';
 
 @NgModule({
   imports: [
@@ -19,10 +21,16 @@ import { MaterialModule } from '@app/material.module';
     RouterModule
   ],
   declarations: [
+    DaavContainerComponent
   ],
   exports: [
+    CommonModule,
+    FlexLayoutModule,
+    MaterialModule,
+    DaavContainerComponent
   ],
   providers: [
+    DateHelperService
   ],
   entryComponents: []
 })

@@ -1,28 +1,65 @@
-<div style="text-align:center">
-  <h1>Financial</h1>
-</div>
-<h2>Stocks: [CROP, UGA, NDAQ] </h2>
+<app-daav-container [tall]="true" [wide]="false">
+  <ng-container class="daav-content">
+    <div
+      fxLayout="column"
+      fxLayoutAlign="start stretch"
+      fxLayoutGap="16px"
+    >
+      <!-- Title -->
+      <div
+        fxLayout="column"
+        fxLayoutAlign="center stretch"
+        fxFlex="0 0 100%"
+      >
+        <div style="text-align:center">
+          <h1>Data Analysis and Visualization</h1>
+        </div>
+      </div>
 
-<ng-container *ngIf="!!isLoading; else loaded">
-  <mat-progress-spinner
-    mode="indeterminate"
-    [strokeWidth]="4"
-    [diameter]="32"
-  ></mat-progress-spinner>
-</ng-container>
-<ng-template #loaded>
-  <ng-container *ngIf="(financial$ | async) as financial; else noData">
-    <pre>
-      {{ financial | json }}
-    </pre>
+      <!-- Stock Chart -->
+      <div
+        fxLayout="row"
+        fxLayoutAlign="center stretch"
+        fxFlex="0 0 100%"
+      >
+        <ng-container *ngIf="!isLoading; else loading">
+          <!-- Stock chart -->
+          <ng-container *ngIf="(stock$ | async) as stock; else noData">
 
-    <!-- Stock chart -->
-    <app-chart></app-chart>
+            <!-- Stock chart -->
+            <app-chart
+              [headingTitle]="'Stock chart'"
+              [headingDescription]=""
+              [yTitle]="'Closing price'"
+              [xTitle]="'Time'"
+              [labelHover]="'Closing price'"
+              [stocks]="stock"
+              [mobile]="mobile"
+            ></app-chart>
 
-    <!-- Table w/ stock's next day prediction -->
-    TABLE
+            <!-- DEBUGGING -->
+            <ng-container *ngIf="false">
+            <pre>
+              {{ stock | json }}
+            </pre>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+
+        <!-- Loading spinner -->
+        <ng-template #loading>
+          <mat-progress-spinner
+            mode="indeterminate"
+            [strokeWidth]="4"
+            [diameter]="32"
+          ></mat-progress-spinner>
+        </ng-template>
+
+        <!-- No data -->
+        <ng-template #noData>
+          No data loaded
+        </ng-template>
+      </div>
+    </div>
   </ng-container>
-  <ng-template #noData>
-    No data loaded
-  </ng-template>
-</ng-template>
+</app-daav-container>

@@ -19,11 +19,11 @@ def test_stocks_path(client):
 	}
 	r = client.post('/api/stocks', data=json.dumps(data), content_type='application/json')
 	assert r.status_code == 200
-	assert "result" in r.json[0]
-	assert "data" in r.json[0]
-	result = r.json[0]["result"]
+	assert "result" in r.json
+	assert "data" in r.json
+	result = r.json["result"]
 	assert result == "OK"
-	data = r.json[0]["data"]
+	data = r.json["data"]
 	assert len(data) >= 1
 
 def test_stocks_path_no_data(client):
@@ -35,11 +35,11 @@ def test_stocks_path_no_data(client):
 	}
 	r = client.post('/api/stocks', data=json.dumps(data), content_type='application/json')
 	assert r.status_code == 200
-	assert "result" in r.json[0]
-	assert "data" in r.json[0]
-	result = r.json[0]["result"]
+	assert "result" in r.json
+	assert "data" in r.json
+	result = r.json["result"]
 	assert result == "OK"
-	data = r.json[0]["data"]
+	data = r.json["data"]
 	assert len(data) == 0
 
 def test_stocks_wrong_method(client):
@@ -54,8 +54,6 @@ def test_raises_wrong_payload(client):
 	###################
 	"""stocks is not working"""
 	r = client.post('/api/stocks')
-	print("====>", r.json)
-
 	assert "result" in r.json
 	result = r.json["result"]
 	assert result == "KO"

@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FinancialService } from '@private/services/financial.service';
+import { StockService } from '@private/services/stock.service';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { Stock } from '@private/models/stock.model';
+import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 
 
 @Component({
@@ -11,27 +12,38 @@ import { Stock } from '@private/models/stock.model';
 })
 export class VisualizationComponent implements OnInit, OnDestroy {
   isLoading = false;
-  financial$ = new BehaviorSubject<Stock[]>({} as Stock[]);
-  subscription: Subscription;
+  stock$ = new BehaviorSubject<Stock[]>(null as Stock[]);
+  breakPointSubscription: Subscription;
+  stocoSubscription: Subscription;
+  mobile = false;
 
   constructor(
-    private financialService: FinancialService
-  ) {}
+    private stockService: StockService,
+    private breakpointObserver: BreakpointObserver,
+  ) {
+    this.breakPointSubscription = this.breakpointObserver
+      .observe([Breakpoints.XSmall, Breakpoints.Small])
+      .subscribe((breakpoint: any) => {
+        this.mobile = breakpoint.matches;
+      });
+  }
 
   ngOnInit() {
     // this.isLoading = true;
     const stocksToAnalyse = ['CROP', 'UGA', 'NDAQ'];
-    const start = '2020-1-1';
-    const end = '2020-1-5';
-    this.subscription = this.financialService.getStocks(stocksToAnalyse, start, end)
+    const start = '2015-1-1';
+    const end = '2020-1-1';
+    this.isLoading = true;
+    this.stocoSubscription = this.stockService.getStocks(stocksToAnalyse, start, end)
       .subscribe((response: any) => {
         this.isLoading = false;
-        this.financial$.next(response);
+        this.stock$.next(response);
       });
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.breakPointSubscription.unsubscribe();
+    this.stocoSubscription.unsubscribe();
   }
 
 }

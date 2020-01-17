@@ -7,7 +7,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 import { MAT_DATE_LOCALE, MatIconModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from '@app/material.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { AppHammerConfig } from '../hammer.config';
 import { SharedModule } from '@shared/shared.module';
@@ -25,7 +24,6 @@ import { ShellModule } from '@app/shell/shell.module';
     MatIconModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MaterialModule,
     TranslateModule.forRoot(),
     CoreModule,
     SharedModule,

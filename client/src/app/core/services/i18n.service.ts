@@ -15,7 +15,7 @@ import enUS from '@i18n/en-US.json';
 import {Observable} from 'rxjs';
 import {MatPaginatorIntl} from '@angular/material';
 
-const languageKey = 'istella-language';
+const languageKey = 'daav-language';
 
 /**
  * Pass-through function to mark a string for translation extraction.

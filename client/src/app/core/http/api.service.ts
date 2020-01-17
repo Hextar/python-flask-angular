@@ -3,14 +3,12 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {StorageService} from '@app/core/services/storage.service';
 import {catchError, map, retryWhen} from 'rxjs/operators';
 import {ApiBaseObject} from '@app/core/models/api-base.model';
-import {noop, Observable, of} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {_throw} from 'rxjs/observable/throw';
 import {timer} from 'rxjs/observable/timer';
 import {mergeMap, finalize} from 'rxjs/operators';
 import {HttpCacheService} from '@app/core/http/http-cache.service';
-import {environment} from '@env/environment';
 import {Logger} from '@app/core/services/logger.service';
-import {STOCK_REPLACE, USER_ID_REPLACE} from '@app/core/http/api.constants';
 import {StorageCredentials} from '@app/core/services/storage.constants';
 
 const log = new Logger('ApiService');

@@ -20,7 +20,7 @@ export class AuthPreloadingStrategy implements PreloadingStrategy {
 
 const routes: Routes = ShellService.childRoutes([
   {
-    path: 'dashboard',
+    path: '',
     loadChildren: () => import('@private/private.module').then(m => m.PrivateModule),
     data: {
       title: 'Dashboard'
@@ -28,12 +28,12 @@ const routes: Routes = ShellService.childRoutes([
   },
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: '',
     pathMatch: 'full'
   },
   {
     path: '**',
-    redirectTo: 'dashboard',
+    redirectTo: '',
     pathMatch: 'full'
   }
 ]);

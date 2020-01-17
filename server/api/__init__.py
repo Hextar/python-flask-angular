@@ -28,7 +28,6 @@ stock_payload = api.model("stock_request", {
 
 @api.route("/stocks")
 class StocksAPI(Resource):
-	@api.doc(response={200: """{}"""})
 	@api.expect(stock_payload)
 
 	def post(self):
@@ -44,8 +43,8 @@ class StocksAPI(Resource):
 			end =  datetime.strptime(data["end"], "%Y-%m-%d")
 
 			# Get data from the stock service and return it
-			financial_service = StockService()
-			return jsonify(financial_service.get_stocks(stocks = stocks, start = start, end = end))
+			stocks_service = StockService()
+			return jsonify(result="OK", data=stocks_service.get_stocks(stocks = stocks, start = start, end = end))
 		except:
             # Return a 400 Internal Server Error
 			return {"result": "KO"}, 400

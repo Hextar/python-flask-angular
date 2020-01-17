@@ -1,10 +1,10 @@
 export interface Stock {
   label: string;
   forecaster_value?: number;
-  values?: ClosingStockValues[];
+  points?: StockPoint[];
 }
 
-export interface ClosingStockValues {
+export interface StockPoint {
   timestamp: number;
   value: number;
 }

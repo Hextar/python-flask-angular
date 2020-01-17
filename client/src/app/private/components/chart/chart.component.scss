@@ -1,0 +1,46 @@
+@import "src/theme/theme-variables.scss";
+@import "src/theme/theme-media.scss";
+@import "src/theme/theme-typography.scss";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 100%;
+  width: 100%;
+  ::ng-deep {
+    tspan,
+    text {
+      font-family: mat-font-family($daav-typography) !important;
+    }
+    .highcharts-daav-tooltip {
+      background: rgba(255,255,255,0.85) !important;
+      border: 1px solid silver !important;
+      border-radius: 4px !important;;
+      box-shadow: 1px 1px 2px #888 !important;;
+      padding: 8px !important;;
+    }
+    .tweet_avatar {
+      height: $magic-number-2 !important;
+      min-height: $magic-number-2 !important;
+      max-height: $magic-number-2 !important;
+      width: $magic-number-2;
+      min-width: $magic-number-2;
+      max-width: $magic-number-2;
+      margin-top: 1px;
+      margin-left: 1px;
+      right: 0;
+      vertical-align: middle;
+      z-index: 0;
+    }
+    .spacing {
+      padding: $padding-default--4;
+    }
+    .highcharts-navigator-mask-inside {
+      cursor: move !important;
+    }
+    .highcharts-scrollbar {
+      //display: none;
+    }
+  }
+}

@@ -11,7 +11,6 @@ import {ApiService} from './http/api.service';
 import {ApiPrefixInterceptor} from './interceptors/api-prefix.interceptor';
 import {ErrorHandlerInterceptor} from './interceptors/error-handler.interceptor';
 import {CacheInterceptor} from './interceptors/cache.interceptor';
-import {RefreshTokenService} from '@app/core/services/refresh-token.service';
 
 @NgModule({
   imports: [
@@ -24,7 +23,6 @@ import {RefreshTokenService} from '@app/core/services/refresh-token.service';
     I18nService,
     StorageService,
     HttpCacheService,
-    RefreshTokenService,
     ApiService,
     ErrorHandlerInterceptor,
     CacheInterceptor,

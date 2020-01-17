@@ -1,7 +1,7 @@
 @import "~@angular/material/theming";
 @include mat-core();
 
-$mat-istellaprimary: (
+$mat-daavprimary: (
   10: #e9ecf4,
   50: #bdc6df,
   100: #3a569f,
@@ -17,7 +17,7 @@ $mat-istellaprimary: (
   )
 );
 
-$mat-istellaaccent: (
+$mat-daavaccent: (
   10: #eaf8f6,
   50: #c0ece4,
   100: #62efcd,
@@ -48,7 +48,7 @@ $mat-lightwarn: (
   )
 );
 
-$mat-istellawarn: (
+$mat-daavwarn: (
   10: #FDF0EE,
   50: #FBD4CD,
   100: #F26248,
@@ -90,7 +90,6 @@ $mat-facebook: (
   )
 );
 
-
 $mat-negative: (
   10: #FDF0EE,
   50: #FBD4CD,
@@ -117,14 +116,14 @@ $mat-positive: (
   )
 );
 
-$istella-background: (
-  status-bar: mat-color($mat-istellaprimary, 500),
-  app-bar: mat-color($mat-istellaprimary, 500),
+$daav-background: (
+  status-bar: mat-color($mat-daavprimary, 500),
+  app-bar: mat-color($mat-daavprimary, 500),
   background: mat-color($mat-grey, 100),
   hover: map_get($mat-grey, 100),
   card: white,
   dialog: white,
-  disabled-button: mat-color($mat-istellaprimary, 50),
+  disabled-button: mat-color($mat-daavprimary, 50),
   raised-button: map-get($mat-grey, 800),
   focused-button: $white-6-opacity,
   selected-button: map_get($mat-grey, 900),
@@ -134,47 +133,47 @@ $istella-background: (
   disabled-list-option: black
 );
 
-$istella-foreground: (
-  base: mat-color($mat-istellaprimary, 100),
+$daav-foreground: (
+  base: mat-color($mat-daavprimary, 100),
   divider: map_get($mat-grey, 700),
   dividers: map_get($mat-grey, 700),
   disabled: map_get($mat-grey, 200),
-  disabled-button: mat-contrast($mat-istellaprimary, 50),
-  disabled-text: mat-contrast($mat-istellaprimary, 50),
+  disabled-button: mat-contrast($mat-daavprimary, 50),
+  disabled-text: mat-contrast($mat-daavprimary, 50),
   hint-text: map_get($mat-grey, 200),
   secondary-text: map_get($mat-grey, 500),
-  icon: mat-color($mat-istellaprimary, 500),
-  icons: mat-color($mat-istellaprimary, 500),
+  icon: mat-color($mat-daavprimary, 500),
+  icons: mat-color($mat-daavprimary, 500),
   text: $dark-primary-text,
   slider-min: map_get($mat-grey, 200),
   slider-off: map_get($mat-grey, 200),
   slider-off-active: map_get($mat-grey, 200),
 );
-@function create-istella-theme($primary, $accent, $warn) {
+@function create-daav-theme($primary, $accent, $warn) {
   @return (
     primary: $primary,
     accent: $accent,
     warn: $warn,
     is-dark: false,
-    foreground: $istella-foreground,
-    background: $istella-background
+    foreground: $daav-foreground,
+    background: $daav-background
   );
 }
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a setDefault, lighter, and darker
 // hue.
-$istella-primary: mat-palette($mat-istellaprimary, 500, 100, 700);
-$istella-accent: mat-palette($mat-istellaaccent, 500, 100, 700);
-$istella-warn: mat-palette($mat-istellawarn, 500, 100, 700);
+$daav-primary: mat-palette($mat-daavprimary, 500, 100, 700);
+$daav-accent: mat-palette($mat-daavaccent, 500, 100, 700);
+$daav-warn: mat-palette($mat-daavwarn, 500, 100, 700);
 // Create the theme object (a Sass map containing all of the palettes).
-$istella-theme: create-istella-theme($istella-primary, $istella-accent, $istella-warn);
-@include angular-material-theme($istella-theme);
+$daav-theme: create-daav-theme($daav-primary, $daav-accent, $daav-warn);
+@include angular-material-theme($daav-theme);
 
-$primary: map-get($istella-theme, primary);
-$accent: map-get($istella-theme, accent);
-$warn: map-get($istella-theme, warn);
-$background: map-get($istella-theme, background);
-$foreground: map-get($istella-theme, foreground);
+$primary: map-get($daav-theme, primary);
+$accent: map-get($daav-theme, accent);
+$warn: map-get($daav-theme, warn);
+$background: map-get($daav-theme, background);
+$foreground: map-get($daav-theme, foreground);
 $dark-primary-text: $dark-primary-text;
 $light-primary-text: $light-primary-text;
 

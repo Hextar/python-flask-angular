@@ -1,0 +1,14 @@
+@import "src/theme/theme-variables.scss";
+@import "src/theme/theme-media.scss";
+@import "src/theme/theme-typography.scss";
+
+:host {
+  display: flex;
+  flex: 1;
+  min-height: 100%;
+  width: 100%;
+  ::ng-deep .mat-divider {
+    border-top-color: map_get($mat-grey, 700) !important;
+    margin: 0 $margin-default;
+  }
+}

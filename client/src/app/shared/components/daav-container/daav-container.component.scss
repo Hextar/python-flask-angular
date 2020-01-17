@@ -1,0 +1,66 @@
+@import "src/theme/theme-variables.scss";
+@import "src/theme/theme-media.scss";
+@import "src/theme/theme-typography.scss";
+
+:host {
+  display: flex;
+  flex: 1;
+  min-height: 100%;
+  max-width: 100% !important;
+  width: 100%;
+  @include media(">md", "<=lg") {
+    //max-width: 80%;
+  }
+  .container {
+    text-align: center;
+    max-width: 100% !important;
+    @include media("<=xs") {
+      padding: $padding-mat-content-xs;
+    }
+    @include media(">xs", "<=sm") {
+      padding: $padding-mat-content-sm;
+    }
+    @include media(">sm", "<=md") {
+      padding: $padding-mat-content-md;
+    }
+    @include media(">md") {
+      padding: $padding-mat-content-lg;
+    }
+    &.anonymous {
+      //background-image: url("/assets/images/login_background.jpeg");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center center;
+      z-index: 1;
+      &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.25);
+        z-index: 2;
+      }
+      > div {
+        z-index: 3;
+      }
+    }
+  }
+}
+
+.logo {
+  height: 53px;
+  width: 240.8px;
+  margin-left: 32px;
+  ::ng-deep svg {
+    tspan {
+      font-family: mat-font-family($daav-typography);
+    }
+  }
+}
+
+.copyright {
+  color: white;
+}
+

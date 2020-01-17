@@ -5,7 +5,7 @@ import { SharedModule } from '@shared/shared.module';
 import { MaterialModule } from '@app/material.module';
 import { ChartComponent } from '@private/components/chart/chart.component';
 import { TableComponent } from '@private/components/table/table.component';
-import { FinancialService } from '@private/services/financial.service';
+import { StockService } from '@private/services/stock.service';
 import { ApiService, HttpService, StorageService } from '@app/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
@@ -29,7 +29,7 @@ describe('VisualizationComponent', () => {
         ApiService,
         HttpClient,
         StorageService,
-        FinancialService
+        StockService
       ]
     })
     .compileComponents();

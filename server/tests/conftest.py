@@ -26,7 +26,7 @@ def client(testApp):
 
 
 @pytest.fixture
-def stockService(testApp):
+def stock_service(testApp):
     """A test client forl the app."""
     ss = StockService()
     yield ss
