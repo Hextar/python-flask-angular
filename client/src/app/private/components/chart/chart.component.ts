@@ -7,7 +7,6 @@ import {
   OnDestroy,
   QueryList,
   SimpleChanges,
-  ViewChildren
 } from '@angular/core';
 import {StockChart} from 'angular-highcharts';
 import {
@@ -17,10 +16,11 @@ import {
   RangeSelectorButtonTypeValue,
   SeriesAreaOptions
 } from 'highcharts';
-import { DateHelperService } from '@shared/services/data-helper.service';
+import { ViewChildren } from '@angular/core';
 import { ChartLangEn } from '@app/app.constants';
 import { Stock, StockPoint } from '@private/models/stock.model';
 import { noop } from 'rxjs';
+import * as moment from 'moment';
 
 interface RangeSelectorButtons {
   count?: number;
@@ -56,6 +56,7 @@ export class ChartComponent implements OnChanges, OnDestroy {
 
   series: SeriesAreaOptions[];
   chartHeight = 380;
+  mobileChartHeight = 240;
 
   plotOptions: PlotOptions = {
     series: {
@@ -73,7 +74,6 @@ export class ChartComponent implements OnChanges, OnDestroy {
   private _chartContainer: ElementRef;
 
   constructor(
-    private dh: DateHelperService,
     private cd: ChangeDetectorRef
   ) {
   }
@@ -103,6 +103,10 @@ export class ChartComponent implements OnChanges, OnDestroy {
     }
   }
 
+  getChartHeight(): number {
+    return this.mobile ? this.mobileChartHeight : this.chartHeight;
+  }
+
   private _initPlotOptions() {
     const animation = !this.mobile;
     this.plotOptions.series.turboThreshold = this.mobile ? this.MOBILE_THRESHOLD : this.THRESHOLD;
@@ -123,20 +127,22 @@ export class ChartComponent implements OnChanges, OnDestroy {
   }
 
   private _getSeries() {
-    console.log('STOCKS', this.stocks);
+    const timezoneOffset = moment().utcOffset();
     if (this.stocks) {
       this.series = <SeriesAreaOptions[]>this.stocks.map((s: Stock) => {
         return <SeriesAreaOptions>{
           type: 'area',
           name: s.label,
           data: s.points.map((point: any) => {
-            return <PointOptionsObject>[point.timestamp, point.value];
+            return <PointOptionsObject>[
+              Number(point.timestamp),
+              point.value
+            ];
           })
-
-
         };
       });
     }
+    console.log(this.series);
     return this.series;
   }
 
@@ -159,7 +165,7 @@ export class ChartComponent implements OnChanges, OnDestroy {
     if (this.series) {
       this.stockChart = new StockChart({
         chart: {
-          height: this.chartHeight,
+          height: this.getChartHeight(),
           zoomType: 'x',
           renderTo: this._chartContainer ? this._chartContainer.nativeElement : '0',
           animation: !this.mobile,
@@ -172,7 +178,8 @@ export class ChartComponent implements OnChanges, OnDestroy {
           text: null
         },
         xAxis: {
-          min: 0, // this._getFirstDate(),
+          min: this._getFirstDate(),
+          type: 'datetime',
           title: {
             text: this.xTitle ? this.xTitle : ''
           },
@@ -198,7 +205,7 @@ export class ChartComponent implements OnChanges, OnDestroy {
           }
         },
         tooltip: {
-          pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.x})<br/>',
+          pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b><br/>',
           valueDecimals: 2,
           split: true
         },
@@ -206,9 +213,10 @@ export class ChartComponent implements OnChanges, OnDestroy {
         credits: {enabled: false},
         plotOptions: this.plotOptions,
         series: this.series,
-        time: {useUTC: true},
+        time: {useUTC: false},
         rangeSelector: {
           enabled: true,
+          buttons: this._getRangeSelectorButtons(),
           inputEnabled: true,
           selected: 1
         },

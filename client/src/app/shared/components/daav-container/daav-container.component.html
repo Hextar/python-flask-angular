@@ -1,6 +1,5 @@
 <div
   class="container"
-  [class.anonymous]="anonymous"
   fxLayout="row"
   fxFlex="1 1 100"
   fxFlex.xs="1 1 100"
@@ -10,91 +9,29 @@
   fxLayoutAlign.lg="center {{tall ? 'stretch' : 'start'}}"
   fxLayoutAlign.gt-lg="center {{tall ? 'stretch' : 'start'}}"
 >
-  <ng-container *ngIf="anonymous; else loggedContent">
-    <div fxFlexFill>
-      <div
-        fxLayout="column"
-        fxFlex="100"
-        fxLayoutAlign="center stretch"
-        fxLayoutGap="16px"
-      >
-        <!-- LOGO -------------->
-        <div
-          fxLayoutGap="column"
-          fxLayoutAlign="center center"
-        >
-          <mat-icon class="logo" svgIcon="logo"></mat-icon>
-        </div>
-        <!-- CONTENT -------------->
-        <ng-container *ngIf="!wide; else wideContent">
-          <div
-            fxLayout="row"
-            fxLayoutAlign="center stretch"
-          >
-            <div
-              fxLayout="column"
-              fxFlex.xs="100"
-              fxFlex.sm="1 1 66"
-              fxFlex.md="1 1 50"
-              fxFlex.lg="1 1 33"
-              fxFlex.gt-lg="1 1 33"
-            >
-              <ng-content select=".daav-anonymous-content"></ng-content>
-            </div>
-          </div>
-        </ng-container>
-        <ng-template #wideContent>
-          <div
-            fxLayout="row"
-            fxLayoutAlign="center stretch"
-          >
-            <div
-              fxLayout="column"
-              fxFlex.xs="100"
-              fxFlex.sm="1 1 66"
-              fxFlex.md="1 1 50"
-              fxFlex.lg="1 1 33"
-              fxFlex.gt-lg="1 1 33"
-            >
-              <ng-content select=".daav-anonymous-wide-content"></ng-content>
-            </div>
-          </div>
-        </ng-template>
-        <!-- COPYWRIGHT -------------->
-        <span
-          class="mat-h3 copyright"
-          fxLayoutAlign="center end"
-        >
-        © {{ currentYear }}&nbsp;&nbsp;<strong>Hextar SpA</strong>
-      </span>
-      </div>
+  <ng-container *ngIf="!wide; else wideContent">
+    <div
+      fxLayout="column"
+      fxFlex.xs="100"
+      fxFlex.sm="1 1 100"
+      fxFlex.md="1 1 100"
+      fxFlex.lg="1 1 60"
+      fxFlex.gt-lg="1 1 60"
+    >
+      <ng-content select=".daav-content"></ng-content>
     </div>
   </ng-container>
-  <ng-template #loggedContent>
-    <ng-container *ngIf="!wide; else wideContent">
-      <div
-        fxLayout="column"
-        fxFlex.xs="100"
-        fxFlex.sm="1 1 100"
-        fxFlex.md="1 1 100"
-        fxFlex.lg="1 1 80"
-        fxFlex.gt-lg="1 1 80"
-      >
-        <ng-content select=".daav-content"></ng-content>
-      </div>
-    </ng-container>
-    <ng-template #wideContent>
-      <div
-        fxLayout="column"
-        fxFlex.xs="100"
-        fxFlex.sm="1 1 100"
-        fxFlex.md="1 1 100"
-        fxFlex.lg="1 1 100"
-        fxFlex.gt-lg="1 1 100"
-      >
-        <ng-content select=".daav-wide-content"></ng-content>
-      </div>
-    </ng-template>
+  <ng-template #wideContent>
+    <div
+      fxLayout="column"
+      fxFlex.xs="100"
+      fxFlex.sm="1 1 100"
+      fxFlex.md="1 1 100"
+      fxFlex.lg="1 1 100"
+      fxFlex.gt-lg="1 1 100"
+    >
+      <ng-content select=".daav-wide-content"></ng-content>
+    </div>
   </ng-template>
 </div>
 

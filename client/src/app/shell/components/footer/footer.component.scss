@@ -1,0 +1,45 @@
+@import "~theme/theme-variables.scss";
+@import "~theme/theme-media.scss";
+@import "~theme/theme-typography.scss";
+
+:host {
+  display: flex;
+  flex: 1;
+  max-width: 100%;
+  width: 100%;
+  background: $white-87-opacity;
+  .footer {
+    max-width: 100%;
+    width: 100%;
+    height: $footer-height;
+    padding-right: $footer-padding;
+    padding-left: $footer-padding;
+    z-index: 1;
+    @include media(">xs", "<md") {
+      padding-right: $footer-padding-md;
+      padding-left: $footer-padding-md;
+    }
+    @include media("<=xs") {
+      height: auto;
+      padding-right: $footer-padding-xs;
+      padding-left: $footer-padding-xs;
+    }
+    div {
+      height: $footer-height;
+      @include media("<=xs") {
+        height: auto;
+        width: 100%;
+      }
+    }
+    p {
+      margin: 0;
+    }
+    a {
+      color: mat-color($primary, 500);
+      text-decoration: none;
+    }
+    .vertical-divider {
+      margin: 0 $magic-number--2 !important;
+    }
+  }
+}

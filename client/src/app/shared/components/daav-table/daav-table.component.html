@@ -1,0 +1,161 @@
+<!-- ----------------------------------------------------------------- -->
+<!-- VALUE ---------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------- -->
+<ng-template #cellValue let-context>
+  <div
+    fxLayout.gt-sm="row"
+    fxLayout.lt-md="column"
+    fxFlex="100"
+    fxLayoutAlign.gt-sm="space-between center"
+    fxLayoutAlign.lt-md="start start"
+    fxLayoutGap="16px"
+    *ngIf="context?.label"
+  >
+    <div
+      class="mobile-label"
+      fxLayout.gt-xs="row"
+      fxLayout.lt-sm="column"
+      fxFlex.gt-sm="1 1 100"
+      fxFlex.lt-md="0 0 32px"
+      fxLayoutAlign.gt-xs="start center"
+      fxLayoutAlign.lt-sm="center center"
+      [ngStyle]="{'width': '100%'}"
+    >
+      <span
+        class="align-left"
+        fxFill
+        fxFlex.sm="100"
+      >
+        {{ context?.label }}
+      </span>
+    </div>
+    <div
+      fxLayout="row"
+      fxFlex.gt-sm="1 1 100"
+      fxFlex.lt-md="0 0 32px"
+      fxLayoutAlign.gt-xs="start center"
+      fxLayoutAlign.lt-sm="center start"
+      [ngStyle]="{'width': '100%'}"
+    >
+      <span
+        [ngClass]="{
+          'align-left': context?.align === 'left',
+          'align-center': context?.align !== 'left'
+        }"
+        class="value"
+        fxFlexFill
+        fxFlex.sm="100"
+      >
+        <div [innerHtml]="context?.value | safeHtml"></div>
+      </span>
+    </div>
+  </div>
+</ng-template>
+
+
+<!-- ----------------------------------------------------------------- -->
+<!-- MAT TABLE  ----------------------------------------------------- -->
+<!-- ----------------------------------------------------------------- -->
+<ng-template #matTable>
+  <mat-table
+    [class.disabled]="disabled"
+    [class.isMobile]="true"
+    [dataSource]="dataSource"
+    [trackBy]="trackByIdx"
+    matSort
+    (matSortChange)="sortData($event)"
+  >
+    <ng-container *ngFor="let col of displayColumns; let i = index">
+      <ng-container [matColumnDef]="col?.id">
+        <ng-container *ngIf="col?.sort">
+          <mat-header-cell
+            *matHeaderCellDef
+            [class.hide]="col?.hidden"
+            [class.align-center]="col?.align !== 'left'"
+            fxFlex="{{col?.size}}"
+            [mat-sort-header]="col?.id"
+          >
+          <span fxFlex="100">
+            {{ col?.label }}
+          </span>
+          </mat-header-cell>
+        </ng-container>
+        <mat-cell
+          *matCellDef="let row; let j = index"
+          [class.disabled]="row?.cols?.disabled"
+          [class.mobile-label-hidden]="col?.hidden"
+          class="mat-cell {{(row?.cols && row?.cols[i]) ? row?.cols[i][(col?.id)]?.class : ''}} {{(row?.cols && row?.cols[i] && row?.cols[i][(col?.id)]?.action?.type) ? row?.cols[i][(col?.id)]?.action?.type : col?.type}}"
+          fxFlex.gt-sm="{{col?.size}}"
+          fxFlex.lt-md="0 0 {{(mobileBetterResponsive) ? '100' : col?.size}}"
+          (mouseover)="hoverCell = (row?.cols && row?.cols[i]) ? row?.cols[i][(col?.id)]?.action?.tooltip : ''"
+          (mouseleave)="hoverCell = false"
+        >
+          <ng-container *ngIf="row && row?.cols && row?.cols[i]">
+            <ng-container *ngIf="row?.cols[i][(col?.id)]; let colid">
+              <!-- MAT CELL VALUES ------------------------------------------- -->
+              <ng-container
+                *ngIf="
+                  colid?.type ? colid?.type === cellType?.LABEL : col?.type === cellType?.LABEL
+                "
+              >
+                <ng-container
+                  *ngTemplateOutlet="
+                    cellValue;
+                    context: {
+                      $implicit: {
+                        label: col?.label,
+                        value: colid?.value,
+                        align: colid?.align
+                      },
+                      localSk: ''
+                    }
+                  "
+                >
+                </ng-container>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+        </mat-cell>
+        <ng-container *ngIf="!col?.sort">
+          <mat-header-cell
+            *matHeaderCellDef
+            [class.hide]="col?.hidden"
+            [class.align-center]="col?.align !== 'left'"
+            fxFlex="{{col?.size}}"
+          >
+          <span fxFlex="100">
+            {{ col?.label }}
+          </span>
+          </mat-header-cell>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="columns" [class.hide]="hideHeaderRow()"></mat-header-row>
+    <mat-row
+      *matRowDef="let row; columns: columns; let l = index"
+      [class.disabled]="(row) ? row[0]?.loading?.type === 'loading': false"
+      [class.action]="mainActionEnabled && mainActions"
+      [class.hide-last-border]="hideLastBorder"
+      fxLayout="row wrap"
+      fxLayoutAlign.gt-sm="center center"
+      fxLayoutAlign.lt-md="end end"
+      matTooltip="{{(mainActionEnabled && mainActions[l]?.tooltip) ? mainActions[l]?.tooltip : ''}}"
+      [matTooltipDisabled]="hoverCell"
+      (click)="!mainActionEnabled || mainActions[l]?.disabled ? null : callActionCallback(mainActions[l]?.callback, l)"
+    >
+    </mat-row>
+  </mat-table>
+
+  <ng-container *ngIf="usePaginator && !userVirtualScrolling">
+    <mat-paginator
+      [length]="totalItems"
+      [pageSizeOptions]="paginatorStep ? paginatorStep : [5, 10, 25]"
+      [pageSize]="pageSize ? pageSize : 10"
+      [pageIndex]="pageIndex ? pageIndex : 0"
+      (page)="paginatorEvent($event)"
+      showFirstLastButtons
+    >
+    </mat-paginator>
+  </ng-container>
+</ng-template>

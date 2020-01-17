@@ -1,1 +1,26 @@
-<p>table works!</p>
+<div
+  fxLayout="column"
+  fxFlex="100"
+  fxLayoutAlign="start stretch"
+>
+  <mat-card fxFlex="100">
+    <mat-card-content>
+      <ng-container *ngIf="stockWithId?.length > 0; else emptyList">
+        <app-daav-table
+          fxFlexFill
+          [data]="data"
+          [displayColumns]="displayColumns"
+          [columns]="displayColumns | tableColumnId"
+          [initialSort]="initialSort"
+        >
+        </app-daav-table>
+      </ng-container>
+      <ng-template #emptyList>
+        <span class="mat-body">
+          Nessun risultato
+        </span>
+      </ng-template>
+    </mat-card-content>
+  </mat-card>
+</div>
+

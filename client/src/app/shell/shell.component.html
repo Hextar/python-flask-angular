@@ -1,10 +1,19 @@
-<div fxFlex>
+<div fxFlexFill>
   <app-header
-    [ngStyle]="{'position': 'fixed', 'z-index': '2'}"
-    >
+    [ngStyle]="{
+      'position': 'fixed',
+      'z-index': '2'
+    }"
+  >
   </app-header>
   <router-outlet></router-outlet>
-  <app-footer>
+  <app-footer
+    [ngStyle]="{
+      'position': 'fixed',
+      'bottom': '0',
+      'z-index': '2'
+    }"
+  >
   </app-footer>
 </div>
 

@@ -54,7 +54,7 @@ class StockService:
 				stock_data.append({
 					"label": s,
 					"points": points,
-					"forecasted_value": self.get_average(average_sum, len(jdf))
+					"closing_price_forecast": self.get_average(average_sum, len(jdf))
 	        	})
 			return stock_data
 		except:

@@ -1,0 +1,307 @@
+@import "~theme/theme-variables";
+@import "~theme/theme-media";
+@import "~theme/theme-typography";
+
+:host {
+  .mat-table {
+    &.disabled {
+      .mat-row {
+        &:hover {
+          background: transparent !important;
+        }
+      }
+    }
+    .mat-header-row {
+      height: $magic-number-3 !important;
+      &.hide {
+        display: none !important;
+      }
+      span {
+        width: 100%;
+      }
+      .mat-header-cell {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        span {
+          text-align: center;
+        }
+        &.hide {
+          display: none !important;
+        }
+        &.align-center {
+          ::ng-deep {
+            .mat-sort-header-container {
+              width: 100% !important;
+              justify-content: center;
+            }
+          }
+        }
+      }
+    }
+
+    .mat-row {
+      border-bottom: 1px solid map-get($mat-grey, 300) !important;
+      &.disabled {
+        background: transparent !important;
+      }
+      &.hide-last-border {
+        &:last-child {
+          border: none !important;
+        }
+      }
+
+      &.action {
+        &:hover {
+          background: mat-color($background, hover);
+          cursor: pointer;
+        }
+      }
+    }
+
+    .mat-cell {
+      > div {
+        max-height: 100%;
+      }
+      &:not(.long-text) {
+        span {
+          min-width: 0;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+      &.loading {
+        background: transparent !important;
+        :hover {
+          background: transparent !important;
+        }
+      }
+
+      height: $list-item-height;
+      padding: $padding-default--4;
+      line-height: $list-item-height;
+      button {
+        z-index: 50 !important;
+      }
+      span {
+        line-height: $magic-number-2;
+        @include media("<=sm") {
+          text-align: left !important;
+        }
+      }
+      .avatar-wrapper {
+        height: $magic-number-3;
+        width: $magic-number-3;
+        overflow: hidden;
+        border-radius: 50%;
+        a {
+          display: flex;
+          max-height: $magic-number-3;
+          max-width: $magic-number-3;
+          img {
+            min-height: $magic-number-3;
+            min-width: $magic-number-3;
+            object-fit: cover;
+          }
+        }
+        &.small {
+          height: $magic-number-2;
+          width: $magic-number-2;
+          a {
+            max-height: $magic-number-2;
+            max-width: $magic-number-2;
+            img {
+              min-height: $magic-number-2;
+              min-width: $magic-number-2;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .mobile-label {
+    display: none !important;
+  }
+
+  .mat-progress-spinner {
+    ::ng-deep {
+      svg {
+        circle {
+          transition: stroke-dashoffset 10s linear;
+        }
+      }
+    }
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: calc(100% - 6px);
+      height: calc(100% - 6px);
+      border: 3px solid #e6e6e6;
+      border-radius: 100%;
+    }
+  }
+
+  .spinner-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: $magic-number-2;
+    height: $magic-number-2;
+    text-align: center;
+    vertical-align: middle;
+    line-height: $magic-number-2;
+    color: transparent;
+    &.with-counter {
+      color: mat-color($primary, 500) !important;
+    }
+    &.one-digit {
+      font-size: 14px !important;
+    }
+    &.two-digit {
+      right: $margin-default--2;
+      font-size: 12px !important;
+    }
+    &.three-digit {
+      right: $margin-default--2;
+      font-size: 10px !important;
+    }
+    &.four-digit {
+      font-size: 10px !important;
+    }
+    &.more-digit {
+      display: none;
+    }
+  }
+
+  @keyframes bgcolorchange {
+    0% {stroke: mat-color($primary, 50); }
+    20%, 100% {stroke: mat-color($primary, 500); }
+  }
+
+  .page-select {
+    display: flex;
+    align-items: center;
+    color: mat-color($foreground, secondary-text);
+
+    .label {
+      margin: 0 4px;
+    }
+  }
+
+  /* MAT PAGINATOR */
+  .mat-paginator {
+    ::ng-deep {
+      .mat-paginator-range-label {
+        //display: none;
+      }
+      .mat-paginator-range-actions {
+        button:disabled,
+        button[disabled] {
+          //display: none !important;
+          svg {
+            fill: mat-color($mat-grey, 200);
+          }
+        }
+        button {
+          svg {
+            fill: mat-color($primary, 500);
+          }
+        }
+      }
+    }
+  }
+
+  .hidden {
+    visibility: hidden !important;
+  }
+
+  .grey-text {
+    color: $dark-secondary-text !important;
+  }
+
+  @include media(">sm") {
+    .mat-cell {
+      &.two-rows {
+        height: $magic-number-4 !important;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      &.three-rows {
+        height: $magic-number-5 !important;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      &.long-text {
+        span {
+          line-height: 16px !important;
+        }
+      }
+    }
+  }
+
+  @include media(">xs", "<=sm") {
+    .mat-cell {
+      width: 100%;
+      height: $list-item-height-xs;
+      line-height: $list-item-height-xs;
+      padding: 0;
+      text-align: left;
+    }
+  }
+
+  @include media("<=sm") {
+    .mobile-label {
+      display: inline-block !important;
+      width: 25vw;
+      margin-bottom: 0 !important;
+      line-height: $magic-number-2;
+      font-weight: bold;
+    }
+    .long-text {
+      .mobile-label {
+        display: none !important;
+      }
+    }
+
+    .mat-header-row {
+      display: none !important;
+    }
+
+    .mat-row {
+      flex-wrap: wrap;
+      padding: 0;
+      align-items: start;
+    }
+
+    .mat-cell {
+      min-height: $list-item-height-xs;
+      line-height: $list-item-height-xs;
+      padding: 0 !important;
+      text-align: left;
+      &.two-rows {
+        height: $magic-number-4 !important;
+      }
+      &.three-rows {
+        height: $magic-number-9 !important;
+      }
+      &.long-text {
+        height: auto !important;
+      }
+      &.action {
+        min-width: $magic-number-3 !important;
+        max-width: $magic-number-3 !important;
+        width: $magic-number-3 !important;
+      }
+      span {
+        height: $list-item-height-xs / 2;
+        line-height: $list-item-height-xs / 2;
+        text-align: left;
+      }
+    }
+  }
+}

@@ -3,7 +3,7 @@
     <div
       fxLayout="column"
       fxLayoutAlign="start stretch"
-      fxLayoutGap="16px"
+      fxLayoutGap="32px"
     >
       <!-- Title -->
       <div
@@ -18,9 +18,10 @@
 
       <!-- Stock Chart -->
       <div
-        fxLayout="row"
-        fxLayoutAlign="center stretch"
+        fxLayout="column"
+        fxLayoutAlign="stretch stretch"
         fxFlex="0 0 100%"
+        fxLayoutGap="32px"
       >
         <ng-container *ngIf="!isLoading; else loading">
           <!-- Stock chart -->
@@ -28,7 +29,6 @@
 
             <!-- Stock chart -->
             <app-chart
-              [headingTitle]="'Stock chart'"
               [headingDescription]=""
               [yTitle]="'Closing price'"
               [xTitle]="'Time'"
@@ -36,6 +36,13 @@
               [stocks]="stock"
               [mobile]="mobile"
             ></app-chart>
+
+            <!-- Forecasting table-->
+            <app-table
+              [stocks]="stock"
+              [mobile]="mobile"
+            >
+            </app-table>
 
             <!-- DEBUGGING -->
             <ng-container *ngIf="false">
@@ -48,11 +55,17 @@
 
         <!-- Loading spinner -->
         <ng-template #loading>
-          <mat-progress-spinner
-            mode="indeterminate"
-            [strokeWidth]="4"
-            [diameter]="32"
-          ></mat-progress-spinner>
+          <div
+            fxFlexFill
+            fxLayoutAlign="center center"
+            [ngStyle]="{'height.px': 380}"
+          >
+            <mat-progress-spinner
+              mode="indeterminate"
+              [strokeWidth]="8"
+              [diameter]="64"
+            ></mat-progress-spinner>
+          </div>
         </ng-template>
 
         <!-- No data -->

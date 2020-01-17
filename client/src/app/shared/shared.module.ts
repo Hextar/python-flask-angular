@@ -8,6 +8,9 @@ import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 import { MaterialModule } from '@app/material.module';
 import { DateHelperService } from '@shared/services/data-helper.service';
 import { DaavContainerComponent } from '@shared/components/daav-container/daav-container.component';
+import { SafeHtmlPipe } from '@shared/pipes/safe-html.pipe';
+import { DaavTableComponent } from '@shared/components/daav-table/daav-table.component';
+import { TableColumnIdPipe } from '@shared/pipes/table-column-id.pipe';
 
 @NgModule({
   imports: [
@@ -21,16 +24,24 @@ import { DaavContainerComponent } from '@shared/components/daav-container/daav-c
     RouterModule
   ],
   declarations: [
-    DaavContainerComponent
+    DaavContainerComponent,
+    DaavTableComponent,
+    TableColumnIdPipe,
+    SafeHtmlPipe
   ],
   exports: [
     CommonModule,
     FlexLayoutModule,
     MaterialModule,
-    DaavContainerComponent
+    DaavContainerComponent,
+    DaavTableComponent,
+    TableColumnIdPipe,
+    SafeHtmlPipe
   ],
   providers: [
-    DateHelperService
+    DateHelperService,
+    TableColumnIdPipe,
+    SafeHtmlPipe
   ],
   entryComponents: []
 })

@@ -1,6 +1,6 @@
 export interface Stock {
   label: string;
-  forecaster_value?: number;
+  closing_price_forecast?: number;
   points?: StockPoint[];
 }
 

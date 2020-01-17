@@ -3,6 +3,7 @@
   fxFlex="0 0 100%"
   fxLayout="column"
   fxLayoutGap="16px"
+  [ngStyle]="{'height': getChartHeight()}"
 >
   <div
     fxLayout="column"
@@ -10,24 +11,40 @@
     [ngStyle.gt-md]="{'width' : '100%'}"
     [ngStyle.md]="{'width' : '100%'}"
     [ngStyle.lt-md]="{'width' : '100%'}"
-    fxLayoutAlign="space-between start"
-    style="border: 2px solid red"
+    fxLayoutAlign="space-between center"
+    *ngIf="headingTitle || headingDescription"
   >
     <span
-      class="align-center mat-h2">
+      class="align-center mat-h2"
+      *ngIf="headingTitle"
+    >
       {{headingTitle}}
     </span>
     <span
       class="align-left
        mat-caption"
       [innerHTML]="headingDescription"
+      *ngIf="headingDescription"
     >
     </span>
   </div>
   <div
-    [chart]="stockChart"
-    class="chart"
-    fxFlex="100"
+    fxLayout="column"
+    fxFlex="0 1 100%"
+    fxLayoutAlign="space-between center"
   >
+    <mat-card
+      fxFlex="1 1 100%"
+      [ngStyle]="{'width': '100%'}"
+    >
+      <mat-card-content>
+        <div
+          [chart]="stockChart"
+          class="chart"
+          fxFlex="1 1 100"
+        >
+        </div>
+      </mat-card-content>
+    </mat-card>
   </div>
 </div>
