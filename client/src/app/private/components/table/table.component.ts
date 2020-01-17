@@ -41,6 +41,14 @@ export class TableComponent implements OnChanges {
     }
   }
 
+  get confidence(): string {
+    if (this.stocks) {
+      let avgConfidence = 0;
+      this.stocks.map((s: Stock) => avgConfidence = avgConfidence + s.forecast.confidence);
+      return (avgConfidence / this.stocks.length).toString();
+    }
+  }
+
   private _getDataSource() {
     if (this.stockWithId) {
       this.displayColumns = this._getDisplayColmuns();
@@ -76,8 +84,8 @@ export class TableComponent implements OnChanges {
             },
             {
               [this.displayColumns[1].id]: {
-                value: x.closing_price_forecast,
-                sort: x.closing_price_forecast,
+                value: x.forecast.closing_price + ' $',
+                sort: x.forecast.closing_price,
                 align: 'left'
               }
             }

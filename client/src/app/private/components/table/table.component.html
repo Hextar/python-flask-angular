@@ -47,13 +47,12 @@
     [ngStyle.lt-md]="{'width' : '100%'}"
     fxLayoutAlign.gt-sm="space-between end"
     fxLayoutAlign.lt-md="space-between center"
-    *ngIf="bottomDescription"
   >
     <span
       class="align-left mat-caption mat-gray"
       [ngStyle]="{'color': '#a9a9a9'}"
-      [innerHTML]="bottomDescription"
     >
+      The closing price is forecasted using a linear regression model, with a confidence of {{confidence}}.
     </span>
   </div>
 </div>

@@ -18,7 +18,7 @@ import {
 } from 'highcharts';
 import { ViewChildren } from '@angular/core';
 import { ChartLangEn } from '@app/app.constants';
-import { Stock, StockPoint } from '@private/models/stock.model';
+import { Stock, StockData } from '@private/models/stock.model';
 import { noop } from 'rxjs';
 import * as moment from 'moment';
 
@@ -133,7 +133,7 @@ export class ChartComponent implements OnChanges, OnDestroy {
         return <SeriesAreaOptions>{
           type: 'area',
           name: s.label,
-          data: s.points.map((point: any) => {
+          data: s.stock_data.map((point: any) => {
             return <PointOptionsObject>[
               Number(point.timestamp),
               point.value
@@ -147,7 +147,7 @@ export class ChartComponent implements OnChanges, OnDestroy {
 
   private _getTimestamps(): number[] {
     if (this.series) {
-      return this.stocks[0].points.map((p: StockPoint) => {
+      return this.stocks[0].stock_data.map((p: StockData) => {
         return p.timestamp;
       });
     } else {
@@ -217,7 +217,7 @@ export class ChartComponent implements OnChanges, OnDestroy {
           enabled: true,
           buttons: this._getRangeSelectorButtons(),
           inputEnabled: true,
-          selected: 1
+          selected: 0
         },
         navigator: {
           enabled: true,

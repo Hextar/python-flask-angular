@@ -1,30 +1,36 @@
 from flask import request, jsonify
 from datetime import datetime
 from typing import List
+from api.services.data_frame_const import DataFrameConst as DF
+from engine.machine_learning import MachineLearning
+from enum import Enum     # for enum34, or the stdlib version
 import json
 import pandas as pd 
 import pandas_datareader as web
 pd.plotting.register_matplotlib_converters()
+import threading
+import logging as log
+
 
 class StockService:
 
-	def __init__(self, last_n_days = 3):
-		self.last_n_days = last_n_days
+	def __init__(self):
+		pass
 
-	def get_average(self, sum = int, len = int):
+	def get_ml_forecast(self, stock, df, days ):
 		try:
-			return sum / min(len, self.last_n_days)
+			ml = MachineLearning()
+			log.info("==== ML STARTS ====")
+			forecast, confidence = ml.get_closing_price_forecast(stock, df, days)
+			return forecast[0], confidence
 		except:
-			return 0
-
-	def get_forecast(self, df):
-		dfreg = df.loc[:,["Adj Close","Volume"]]
-		dfreg["HL_PCT"] = (df["High"] - df["Low"]) / df["Close"] * 100.0
-		dfreg["PCT_change"] = (df["Close"] - df["Open"]) / df["Open"] * 100.0
+			log.error("==== ML ERROR ====")
+			return 0, 0
 
 	def get_stocks(self, stocks = List[str], start = datetime, end = datetime):
 		# Prepare the response json
 		stock_data = []
+			
 		try:
 			# For each stock in the list
 			for s in stocks:
@@ -34,28 +40,33 @@ class StockService:
 				# Parse the data frame as a json
 				jdf = json.loads(df.to_json(orient="index"))
 
-				forecast = self.get_forecast(df)
-
 				# Pretty parse of timestamp, value couples
 				points = []
-				average_sum = 0
-				for idy, timestamp in enumerate(jdf.keys()):
+				for timestamp in jdf.keys():
 					# Append the timestamp/couple
 					points.append({
 						"timestamp": timestamp,
-						"value": jdf[timestamp]['Close']
+						"high": jdf[timestamp][DF.HIGH],
+						"low": jdf[timestamp][DF.LOW],
+						"open": jdf[timestamp][DF.OPEN],
+						"close": jdf[timestamp][DF.CLOSE],
+						"volume": jdf[timestamp][DF.VOLUME],
+						"adj_close": jdf[timestamp][DF.ADJ_CLOSE]
 					})
-		
-					# Use the last 3 days to calculate the average
-					if (idy >= (len(jdf) - self.last_n_days)):
-						average_sum += jdf[timestamp]['Close']
 
+				closing_price, confidence = self.get_ml_forecast(s, df, 1)
 				# Final stock parsing
 				stock_data.append({
 					"label": s,
 					"points": points,
-					"closing_price_forecast": self.get_average(average_sum, len(jdf))
-	        	})
+					"forecast": {
+						"closing_price": closing_price,
+						"confidene": confidence
+					}
+				})
+
+							# Return the final JSONObject
 			return stock_data
 		except:
+			log.error("Empty list")
 			return []

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { Title } from '@angular/platform-browser';
+import { DomSanitizer, Title } from '@angular/platform-browser';
 import { filter, map } from 'rxjs/operators';
+import { MatIconRegistry } from '@angular/material';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,8 @@ export class AppComponent {
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
+    private matIconRegistry: MatIconRegistry,
+    private domSanitizer: DomSanitizer,
     private titleService: Title
   ) {
     this.router.events.pipe(
@@ -36,5 +39,11 @@ export class AppComponent {
         this.titleService.setTitle(data + ' - Data Analysis and Visualization');
       }
     });
+    /** ADD LOGO */
+    this.matIconRegistry.addSvgIcon('logo', this._dsbstr('logo.svg'));
+  }
+
+  private _dsbstr(s: string) {
+    return this.domSanitizer.bypassSecurityTrustResourceUrl(s);
   }
 }

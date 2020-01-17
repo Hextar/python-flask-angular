@@ -31,7 +31,6 @@ class StocksAPI(Resource):
 	@api.expect(stock_payload)
 
 	def post(self):
-		print(request.method)
 		"""Getting the analysis for a stock list and start-end date"""
 		try:
 			# Decode the payload

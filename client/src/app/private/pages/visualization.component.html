@@ -10,7 +10,8 @@
         fxLayout="column"
         fxLayoutAlign="stretch stretch"
         fxFlex="0 0 100%"
-        fxLayoutGap="64px"
+        fxLayoutGap.gt-sm="64px"
+        fxLayoutGap.lt-md="32px"
         [ngStyle]="{'padding-bottom.px': 64}"
       >
         <ng-container *ngIf="!isLoading; else loading">
