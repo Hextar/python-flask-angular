@@ -9,6 +9,8 @@ import { Sort } from '@angular/material';
   styleUrls: ['./table.component.scss']
 })
 export class TableComponent implements AfterViewInit {
+  @Input() headingTitle: string;
+  @Input() bottomDescription: string;
   @Input() stocks: Stock[] = [];
   @Input() mobile = false;
   @Input() displayColumns: any[];

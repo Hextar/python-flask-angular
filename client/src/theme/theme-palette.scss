@@ -2,33 +2,33 @@
 @include mat-core();
 
 $mat-daavprimary: (
-  10: #e9ecf4,
-  50: #bdc6df,
-  100: #3a569f,
-  400: #3a569f,
-  500: #0f318a,
-  700: #0b2465,
+  10: #B1CDFE,
+  50: #5A96FD,
+  100: #2D7BFF,
+  400: #2D7BFF,
+  500: #0f69ff,
+  700: #013DA4,
   contrast: (
     50: #e1e1e1,
     100: #fff,
     400: #fff,
-    500: #0f318a,
+    500: #013DA4,
     700: #000
   )
 );
 
 $mat-daavaccent: (
-  10: #eaf8f6,
-  50: #c0ece4,
-  100: #62efcd,
-  400: #62efcd,
-  500: #1abc9c,
-  700: #138972,
+  10: #FFF0B3,
+  50: #FFE164,
+  100: #FFD939,
+  400: #FFD939,
+  500: #FFCE00,
+  700: #9B7D00,
   contrast: (
     50: #e1e1e1,
     100: #fff,
     400: #fff,
-    500: #1abc9c,
+    500: #9B7D00,
     700: #000
   )
 );
@@ -53,7 +53,7 @@ $mat-daavwarn: (
   50: #FBD4CD,
   100: #F26248,
   400: #F26248,
-  500: #F44336,
+  500: #ea145e,
   700: #B14835,
   contrast: (
     50: #e1e1e1,

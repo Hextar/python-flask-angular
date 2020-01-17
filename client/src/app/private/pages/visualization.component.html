@@ -5,17 +5,6 @@
       fxLayoutAlign="start stretch"
       fxLayoutGap="32px"
     >
-      <!-- Title -->
-      <div
-        fxLayout="column"
-        fxLayoutAlign="center stretch"
-        fxFlex="0 0 100%"
-      >
-        <div style="text-align:center">
-          <h1>Data Analysis and Visualization</h1>
-        </div>
-      </div>
-
       <!-- Stock Chart -->
       <div
         fxLayout="column"
@@ -29,6 +18,7 @@
 
             <!-- Stock chart -->
             <app-chart
+              [headingTitle]="'Stock Chart'"
               [headingDescription]=""
               [yTitle]="'Closing price'"
               [xTitle]="'Time'"
@@ -39,6 +29,8 @@
 
             <!-- Forecasting table-->
             <app-table
+              [headingTitle]="'Closing Price Forecast'"
+              [bottomDescription]="'Calculated using the average of the last 3 days'"
               [stocks]="stock"
               [mobile]="mobile"
             >

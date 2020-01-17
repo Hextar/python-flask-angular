@@ -1,8 +1,24 @@
 <div
+  fxFlex="0 0 100%"
   fxLayout="column"
-  fxFlex="100"
-  fxLayoutAlign="start stretch"
+  fxLayoutGap="16px"
 >
+  <div
+    fxLayout="column"
+    fxFlex="0 0 auto"
+    [ngStyle.gt-md]="{'width' : '100%'}"
+    [ngStyle.md]="{'width' : '100%'}"
+    [ngStyle.lt-md]="{'width' : '100%'}"
+    fxLayoutAlign="space-between center"
+    *ngIf="headingTitle"
+  >
+    <span
+      class="align-center mat-h2"
+      *ngIf="headingTitle"
+    >
+      {{headingTitle}}
+    </span>
+  </div>
   <mat-card fxFlex="100">
     <mat-card-content>
       <ng-container *ngIf="stockWithId?.length > 0; else emptyList">
@@ -22,5 +38,21 @@
       </ng-template>
     </mat-card-content>
   </mat-card>
+  <div
+    fxLayout="column"
+    fxFlex="0 0 auto"
+    [ngStyle.gt-md]="{'width' : '100%'}"
+    [ngStyle.md]="{'width' : '100%'}"
+    [ngStyle.lt-md]="{'width' : '100%'}"
+    fxLayoutAlign="space-between center"
+    *ngIf="bottomDescription"
+  >
+    <span
+      class="align-left mat-caption mat-gray"
+      [ngStyle]="{'color': '#a9a9a9'}"
+      [innerHTML]="bottomDescription"
+    >
+    </span>
+  </div>
 </div>
 

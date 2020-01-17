@@ -5,4 +5,14 @@
 :host {
   display: flex;
   flex: 1;
+  .content {
+    padding-top: $header-height;
+    @media ($mat-xsmall) {
+      .mat-sidenav,
+      .mat-drawer-content,
+      :host ::ng-deep .mat-drawer-backdrop {
+        padding-top: $header-height-xs;
+      }
+    }
+  }
 }
