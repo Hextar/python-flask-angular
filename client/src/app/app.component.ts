@@ -41,6 +41,8 @@ export class AppComponent {
     });
     /** ADD LOGO */
     this.matIconRegistry.addSvgIcon('logo', this._dsbstr('logo.svg'));
+    /** ADD LOGO CIRCLED*/
+    this.matIconRegistry.addSvgIcon('logo_circled', this._dsbstr('logo_circled.svg'));
   }
 
   private _dsbstr(s: string) {

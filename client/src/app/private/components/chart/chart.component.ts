@@ -60,7 +60,7 @@ export class ChartComponent implements OnChanges, OnDestroy {
 
   series: SeriesAreaOptions[];
   chartHeight = 380;
-  mobileChartHeight = 240;
+  mobileChartHeight = 420;
 
   plotOptions: PlotOptions = {
     series: {

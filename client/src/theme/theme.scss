@@ -18,6 +18,7 @@ body {
   flex-direction: column;
   margin: 0;
   height: 100%;
+  background: #FCFCFC;
 }
 
 html {
@@ -35,6 +36,10 @@ a:visited {
 p {
   margin-top: $margin-default;
   margin-bottom: $margin-default;
+}
+
+.mat-h2 {
+  color: #000C20 !important;
 }
 
 .bold,

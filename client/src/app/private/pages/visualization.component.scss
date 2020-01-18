@@ -7,15 +7,20 @@
   flex: 1;
   min-height: 100%;
   width: 100%;
+
   ::ng-deep .mat-divider {
     border-top-color: map_get($mat-grey, 700) !important;
     margin: 0 $margin-default;
   }
+
   .mat-chip-list {
-    margin-top: $margin-default--2;
     .daav-chip-list {
       margin: 0 $margin-default--2 0 0;
       color: $light-primary-text !important;
+    }
+
+    @include media("<=md") {
+      margin-top: $margin-default;
     }
   }
 }
