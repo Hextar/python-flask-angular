@@ -11,6 +11,7 @@ class DevConfig(BaseConfig):
 
 class ProductionConfig(BaseConfig):
     FLASK_ENV = 'production'
+    DEBUG = False
 
 
 class TestConfig(BaseConfig):

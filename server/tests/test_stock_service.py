@@ -4,12 +4,13 @@ import pytest
 import json 
 from datetime import datetime
 
-
+'''
 def test_get_average(app_context, stock_service):
 	assert stock_service.get_average(sum = 50, len = 2) == 25
 
 def test_get_average_error(app_context, stock_service):
 	assert stock_service.get_average() == 0
+'''
 
 def test_get_stocks(app_context, stock_service):
 	stocks = ["CORN"]

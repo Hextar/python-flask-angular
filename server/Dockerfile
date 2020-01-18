@@ -11,6 +11,8 @@ RUN pip install --upgrade pip
 
 RUN pip install -r requirements.txt
 
+RUN pytest --cov-report=html --cov=.
+
 COPY . /src
 
 EXPOSE 5000

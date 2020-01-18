@@ -19,13 +19,14 @@ class StockService:
 
 	def get_ml_forecast(self, stock, df, days ):
 		try:
-			ml = MachineLearning()
-			log.info("==== ML STARTS ====")
-			forecast, confidence = ml.get_closing_price_forecast(stock, df, days)
-			return forecast[0], confidence
+			# Init the ML with 1 day forecasting
+			ml = MachineLearning(1)
+			forecast = ml.get_closing_price_forecast(stock, df, days)
+			print(forecast)
+			return forecast[0]
 		except:
 			log.error("==== ML ERROR ====")
-			return 0, 0
+			return 0
 
 	def get_stocks(self, stocks = List[str], start = datetime, end = datetime):
 		# Prepare the response json
@@ -54,18 +55,18 @@ class StockService:
 						"adj_close": jdf[timestamp][DF.ADJ_CLOSE]
 					})
 
-				closing_price, confidence = self.get_ml_forecast(s, df, 1)
+				closing_price = self.get_ml_forecast(s, df, 1)
 				# Final stock parsing
 				stock_data.append({
 					"label": s,
 					"points": points,
 					"forecast": {
 						"closing_price": closing_price,
-						"confidene": confidence
+						"confidene": 0
 					}
 				})
 
-							# Return the final JSONObject
+			# Return the final JSONObject
 			return stock_data
 		except:
 			log.error("Empty list")

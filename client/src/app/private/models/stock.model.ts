@@ -6,7 +6,6 @@ export interface Stock {
 
 export interface ForecastData {
   closing_price: number;
-  confidence: number;
 }
 
 export interface StockData {
