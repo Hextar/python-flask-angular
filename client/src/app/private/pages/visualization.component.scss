@@ -14,12 +14,13 @@
   }
 
   .mat-chip-list {
+    margin-top: 0;
     .daav-chip-list {
       margin: 0 $margin-default--2 0 0;
       color: $light-primary-text !important;
     }
 
-    @include media("<=md") {
+    @include media("<md") {
       margin-top: $margin-default;
     }
   }

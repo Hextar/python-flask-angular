@@ -8,12 +8,11 @@
       <!-- Data info -->
       <div
         fxLayout="column"
-        fxLayoutAlign="space-between start"
+        fxLayoutAlign.gt-sm="space-between start"
+        fxLayoutAlign.lt-md="space-between center"
         fxLayoutGap="32px"
       >
-        <span
-          class="align-center mat-h2"
-        >
+        <span class="mat-h2">
           Stock Analyzed and Date Range
         </span>
         <div
@@ -21,8 +20,8 @@
           fxLayout.gt-sm="row"
           fxLayout.lt-md="column"
           fxLayoutAlign.gt-sm="start center"
-          fxLayoutAlign.lt-md="start start"
-          fxFlex.gt-sm="0 0 64px"
+          fxLayoutAlign.lt-md="start center"
+          fxFlex.gt-sm="0 0 48px"
           fxFlex.lt-md="0 0 auto"
           fxLayoutGap="16px"
         >
