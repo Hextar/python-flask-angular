@@ -76,7 +76,35 @@
           background: transparent !important;
         }
       }
-
+      &.circle {
+        $circle-size: 10px;
+        &::before {
+          content: '';
+          top: 0;
+          left: 0;
+          height: $circle-size;
+          width: $circle-size;
+          max-width: $circle-size;
+          border-radius: $circle-size;
+          margin-right: $margin-default;
+          z-index: 10;
+        }
+        &.red {
+          &::before {
+            background: #FF60AA;
+          }
+        }
+        &.green {
+          &::before {
+            background: #60FFAA;
+          }
+        }
+        &.blue {
+          &::before {
+            background: #60AAFF;
+          }
+        }
+      }
       height: $list-item-height;
       padding: $padding-default--4;
       line-height: $list-item-height;

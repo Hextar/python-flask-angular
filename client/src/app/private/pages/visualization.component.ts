@@ -20,6 +20,7 @@ export class VisualizationComponent implements OnInit, OnDestroy {
 
   stocksToAnalyse: string[];
   stocksColors: string[];
+  stocksClass: string[];
   start: string;
   end: string;
 
@@ -40,6 +41,7 @@ export class VisualizationComponent implements OnInit, OnDestroy {
     this.stocksToAnalyse = ['CROP', 'UGA', 'NDAQ'];
     // this.stocksColors = ['#264b96', '#27b376', '#bf212f'];
     this.stocksColors = ['#60AAFF', '#60FFAA', '#FF60AA'];
+    this.stocksClass = ['blue', 'green', 'red'];
     this.start = '2015-1-2';
     this.end = '2020-1-2';
     this.isLoading = true;

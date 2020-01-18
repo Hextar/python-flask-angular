@@ -14,6 +14,7 @@ export class TableComponent implements OnChanges {
   @Input() bottomDescription: string;
   @Input() stocks: Stock[] = [];
   @Input() mobile = false;
+  @Input() stocksClass: string[];
   @Input() displayColumns: any[];
   @Input() displayColumnTitle = true;
   @Input() mobileBetterResponsive = true;
@@ -66,7 +67,7 @@ export class TableComponent implements OnChanges {
   }
 
   private _getRows(): any[] {
-    const rows: any[] = this.stockWithId.map((s: SortedTableData) => {
+    const rows: any[] = this.stockWithId.map((s: SortedTableData, idx: number) => {
       const x = s.value;
       return {
         uid: s.uid,
@@ -74,6 +75,7 @@ export class TableComponent implements OnChanges {
             {
               [this.displayColumns[0].id]: {
                 value: x.label,
+                class: 'circle ' + this.stocksClass[idx],
                 sort: x.label,
                 align: 'left'
               }
