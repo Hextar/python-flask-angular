@@ -3,6 +3,7 @@ import { StockService } from '@private/services/stock.service';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { Stock } from '@private/models/stock.model';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
+import { DatePipe } from '@angular/common';
 
 
 @Component({
@@ -17,9 +18,15 @@ export class VisualizationComponent implements OnInit, OnDestroy {
   stocoSubscription: Subscription;
   mobile = false;
 
+  stocksToAnalyse: string[];
+  stocksColors: string[];
+  start: string;
+  end: string;
+
   constructor(
     private stockService: StockService,
     private breakpointObserver: BreakpointObserver,
+    private datePipe: DatePipe
   ) {
     this.breakPointSubscription = this.breakpointObserver
       .observe([Breakpoints.XSmall, Breakpoints.Small])
@@ -30,11 +37,13 @@ export class VisualizationComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // this.isLoading = true;
-    const stocksToAnalyse = ['CROP', 'UGA', 'NDAQ'];
-    const start = '2015-1-1';
-    const end = '2020-1-1';
+    this.stocksToAnalyse = ['CROP', 'UGA', 'NDAQ'];
+    // this.stocksColors = ['#264b96', '#27b376', '#bf212f'];
+    this.stocksColors = ['#60AAFF', '#60FFAA', '#FF60AA'];
+    this.start = '2015-1-2';
+    this.end = '2020-1-2';
     this.isLoading = true;
-    this.stocoSubscription = this.stockService.getStocks(stocksToAnalyse, start, end)
+    this.stocoSubscription = this.stockService.getStocks(this.stocksToAnalyse, this.start, this.end)
       .subscribe((response: any) => {
         this.isLoading = false;
         this.stock$.next(response);
@@ -45,5 +54,4 @@ export class VisualizationComponent implements OnInit, OnDestroy {
     this.breakPointSubscription.unsubscribe();
     this.stocoSubscription.unsubscribe();
   }
-
 }

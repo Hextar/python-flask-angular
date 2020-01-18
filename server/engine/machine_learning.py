@@ -19,24 +19,24 @@ DATASET = 'dataset/crop_dataset_2011_1_1_2020_1_1.csv'
 class MachineLearning:
 
 	def __init__(self, forecast_out = 1):
-		lr = self.load_model()
+		lr = self.load_model(LR_MODEL)
 		if lr is None:
 			self.train_lr_model(forecast_out)
 
-	def save_model(self, lr):
+	def save_model(self, lr, path):
 		try:
 			# save the model to disk
 			log.info("Saving lr model to memory")
-			pickle.dump(lr, open(LR_MODEL, 'wb'))
+			pickle.dump(lr, open(path, 'wb'))
 			log.info("Saving lr model to memory SUCCESS")
 		except:
 			log.info("Saving lr model to memory FAILED")
 
-	def load_model(self):
+	def load_model(self, path):
 		try:
 			# save the model to disk
 			log.info("Loading lr model from memory")
-			lr = pickle.load(open(LR_MODEL, 'rb'))
+			lr = pickle.load(open(path, 'rb'))
 			log.info("Loading lr model from memory SUCCESS")
 			return lr
 		except:
@@ -44,7 +44,7 @@ class MachineLearning:
 
 	def get_closing_price_forecast(self, stock, df, forecast_out = 1):
 		# Load the model
-		lr = self.load_model()
+		lr = self.load_model(LR_MODEL)
 
 		if lr:
 			# Get the Adjusted Close Price
@@ -59,14 +59,16 @@ class MachineLearning:
 			lr_forecast = lr.predict(x_forecast)
 			return lr_forecast
 		else:
-			pass
-			# self.train_lr_model(forecast_out)
-			# self.get_closing_price_forecast(stock, df, forecast_out)
+			lr = self.train_lr_model(forecast_out)
+			lr_forecast = lr.predict(x_forecast)
+			return lr_forecast
 
 
 	def train_lr_model(self, forecast_out = 1):
 		try:
-			log.info("Start training lr model")
+			log.info("===========================")
+			log.info("  Start training lr model  ")
+			log.info("===========================")
 			
 			# Load the dataset
 			url="https://query1.finance.yahoo.com/v7/finance/download/CORN?period1=1420070400&period2=1577836800&interval=1d&events=history&crumb=TjNAMHrOgWR"
@@ -101,19 +103,24 @@ class MachineLearning:
 			# Testing Model: Score returns the coefficient of determination R^2 of the prediction. 
 			# The best possible score is 1.0
 			svm_confidence = svr_rbf.score(x_test, y_test)
-			print("svm confidence: ", svm_confidence)
+			log.info("svm confidence: ", svm_confidence)
 
 			# Create and train the Linear Regression  Model
 			lr = LinearRegression()
 			# Train the model
 			lr.fit(x_train, y_train)
 
-			# Testing Model: Score returns the coefficient of determination R^2 of the forecast. 
-			# The best possible score is 1.0
-			print("Training lr model SUCCESS, confidence=" + str(lr.score(x_test, y_test)))
+			log.info("Training lr model SUCCESS, confidence=" + str(lr.score(x_test, y_test)))
 
 			# Save the model
-			self.save_model(lr)
+			self.save_model(lr, LR_MODEL)
 		except:
-			log.error("Training lr model FAILED")
+			log.error("Training LR model FAILED")
 			return 0
+		try:
+			# Testing Model: Score returns the coefficient of determination R^2 of the forecast. 
+			# The best possible score is 1.0
+			log.info("LR Confidence=" + str(lr.score(x_test, y_test)))
+			return lr
+		except:
+			log.error("LR NOT RETURNED")

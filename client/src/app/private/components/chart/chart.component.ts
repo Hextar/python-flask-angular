@@ -47,7 +47,11 @@ export class ChartComponent implements OnChanges, OnDestroy {
   @Input() xTitle: string;
   @Input() labelHover: string;
   @Input() stocks: Stock[] = [];
+  @Input() colors: string[] = [];
   @Input() mobile = false;
+  @Input() filter: string[];
+  @Input() start: string;
+  @Input() end: string;
 
   EXPORTING = true;
   THRESHOLD = 500000;
@@ -127,16 +131,16 @@ export class ChartComponent implements OnChanges, OnDestroy {
   }
 
   private _getSeries() {
-    const timezoneOffset = moment().utcOffset();
     if (this.stocks) {
-      this.series = <SeriesAreaOptions[]>this.stocks.map((s: Stock) => {
+      this.series = <SeriesAreaOptions[]>this.stocks.map((s: Stock, idx: number) => {
         return <SeriesAreaOptions>{
           type: 'area',
           name: s.label,
-          data: s.stock_data.map((point: any) => {
+          color: this.colors[idx],
+          data: s.points.map((point: any) => {
             return <PointOptionsObject>[
               Number(point.timestamp),
-              point.value
+              point.close
             ];
           })
         };
@@ -147,7 +151,7 @@ export class ChartComponent implements OnChanges, OnDestroy {
 
   private _getTimestamps(): number[] {
     if (this.series) {
-      return this.stocks[0].stock_data.map((p: StockData) => {
+      return this.stocks[0].points.map((p: StockData) => {
         return p.timestamp;
       });
     } else {
@@ -157,6 +161,11 @@ export class ChartComponent implements OnChanges, OnDestroy {
 
   private _getFirstDate(): number {
     return this._getTimestamps()[0];
+  }
+
+  private _getLastDate(): number {
+    const timestamps = this._getTimestamps();
+    return timestamps[timestamps.length - 1];
   }
 
   private _createChart() {
@@ -212,7 +221,10 @@ export class ChartComponent implements OnChanges, OnDestroy {
         credits: {enabled: false},
         plotOptions: this.plotOptions,
         series: this.series,
-        time: {useUTC: false},
+        time: {
+          useUTC: true,
+          timezoneOffset: -moment().utcOffset() * 10
+        },
         rangeSelector: {
           enabled: true,
           buttons: this._getRangeSelectorButtons(),

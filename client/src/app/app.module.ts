@@ -13,6 +13,11 @@ import { SharedModule } from '@shared/shared.module';
 import { CoreModule } from '@app/core';
 import { AppRoutingModule } from '@app/app-routing.module';
 import { ShellModule } from '@app/shell/shell.module';
+import { registerLocaleData } from '@angular/common';
+import localeITA from '@angular/common/locales/it';
+
+registerLocaleData(localeITA);
+
 
 @NgModule({
   imports: [
@@ -43,7 +48,7 @@ import { ShellModule } from '@app/shell/shell.module';
     },
     {
       provide: LOCALE_ID,
-      useValue: 'it-IT'
+      useValue: 'en-US'
     },
     {
       provide: MAT_DATE_LOCALE,

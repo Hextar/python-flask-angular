@@ -9,6 +9,7 @@ import { ApiService, StorageService } from '@app/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ChartModule, HIGHCHARTS_MODULES } from 'angular-highcharts';
 import { HAMMER_GESTURE_CONFIG, HammerGestureConfig } from '@angular/platform-browser';
+import { DatePipe } from '@angular/common';
 
 describe('VisualizationComponent', () => {
   let component: VisualizationComponent;
@@ -31,6 +32,7 @@ describe('VisualizationComponent', () => {
         HttpClient,
         StorageService,
         StockService,
+        DatePipe,
         {provide: HIGHCHARTS_MODULES, useFactory: (): any => []},
         {provide: HAMMER_GESTURE_CONFIG, useClass: HammerGestureConfig},
       ]

@@ -1,7 +1,7 @@
 export interface Stock {
   label: string;
   forecast?: ForecastData;
-  stock_data?: StockData[];
+  points?: StockData[];
 }
 
 export interface ForecastData {

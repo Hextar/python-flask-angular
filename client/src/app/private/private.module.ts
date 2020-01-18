@@ -9,6 +9,7 @@ import { ChartModule, HIGHCHARTS_MODULES } from 'angular-highcharts';
 import { HAMMER_GESTURE_CONFIG, HammerGestureConfig } from '@angular/platform-browser';
 
 import * as Highcharts from 'highcharts';
+import { DatePipe, DecimalPipe } from '@angular/common';
 declare var require: any;
 require('highcharts/highcharts-more')(Highcharts);
 require('highcharts/modules/exporting')(Highcharts);
@@ -30,6 +31,8 @@ Boost(Highcharts);
   ],
   providers: [
     StockService,
+    DecimalPipe,
+    DatePipe,
     {provide: HIGHCHARTS_MODULES, useFactory: (): any => []},
     {provide: HAMMER_GESTURE_CONFIG, useClass: HammerGestureConfig},
   ]

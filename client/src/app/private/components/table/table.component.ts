@@ -1,7 +1,8 @@
-import { AfterViewInit, ChangeDetectorRef, Component, Input, OnChanges, SimpleChange, SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnChanges, SimpleChange, SimpleChanges } from '@angular/core';
 import { Stock } from '@private/models/stock.model';
 import { DaavTableColumn, DaavTableComponent, DaavTableType, SortedTableData } from '@shared/components/daav-table/daav-table.component';
 import { Sort } from '@angular/material';
+import { DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-table',
@@ -18,13 +19,16 @@ export class TableComponent implements OnChanges {
   @Input() mobileBetterResponsive = true;
   @Input() useSort = true;
   @Input() disabled = false;
+  @Input() format = '1.0';
 
   data = [];
   initialSort: Sort = {active: 'stock', direction: 'asc'};
   stockWithId: SortedTableData[] = [];
+  accuracy = 0.9939904210784928;
 
   constructor(
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private decimalPipe: DecimalPipe
   ) {}
 
   ngOnChanges(changes: SimpleChanges) {
@@ -76,7 +80,7 @@ export class TableComponent implements OnChanges {
             },
             {
               [this.displayColumns[1].id]: {
-                value: x.forecast.closing_price + ' $',
+                value: '$' + this.decimalPipe.transform(x.forecast.closing_price, this.format),
                 sort: x.forecast.closing_price,
                 align: 'left'
               }

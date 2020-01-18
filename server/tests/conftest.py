@@ -6,7 +6,8 @@ sys.path.append(folder)
 
 import app
 import pytest
-from api.services.stock_service import StockService
+from api.services.stock_service import StockService as StokServiceTest
+from engine.machine_learning import MachineLearning as MachineLearningTest
 
 @pytest.fixture
 def testApp():
@@ -28,5 +29,11 @@ def client(testApp):
 @pytest.fixture
 def stock_service(testApp):
     """A test client forl the app."""
-    ss = StockService()
+    ss = StokServiceTest()
     yield ss
+
+@pytest.fixture
+def machine_learning(testApp):
+    """ Train the machine learning model """
+    ml = MachineLearningTest(1)
+    yield ml
