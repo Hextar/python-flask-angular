@@ -1,14 +1,6 @@
 version: '3'
 services:
 
-  daav-fe-angular:
-    build: ./client
-    container_name: daav-fe
-    ports:
-      - 80:80   
-    environment:
-      - APP_ENV=${APP_ENV}
-
   daav-be-flask:
     build: ./server
     container_name: daav-be
@@ -16,3 +8,14 @@ services:
       - 5000:5000
     environment:
       - APP_ENV=${APP_ENV}
+
+  daav-fe-angular:
+    build: ./client
+    container_name: daav-fe
+    ports:
+      - 80:80   
+    environment:
+      - APP_ENV=${APP_ENV}
+    depends_on: [
+      daav-be-flask
+    ]
