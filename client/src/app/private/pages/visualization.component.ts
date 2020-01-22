@@ -38,7 +38,7 @@ export class VisualizationComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // this.isLoading = true;
-    this.stocksToAnalyse = ['CROP', 'UGA', 'NDAQ'];
+    this.stocksToAnalyse = ['CORN', 'UGA', 'NDAQ'];
     // this.stocksColors = ['#264b96', '#27b376', '#bf212f'];
     this.stocksColors = ['#60AAFF', '#60FFAA', '#FF60AA'];
     this.stocksClass = ['blue', 'green', 'red'];
