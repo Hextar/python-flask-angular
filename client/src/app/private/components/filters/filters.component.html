@@ -14,7 +14,28 @@
     fxFlex.lt-md="1 1 auto"
     fxLayoutGap="16px"
   >
+
     <ng-container *ngIf="!!stocksToAnalyse">
+      <mat-chip-list
+        aria-label="Fish selection"
+        fxLayout="row"
+        fxLayoutGap="16px"
+      >
+        <ng-container *ngFor="let s of stocksToAnalyse; let idx = index">
+          <mat-chip
+            class="daav-chip-list"
+            [ngStyle]="{'background-color': stocksColors[idx]}"
+            [disableRipple]="true"
+          >
+            <span class="mat-caption">
+              <strong>{{s}}</strong>
+            </span>
+          </mat-chip>
+        </ng-container>
+      </mat-chip-list>
+    </ng-container>
+
+    <ng-container *ngIf="!!stocksToAnalyse && false">
       <mat-form-field
         class="stock-chip-list"
       >
