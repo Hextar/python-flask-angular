@@ -1,0 +1,93 @@
+<div
+  fxFlex="0 0 100%"
+  fxLayout.gt-sm="row"
+  fxLayout.lt-md="column"
+  fxLayoutAlign.gt-sm="space-between center"
+  fxLayoutAlign.lt-md="start stretch"
+  fxLayoutGap="16px"
+>
+  <div
+    fxLayout="row"
+    fxLayoutAlign.gt-sm="start center"
+    fxLayoutAlign.lt-md="center center"
+    fxFlex.gt-sm="0 0 50%"
+    fxFlex.lt-md="1 1 auto"
+    fxLayoutGap="16px"
+  >
+    <ng-container *ngIf="!!stocksToAnalyse">
+      <mat-form-field
+        class="stock-chip-list"
+      >
+        <mat-chip-list
+          #chipList
+          aria-label="Stock selection"
+          fxLayout="row"
+          fxLayoutGap="16px"
+        >
+          <ng-container *ngFor="let s of stocksToAnalyse; let idx = index">
+            <mat-chip
+              class="daav-chip-list"
+              [ngStyle]="{'background-color': stocksColors[idx]}"
+              [disableRipple]="true"
+              [removable]="removable"
+              (removed)="removeStock(s)"
+            >
+              <span class="mat-caption">
+                <strong>{{s}}</strong>
+              </span>
+              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+          </ng-container>
+          <input
+            #stockInput
+            matInput
+            required
+            type="text"
+            placeholder="New stock"
+            [formControl]="stocksCtrl"
+            [matAutocomplete]="auto"
+            [matChipInputFor]="chipList"
+            [disabled]="!stocksAvailable"
+            [matAutocompleteDisabled]="!stocksAvailable"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            [matChipInputAddOnBlur]="addOnblur"
+            (matChipInputTokenEnd)="addStock($event)"
+          >
+          <mat-hint align="start">
+            <span class="align-left mat-caption mat-grey">
+              You can add {{stocksAvailable}} more stocks.
+            </span>
+          </mat-hint>
+        </mat-chip-list>
+        <mat-autocomplete
+          #auto="matAutocomplete"
+          (optionSelected)="selected($event)"
+        >
+          <mat-option *ngFor="let stock of filteredStocks | async" [value]="stock">
+            {{stock}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+    </ng-container>
+  </div>
+  <div
+    fxLayout="row"
+    fxLayoutAlign.gt-sm="end center"
+    fxLayoutAlign.lt-md="center center"
+    fxFlex.gt-sm="0 0 50%"
+    fxFlex.lt-md="1 1 auto"
+    fxLayoutGap="16px"
+  >
+    <span class="mat-h4">
+      From
+      <span style="color: #444">
+        <strong>{{start | date: 'MMM dd, yyy'}}</strong>
+      </span>
+      to
+      <span style="color: #444">
+        <strong>{{end | date: 'MMM dd, yyy'}}</strong>
+      </span>
+    </span>
+  </div>
+</div>

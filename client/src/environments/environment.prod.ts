@@ -17,4 +17,4 @@ export const environment = {
   defaultLanguage: 'itIT',
   supportedLanguages: ['itIT', 'enUS'],
   realTime: true
-}
+};

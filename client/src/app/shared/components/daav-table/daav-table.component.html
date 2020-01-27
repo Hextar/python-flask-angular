@@ -52,6 +52,22 @@
   </div>
 </ng-template>
 
+<!-- ----------------------------------------------------------------- -->
+<!-- VALUE ---------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------- -->
+<ng-template #cellColorIcon let-context>
+  <div
+    fxLayout="row"
+    fxFlex="0 0 auto"
+    fxLayoutAlign="center center"
+  >
+    <div
+      class="color-icon"
+      [ngStyle]="{'background-color': context?.value}"
+    >
+    </div>
+  </div>
+</ng-template>
 
 <!-- ----------------------------------------------------------------- -->
 <!-- MAT TABLE  ----------------------------------------------------- -->
@@ -107,6 +123,25 @@
                         label: col?.label,
                         value: colid?.value,
                         align: colid?.align
+                      },
+                      localSk: ''
+                    }
+                  "
+                >
+                </ng-container>
+              </ng-container>
+              <!-- MAT CELL COLOR ICON ------------------------------------------- -->
+              <ng-container
+                *ngIf="
+                  colid?.type ? colid?.type === cellType?.COLOR_ICON : col?.type === cellType?.COLOR_ICON
+                "
+              >
+                <ng-container
+                  *ngTemplateOutlet="
+                    cellColorIcon;
+                    context: {
+                      $implicit: {
+                        value: colid?.value
                       },
                       localSk: ''
                     }

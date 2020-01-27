@@ -10,6 +10,8 @@ import { HAMMER_GESTURE_CONFIG, HammerGestureConfig } from '@angular/platform-br
 
 import * as Highcharts from 'highcharts';
 import { DatePipe, DecimalPipe } from '@angular/common';
+import { FiltersComponent } from './components/filters/filters.component';
+import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 declare var require: any;
 require('highcharts/highcharts-more')(Highcharts);
 require('highcharts/modules/exporting')(Highcharts);
@@ -21,11 +23,13 @@ Boost(Highcharts);
   imports: [
     SharedModule,
     ChartModule,
-    PrivateRoutingModule
+    PrivateRoutingModule,
+    RxReactiveFormsModule
   ],
   declarations: [
     PrivateInitComponent,
     VisualizationComponent,
+    FiltersComponent,
     ChartComponent,
     TableComponent
   ],

@@ -2,6 +2,8 @@
 @import "~theme/theme-media";
 @import "~theme/theme-typography";
 
+$icon-circle-size: 10px;
+
 :host {
   .mat-table {
     &.disabled {
@@ -76,34 +78,10 @@
           background: transparent !important;
         }
       }
-      &.circle {
-        $circle-size: 10px;
-        &::before {
-          content: '';
-          top: 0;
-          left: 0;
-          height: $circle-size;
-          width: $circle-size;
-          max-width: $circle-size;
-          border-radius: $circle-size;
-          margin-right: $margin-default;
-          z-index: 10;
-        }
-        &.red {
-          &::before {
-            background: #FF60AA;
-          }
-        }
-        &.green {
-          &::before {
-            background: #60FFAA;
-          }
-        }
-        &.blue {
-          &::before {
-            background: #60AAFF;
-          }
-        }
+      .color-icon {
+        height: $icon-circle-size;
+        width: $icon-circle-size;
+        border-radius: $icon-circle-size;
       }
       height: $list-item-height;
       padding: $padding-default--4;

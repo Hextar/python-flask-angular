@@ -16,7 +16,8 @@ import { environment } from '@env/environment';
 import { noop } from 'rxjs';
 
 export enum DaavTableType {
-  LABEL = 'value'
+  LABEL = 'value',
+  COLOR_ICON = 'color-icon'
 }
 
 export interface DaavTableColumn {

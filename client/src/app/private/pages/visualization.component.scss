@@ -20,7 +20,7 @@
       color: $light-primary-text !important;
     }
 
-    @include media("<md") {
+    @include media("<=sm") {
       margin-top: $margin-default;
     }
   }

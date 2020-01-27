@@ -15,44 +15,17 @@
         <span class="mat-h2">
           Stock Analyzed and Date Range
         </span>
-        <div
-          class="stock-analysis-info"
-          fxLayout.gt-sm="row"
-          fxLayout.lt-md="column"
-          fxLayoutAlign.gt-sm="start center"
-          fxLayoutAlign.lt-md="start center"
-          fxFlex.gt-sm="0 0 48px"
-          fxFlex.lt-md="0 0 auto"
-          fxLayoutGap="16px"
+        <app-filters
+          [isLoading]="isLoading"
+          [(stocksToAnalyse)]="stocksToAnalyse"
+          [(start)]="start"
+          [(end)]="end"
+          [stocksColors]="stocksColors"
+          [mobile]="mobile"
+          (changedStocksToAnalyse)="reloadStocks()"
         >
-          <mat-chip-list
-            aria-label="Fish selection"
-            fxLayout="row"
-            fxLayoutGap="16px"
-          >
-            <ng-container *ngFor="let s of stocksToAnalyse; let idx = index">
-              <mat-chip
-                class="daav-chip-list"
-                [ngStyle]="{'background-color': stocksColors[idx]}"
-                [disableRipple]="true"
-              >
-              <span class="mat-caption">
-                <strong>{{s}}</strong>
-              </span>
-              </mat-chip>
-            </ng-container>
-          </mat-chip-list>
-          <span class="mat-h4">
-            From
-            <span style="color: #444">
-              <strong>{{start | date: 'MMM dd, yyy'}}</strong>
-            </span>
-            to
-            <span style="color: #444">
-              <strong>{{end | date: 'MMM dd, yyy'}}</strong>
-            </span>
-          </span>
-        </div>
+        </app-filters>
+
       </div>
       <!-- Stock Chart -->
       <div
@@ -89,7 +62,7 @@
               [bottomDescription]="'*Calculated using the average closing price of the last 3 days.'"
               [stocks]="stock"
               [mobile]="mobile"
-              [stocksClass]="stocksClass"
+              [stocksColors]="stocksColors"
             >
             </app-table>
 

@@ -14,7 +14,7 @@ export class TableComponent implements OnChanges {
   @Input() bottomDescription: string;
   @Input() stocks: Stock[] = [];
   @Input() mobile = false;
-  @Input() stocksClass: string[];
+  @Input() stocksColors: string[];
   @Input() displayColumns: any[];
   @Input() displayColumnTitle = true;
   @Input() mobileBetterResponsive = true;
@@ -38,6 +38,7 @@ export class TableComponent implements OnChanges {
       const dpv = stocks.previousValue;
       const dcv = stocks.currentValue;
       if (dcv && dpv !== dcv) {
+        console.log(dcv);
         this.stockWithId = dcv.map((x: any, index: number) => {
           return {uid: 'UID-' + index, value: x};
         });
@@ -57,9 +58,11 @@ export class TableComponent implements OnChanges {
   //// ISTELLA TABLE INIT
   private _getDisplayColmuns(): DaavTableColumn[] {
     let displayColumns: DaavTableColumn[];
-    const stockSize = DaavTableComponent.getSize(50, 16);
-    const cpfSize = DaavTableComponent.getSize(50, 16);
+    const colorIconSize = DaavTableComponent.getSize(32);
+    const stockSize = DaavTableComponent.getSize(50, 48);
+    const cpfSize = DaavTableComponent.getSize(50, 48);
     displayColumns = <DaavTableColumn[]>[
+      {id: 'colorIcon', label: '', size: colorIconSize, type: DaavTableType.COLOR_ICON},
       {id: 'stock', label: 'Stock', align: 'left', size: stockSize, sort: true, type: DaavTableType.LABEL},
       {id: 'cpf', label: 'Close price forecast', align: 'left', size: cpfSize, sort: true, type: DaavTableType.LABEL},
     ];
@@ -72,24 +75,28 @@ export class TableComponent implements OnChanges {
       return {
         uid: s.uid,
         cols: [
-            {
-              [this.displayColumns[0].id]: {
-                value: x.label,
-                class: 'circle ' + this.stocksClass[idx],
-                sort: x.label,
-                align: 'left'
-              }
-            },
-            {
-              [this.displayColumns[1].id]: {
-                value: '$' + this.decimalPipe.transform(x.forecast.closing_price, this.format),
-                sort: x.forecast.closing_price,
-                align: 'left'
-              }
+          {
+            [this.displayColumns[0].id]: {
+              value: this.stocksColors[idx]
             }
-          ]
-        };
-      });
+          },
+          {
+            [this.displayColumns[1].id]: {
+              value: x.label,
+              sort: x.label,
+              align: 'left'
+            }
+          },
+          {
+            [this.displayColumns[2].id]: {
+              value: '$' + this.decimalPipe.transform(x.forecast.closing_price, this.format),
+              sort: x.forecast.closing_price,
+              align: 'left'
+            }
+          }
+        ]
+      };
+    });
     return rows;
   }
 

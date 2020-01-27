@@ -26,7 +26,7 @@ import { TableColumnIdPipe } from '@shared/pipes/table-column-id.pipe';
     DaavContainerComponent,
     DaavTableComponent,
     TableColumnIdPipe,
-    SafeHtmlPipe
+    SafeHtmlPipe,
   ],
   exports: [
     CommonModule,

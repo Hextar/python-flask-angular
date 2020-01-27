@@ -1,0 +1,27 @@
+@import "~theme/theme-variables.scss";
+@import "~theme/theme-media.scss";
+@import "~theme/theme-typography.scss";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 100%;
+  width: 100%;
+
+  .stock-chip-list {
+    min-height: $magic-number-3;
+    width: 100%;
+  }
+
+  .mat-form-field-invalid .mat-hint {
+    display: none;
+  }
+
+  .mat-form-field-invalid .mat-hint {
+    transform: translateY(24px);
+  }
+
+}
+
+
