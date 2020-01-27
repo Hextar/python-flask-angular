@@ -1,0 +1,43 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "src",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "typeRoots": ["node_modules/@types", "node_modules/types"],
+    "lib": ["es2017", "dom", "es6"],
+    "types": ["node", "jasmine"],
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "paths": {
+      "@app/*": ["app/*"],
+      "@shared/*": ["app/shared/*"],
+      "@shell/*": ["app/shell/*"],
+      "@private/*": ["app/private/*"],
+      "@public/*": ["app/public/*"],
+      "@assets/*": ["assets/*"],
+      "@theme/*": ["theme/*"],
+      "@env/*": ["environments/*"],
+      "@i18n/*": ["translations/*"],
+      "core-js/es7/reflect": ["../node_modules/@angular-devkit/build-angular/node_modules/core-js/proposals/reflect-metadata"],
+      "core-js/es6/*": ["../node_modules/@angular-devkit/build-angular/node_modules/core-js/es"]
+    }
+  },
+  "angularCompilerOptions": {
+    "preserveWhitespaces": false,
+    "enableIvy": false
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
