@@ -5,7 +5,7 @@
 :host {
   display: flex;
   flex: 1;
-  min-height: 100%;
+  min-height: 0;
   width: 100%;
 
   ::ng-deep .mat-divider {
