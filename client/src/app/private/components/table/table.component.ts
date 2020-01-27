@@ -3,6 +3,8 @@ import { Stock } from '@private/models/stock.model';
 import { DaavTableColumn, DaavTableComponent, DaavTableType, SortedTableData } from '@shared/components/daav-table/daav-table.component';
 import { Sort } from '@angular/material';
 import { DecimalPipe } from '@angular/common';
+import * as moment from 'moment';
+import { Moment } from 'moment';
 
 @Component({
   selector: 'app-table',
@@ -13,6 +15,7 @@ export class TableComponent implements OnChanges {
   @Input() headingTitle: string;
   @Input() bottomDescription: string;
   @Input() stocks: Stock[] = [];
+  @Input() end: string;
   @Input() mobile = false;
   @Input() stocksColors: string[];
   @Input() displayColumns: any[];
@@ -25,6 +28,7 @@ export class TableComponent implements OnChanges {
   data = [];
   initialSort: Sort = {active: 'stock', direction: 'asc'};
   stockWithId: SortedTableData[] = [];
+  nextDay: Moment;
   accuracy = 0.9939904210784928;
 
   constructor(
@@ -38,12 +42,18 @@ export class TableComponent implements OnChanges {
       const dpv = stocks.previousValue;
       const dcv = stocks.currentValue;
       if (dcv && dpv !== dcv) {
-        console.log(dcv);
         this.stockWithId = dcv.map((x: any, index: number) => {
           return {uid: 'UID-' + index, value: x};
         });
         this._getDataSource();
+        this._nextDay();
       }
+    }
+  }
+
+  private _nextDay() {
+    if (this.end) {
+      this.nextDay = moment(this.end).add(1, 'day');
     }
   }
 

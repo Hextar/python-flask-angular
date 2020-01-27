@@ -17,7 +17,7 @@
       class="align-center mat-h2"
       *ngIf="headingTitle"
     >
-      {{headingTitle}}
+      {{headingTitle}} of day {{nextDay | date: 'MMM dd, yyy'}}
     </span>
   </div>
   <mat-card fxFlex="100">
@@ -34,7 +34,7 @@
       </ng-container>
       <ng-template #emptyList>
         <span class="mat-body">
-          Nessun risultato
+          No result
         </span>
       </ng-template>
     </mat-card-content>
