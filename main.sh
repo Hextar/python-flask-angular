@@ -19,7 +19,7 @@ sudo apt-get install -y docker-ce \
 
 
 # Allow Docker to Run as user
-sudo usermod --aG docker "$USER" \
+sudo usermod -aG docker "$USER" \
 	&& sudo systemctl enable docker \
 	&& printf '\n=== Docker enabled successfully\n\n'
 
