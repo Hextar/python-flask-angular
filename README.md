@@ -1,6 +1,4 @@
-# Project Title
-
-Data Analysis and Visualization
+# Data Analysis and Visualization
 
 ## Description
 
@@ -8,59 +6,66 @@ This project aims to ​ collect, visualise and forecast​ financial data with 
 In specific, we want to download stock closing price for Corn, Gasoline and Nasdaq and plot
 them on a same chart where at least 1 month of data is available.
 
-### Requirements
 
-Python
-```
-Give examples
-```
+### Dependencies
 
-### Installing
+ - Python 3.6
 
-A step by step series of examples that tell you how to get a development env running
 
-Say what the step will be
+### Install
 
 ```
-Give the example
+pip install -r requirements.txt
 ```
 
-And repeat
-
 ```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
+python main.py
 ```
 
 ### Usage
 
-Explain what these tests test and why
+
+The Client is available at the following address:
 
 ```
-Give an example
+http://localhost:80
 ```
 
-## Tests
+The Server is available the Server at the address:
 
-Add additional notes about how to deploy this on a live system
+```
+http://localhost:5000
+```
 
-## Authors
+### Documentation
 
-* **Stefano Salidu** - https://github.com/Hextar
+A Swagger documentation is available accessing using a browser the address:
 
-## License
+```
+http://localhost:5000
+```
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+### Tests
+
+## Server
+
+Access the '/server/tests' directory
+
+```
+pytest --cov-report html --cov=../.
+```
+
+The test coverage results will be available at the director 'htmlcov'
+
+## Client
+
+Acces the '/client' directory
+
+```
+npm run test:coverage
+```
+
+Useful Links
+============
+
