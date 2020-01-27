@@ -22,6 +22,9 @@ pip install -r requirements.txt
 python main.py
 ```
 
+Ps: the main.sh in the directory need to have execution permission
+
+
 ### Usage
 
 
@@ -36,6 +39,7 @@ The Server is available the Server at the address:
 ```
 http://localhost:5000
 ```
+
 
 ### Documentation
 
@@ -60,12 +64,15 @@ The test coverage results will be available at the director 'htmlcov'
 
 ## Client
 
-Acces the '/client' directory
+Access the '/client' directory
 
 ```
 npm run test:coverage
 ```
 
-Useful Links
-============
+The test coverage results will be available at the director 'coverage'
 
+
+### Email
+
+For any info you contact me at st.salidu@gmail.com
