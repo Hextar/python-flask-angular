@@ -4,7 +4,8 @@ import { MatAutocomplete, MatAutocompleteSelectedEvent, MatChipInputEvent } from
 import { noop, Observable } from 'rxjs';
 import { STOCK_LIST } from '@private/components/filters/filters.constants';
 import { FormControl } from '@angular/forms';
-import { debounceTime, filter, map, startWith } from 'rxjs/operators';
+import { map, startWith } from 'rxjs/operators';
+import { environment } from '@env/environment';
 
 @Component({
   selector: 'app-filters',
@@ -26,6 +27,7 @@ export class FiltersComponent {
   removable = true;
   addOnblur = true;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  readonly environment = environment;
 
   stocksCtrl = new FormControl();
   filteredStocks: Observable<string[]>;

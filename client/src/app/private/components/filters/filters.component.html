@@ -15,7 +15,7 @@
     fxLayoutGap="16px"
   >
 
-    <ng-container *ngIf="!!stocksToAnalyse">
+    <ng-container *ngIf="!!stocksToAnalyse && environment?.production; else devFilter">
       <mat-chip-list
         aria-label="Fish selection"
         fxLayout="row"
@@ -34,63 +34,64 @@
         </ng-container>
       </mat-chip-list>
     </ng-container>
-
-    <ng-container *ngIf="!!stocksToAnalyse && false">
-      <mat-form-field
-        class="stock-chip-list"
-      >
-        <mat-chip-list
-          #chipList
-          aria-label="Stock selection"
-          fxLayout="row"
-          fxLayoutGap="16px"
+    <ng-template #devFilter>
+      <ng-container *ngIf="!!stocksToAnalysecd gt">
+        <mat-form-field
+          class="stock-chip-list"
         >
-          <ng-container *ngFor="let s of stocksToAnalyse; let idx = index">
-            <mat-chip
-              class="daav-chip-list"
-              [ngStyle]="{'background-color': stocksColors[idx]}"
-              [disableRipple]="true"
-              [removable]="removable"
-              (removed)="removeStock(s)"
-            >
+          <mat-chip-list
+            #chipList
+            aria-label="Stock selection"
+            fxLayout="row"
+            fxLayoutGap="16px"
+          >
+            <ng-container *ngFor="let s of stocksToAnalyse; let idx = index">
+              <mat-chip
+                class="daav-chip-list"
+                [ngStyle]="{'background-color': stocksColors[idx]}"
+                [disableRipple]="true"
+                [removable]="removable"
+                (removed)="removeStock(s)"
+              >
               <span class="mat-caption">
                 <strong>{{s}}</strong>
               </span>
-              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-            </mat-chip>
-          </ng-container>
-          <input
-            #stockInput
-            matInput
-            required
-            type="text"
-            placeholder="New stock"
-            [formControl]="stocksCtrl"
-            [matAutocomplete]="auto"
-            [matChipInputFor]="chipList"
-            [disabled]="!stocksAvailable"
-            [matAutocompleteDisabled]="!stocksAvailable"
-            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-            [matChipInputAddOnBlur]="addOnblur"
-            (matChipInputTokenEnd)="addStock($event)"
-          >
-          <mat-hint align="start">
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
+            </ng-container>
+            <input
+              #stockInput
+              matInput
+              required
+              type="text"
+              placeholder="New stock"
+              [formControl]="stocksCtrl"
+              [matAutocomplete]="auto"
+              [matChipInputFor]="chipList"
+              [disabled]="!stocksAvailable"
+              [matAutocompleteDisabled]="!stocksAvailable"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              [matChipInputAddOnBlur]="addOnblur"
+              (matChipInputTokenEnd)="addStock($event)"
+            >
+            <mat-hint align="start">
             <span class="align-left mat-caption mat-grey">
               You can add {{stocksAvailable}} more stocks.
             </span>
-          </mat-hint>
-        </mat-chip-list>
-        <mat-autocomplete
-          #auto="matAutocomplete"
-          (optionSelected)="selected($event)"
-        >
-          <mat-option *ngFor="let stock of filteredStocks | async" [value]="stock">
-            {{stock}}
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
+            </mat-hint>
+          </mat-chip-list>
+          <mat-autocomplete
+            #auto="matAutocomplete"
+            (optionSelected)="selected($event)"
+          >
+            <mat-option *ngFor="let stock of filteredStocks | async" [value]="stock">
+              {{stock}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
 
-    </ng-container>
+      </ng-container>
+    </ng-template>
   </div>
   <div
     fxLayout="row"

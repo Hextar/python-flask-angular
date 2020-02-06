@@ -1,5 +1,6 @@
 import os
 import io
+import sys
 import numpy as np 
 import logging as log
 import pandas as pd 
@@ -13,38 +14,38 @@ pd.options.mode.chained_assignment = None  # default='warn'
 
 FORECAST = "Forecast"
 LR_MODEL = './engine/model/lr_model.sav'
-DATASET = 'dataset/crop_dataset_2011_1_1_2020_1_1.csv'
+DATASET = './engine/dataset/CORN_1_1_2015_1_1_2020.csv'
 
 
 class MachineLearning:
 
-	def __init__(self, forecast_out = 1):
-		lr = self.load_model(LR_MODEL)
+	def __init__(self, forecast_out = 1, model_path = LR_MODEL):
+		lr = self.load_model(model_path)
 		if lr is None:
 			self.train_lr_model(forecast_out)
 
-	def save_model(self, lr, path):
+	def save_model(self, lr, model_path):
 		try:
 			# save the model to disk
 			log.info("Saving lr model to memory")
-			pickle.dump(lr, open(path, 'wb'))
+			pickle.dump(lr, open(model_path, 'wb'))
 			log.info("Saving lr model to memory SUCCESS")
 		except:
 			log.info("Saving lr model to memory FAILED")
 
-	def load_model(self, path):
+	def load_model(self, model_path):
 		try:
 			# save the model to disk
 			log.info("Loading lr model from memory")
-			lr = pickle.load(open(path, 'rb'))
+			lr = pickle.load(open(model_path, 'rb'))
 			log.info("Loading lr model from memory SUCCESS")
 			return lr
 		except:
 			log.info("Loading lr model from memory FAILED")
 
-	def get_closing_price_forecast(self, stock, df, forecast_out = 1):
+	def get_closing_price_forecast(self, stock, df, forecast_out = 1, model_path = LR_MODEL):
 		# Load the model
-		lr = self.load_model(LR_MODEL)
+		lr = self.load_model(model_path)
 
 		if lr:
 			# Get the Adjusted Close Price
@@ -64,16 +65,15 @@ class MachineLearning:
 			return lr_forecast
 
 
-	def train_lr_model(self, forecast_out = 1):
+	def train_lr_model(self, forecast_out = 1, model_path = LR_MODEL):
 		try:
 			log.info("===========================")
 			log.info("  Start training lr model  ")
 			log.info("===========================")
+		
+			#load the dataset
+			df = pd.read_csv(DATASET)
 			
-			# Load the dataset
-			url="https://query1.finance.yahoo.com/v7/finance/download/CORN?period1=1420070400&period2=1577836800&interval=1d&events=history&crumb=TjNAMHrOgWR"
-			df = pd.read_csv(io.StringIO(requests.get(url).content.decode('utf-8')))
-
 			# Get the Adjusted Close Price
 			df = df[[DF.ADJ_CLOSE]]
 
@@ -96,27 +96,22 @@ class MachineLearning:
 			# Split the data into 80% training and 20% testing
 			x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
-			# Create and train the Support Vector Machine (Regressor)
-			svr_rbf = SVR(kernel='rbf', C=1e3, gamma=0.1)
-			svr_rbf.fit(x_train, y_train)
-			
-			# Testing Model: Score returns the coefficient of determination R^2 of the prediction. 
-			# The best possible score is 1.0
-			svm_confidence = svr_rbf.score(x_test, y_test)
-			log.info("svm confidence: ", svm_confidence)
-
 			# Create and train the Linear Regression  Model
 			lr = LinearRegression()
+			
 			# Train the model
 			lr.fit(x_train, y_train)
 
 			log.info("Training lr model SUCCESS, confidence=" + str(lr.score(x_test, y_test)))
 
 			# Save the model
-			self.save_model(lr, LR_MODEL)
+			self.save_model(lr, model_path)
 		except:
+			err = sys.exc_info()[0]
+			log.error(err)
 			log.error("Training LR model FAILED")
 			return 0
+
 		try:
 			# Testing Model: Score returns the coefficient of determination R^2 of the forecast. 
 			# The best possible score is 1.0

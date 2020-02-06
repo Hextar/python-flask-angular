@@ -1,21 +1,35 @@
 import os
 import sys
 import pytest
-import pickle
 import logging as log
 
-
-TEST_LR_MODEL = './engine/model/test_lr_model.sav'
-
-def test_save_model(app_context, machine_learning):
+''
+def test_save_model(app_context, machine_learning, model_path):
 	# save the model to disk
-	machine_learning.save_model({}, TEST_LR_MODEL)			
-	
-def test_load_model(app_context, machine_learning):
-	# save the model to disk
-	machine_learning.save_model({}, TEST_LR_MODEL)			
-	lr = machine_learning.load_model(TEST_LR_MODEL)			
+	machine_learning.save_model(lr={}, model_path=model_path)
+	# then load the model from disk	
+	lr = machine_learning.load_model(model_path=model_path)			
 	assert lr is not None
 
-def test_train_lr_model(app_context, machine_learning):
+def test_save_model_fail_to_save(app_context, machine_learning, model_path):
+	# save the model to disk
+	try:
+		os.remove(model_path)
+		machine_learning.save_model(model_path=model_path)		
+	except:
+		pass
+	# then load the model from disk	
+	lr = machine_learning.load_model(model_path=model_path)			
+	assert lr is None		
+	
+def test_load_model(app_context, machine_learning, model_path):
+	# save the model to disk
+	machine_learning.save_model(lr={}, model_path=model_path)		
+	# then load the model from disk	
+	lr = machine_learning.load_model(model_path=model_path)
+	log.info("==============>", lr)	
+	assert lr is not None
+
+def test_train_lr_model(app_context, machine_learning, model_path):
 	lr = machine_learning.train_lr_model(1)
+	pass

@@ -9,6 +9,8 @@ import pytest
 from api.services.stock_service import StockService as StokServiceTest
 from engine.machine_learning import MachineLearning as MachineLearningTest
 
+TEST_LR_MODEL = '../engine/model/test_lr_model.sav'
+
 @pytest.fixture
 def testApp():
     """Create and configure a new app instance for each test."""
@@ -33,7 +35,12 @@ def stock_service(testApp):
     yield ss
 
 @pytest.fixture
+def model_path():
+    """A test client forl the app."""
+    return TEST_LR_MODEL
+
+@pytest.fixture
 def machine_learning(testApp):
     """ Train the machine learning model """
-    ml = MachineLearningTest(1)
+    ml = MachineLearningTest(forecast_out = 1, model_path = TEST_LR_MODEL)
     yield ml
