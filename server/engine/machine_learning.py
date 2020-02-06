@@ -1,6 +1,5 @@
 import os
 import io
-import sys
 import numpy as np 
 import logging as log
 import pandas as pd 
@@ -26,16 +25,20 @@ class MachineLearning:
 
 	def save_model(self, lr, model_path):
 		try:
-			# save the model to disk
-			log.info("Saving lr model to memory")
-			pickle.dump(lr, open(model_path, 'wb'))
-			log.info("Saving lr model to memory SUCCESS")
-		except:
-			log.info("Saving lr model to memory FAILED")
+			if lr is None:
+				# If the model is null
+				raise Exception("The model cannot be None")
+			else:
+				# Save the model to disk
+				log.info("Saving lr model to memory")
+				pickle.dump(lr, open(model_path, 'wb'))
+				log.info("Saving lr model to memory SUCCESS")
+		except Exception as error : 
+			log.info("Saving lr model to memory FAILED", str(error))
 
 	def load_model(self, model_path):
 		try:
-			# save the model to disk
+			# Save the model to disk
 			log.info("Loading lr model from memory")
 			lr = pickle.load(open(model_path, 'rb'))
 			log.info("Loading lr model from memory SUCCESS")
@@ -51,7 +54,7 @@ class MachineLearning:
 			# Get the Adjusted Close Price
 			df = df[[DF.ADJ_CLOSE]]
 
-			#Create another column (the target or dependent variable) shifted 'n' units up
+			# Create another column (the target or dependent variable) shifted 'n' units up
 			df[FORECAST] = df[[DF.ADJ_CLOSE]].shift(-forecast_out)
 
 			# Set x_forecast equal to the last N rows of the original data set from Adj. Close column
@@ -71,13 +74,13 @@ class MachineLearning:
 			log.info("  Start training lr model  ")
 			log.info("===========================")
 		
-			#load the dataset
+			# Load the dataset
 			df = pd.read_csv(DATASET)
 			
 			# Get the Adjusted Close Price
 			df = df[[DF.ADJ_CLOSE]]
 
-			#Create another column (the target or dependent variable) shifted 'n' units up
+			# Create another column (the target or dependent variable) shifted 'n' units up
 			df[FORECAST] = df[[DF.ADJ_CLOSE]].shift(-forecast_out)
 
 			### Create the independent data set (X)  #######
@@ -106,10 +109,8 @@ class MachineLearning:
 
 			# Save the model
 			self.save_model(lr, model_path)
-		except:
-			err = sys.exc_info()[0]
-			log.error(err)
-			log.error("Training LR model FAILED")
+		except Exception as error :
+			log.error("Training LR model FAILED", str(error))
 			return 0
 
 		try:

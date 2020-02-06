@@ -9,7 +9,7 @@ import pytest
 from api.services.stock_service import StockService as StokServiceTest
 from engine.machine_learning import MachineLearning as MachineLearningTest
 
-TEST_LR_MODEL = '../engine/model/test_lr_model.sav'
+TEST_LR_MODEL = './engine/model/test_lr_model.sav'
 
 @pytest.fixture
 def testApp():
