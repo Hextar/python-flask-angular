@@ -15,11 +15,13 @@ them on a same chart where at least 1 month of data is available.
 ### Install
 
 ```
-pip install -r requirements.txt
+python main.py
 ```
 
+OR
+
 ```
-python main.py
+APP_ENV=Production docker-compose up -d --force-recreate
 ```
 
 Ps: the main.sh in the directory need to have execution permission
